@@ -1,0 +1,109 @@
+{
+  "content": [
+    {
+      "id": "11ee622c-cecf-75eb-8e63-0242ac110002",
+      "name": "Австралия"
+    },
+    {
+      "id": "11ee622c-cecf-cf1a-8e63-0242ac110002",
+      "name": "Австрия"
+    },
+    {
+      "id": "11ee622c-ced0-250e-8e63-0242ac110002",
+      "name": "Азербайджан"
+    },
+    {
+      "id": "11ee622c-ced0-6f9f-8e63-0242ac110002",
+      "name": "Албания"
+    },
+    {
+      "id": "11ee622c-ced0-c0ee-8e63-0242ac110002",
+      "name": "Алжир"
+    },
+    {
+      "id": "11ee622c-ced1-1794-8e63-0242ac110002",
+      "name": "Ангола"
+    },
+    {
+      "id": "11ee622c-ced1-633e-8e63-0242ac110002",
+      "name": "Андорра"
+    },
+    {
+      "id": "11ee622c-ced1-b24c-8e63-0242ac110002",
+      "name": "Антигуа и Барбуда"
+    },
+    {
+      "id": "11ee622c-ced1-f88b-8e63-0242ac110002",
+      "name": "Аргентина"
+    },
+    {
+      "id": "11ee622c-ced2-48d0-8e63-0242ac110002",
+      "name": "Армения"
+    },
+    {
+      "id": "11ee622c-ced2-9f6e-8e63-0242ac110002",
+      "name": "Афганистан"
+    },
+    {
+      "id": "11ee622c-ced2-f7b4-8e63-0242ac110002",
+      "name": "Багамские Острова"
+    },
+    {
+      "id": "11ee622c-ced3-4a21-8e63-0242ac110002",
+      "name": "Бангладеш"
+    },
+    {
+      "id": "11ee622c-ced3-9c0e-8e63-0242ac110002",
+      "name": "Барбадос"
+    },
+    {
+      "id": "11ee622c-ced3-f363-8e63-0242ac110002",
+      "name": "Бахрейн"
+    },
+    {
+      "id": "11ee622c-ced4-3a66-8e63-0242ac110002",
+      "name": "Белиз"
+    },
+    {
+      "id": "11ee622c-ced4-7c5d-8e63-0242ac110002",
+      "name": "Белоруссия"
+    },
+    {
+      "id": "11ee622c-ced4-cde1-8e63-0242ac110002",
+      "name": "Бельгия"
+    },
+    {
+      "id": "11ee622c-ced5-12ab-8e63-0242ac110002",
+      "name": "Бенин"
+    },
+    {
+      "id": "11ee622c-ced5-52e4-8e63-0242ac110002",
+      "name": "Болгария"
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 20,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": false,
+  "totalPages": 10,
+  "totalElements": 195,
+  "number": 0,
+  "first": true,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "size": 20,
+  "numberOfElements": 20,
+  "empty": false
+}
