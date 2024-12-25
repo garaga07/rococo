@@ -21,7 +21,11 @@ public class GeoEntity implements Serializable {
     private UUID id;
 
     @Column(nullable = false)
-    private String name;
+    private String city;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "country_id", nullable = false)
+    private CountryEntity country;
 
     @Override
     public final boolean equals(Object o) {
