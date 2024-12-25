@@ -136,7 +136,7 @@ Pageble контроллеры.
   @GetMapping()
   public Page<ArtistJson> getAll(@RequestParam(required = false) String name,
                                  @PageableDefault Pageable pageable) {
-    return artistService.getAll(name, pageable);
+    return paintingService.getAll(name, pageable);
   }
 ```
   Здесь объект `Pageable` - приходит в виде GET параметров с фронта. Спринг сам превратит GET параметры в этот объект.
