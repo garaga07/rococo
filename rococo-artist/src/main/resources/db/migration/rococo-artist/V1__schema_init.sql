@@ -1,11 +1,10 @@
 create extension if not exists "uuid-ossp";
 
-create table if not exists "artist"
-(
-    id       UUID unique  not null default uuid_generate_v1() primary key,
-    name varchar(255) not null,
-    biography text  not null,
-    photo text not null
+CREATE TABLE IF NOT EXISTS "artist" (
+    id UUID UNIQUE NOT NULL DEFAULT uuid_generate_v1() PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    biography TEXT NOT NULL,
+    photo TEXT NOT NULL
 );
 
 insert into "artist" (id, name, biography, photo) values
