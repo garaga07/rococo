@@ -7,21 +7,19 @@ import jakarta.annotation.Nonnull;
 import java.util.UUID;
 
 public record MuseumJson(
-        @JsonProperty("id")
-        UUID id,
-        @JsonProperty("title")
-        String title,
-        @JsonProperty("description")
-        String description,
-        @JsonProperty("photo")
-        String photo) {
-
+        @JsonProperty("id") UUID id,
+        @JsonProperty("title") String title,
+        @JsonProperty("description") String description,
+        @JsonProperty("photo") String photo,
+        @JsonProperty("geo") GeoJson geo
+) {
     public static @Nonnull MuseumJson fromEntity(@Nonnull MuseumEntity entity) {
         return new MuseumJson(
                 entity.getId(),
                 entity.getTitle(),
                 entity.getDescription(),
-                entity.getPhoto()
+                entity.getPhoto(),
+                GeoJson.fromEntity(entity.getGeo())
         );
     }
 }

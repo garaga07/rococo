@@ -1,6 +1,8 @@
 package guru.qa.rococo.service;
 
+import guru.qa.rococo.data.repository.GeoRepository;
 import guru.qa.rococo.data.repository.MuseumRepository;
+import guru.qa.rococo.model.GeoJson;
 import guru.qa.rococo.model.MuseumJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +13,23 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class MuseumService {
+public class MuseumGeoService {
 
+    private final GeoRepository geoRepository;
     private final MuseumRepository museumRepository;
 
     @Autowired
-    public MuseumService(MuseumRepository museumRepository) {
+    public MuseumGeoService(GeoRepository geoRepository, MuseumRepository museumRepository) {
+        this.geoRepository = geoRepository;
         this.museumRepository = museumRepository;
+    }
+
+    @Transactional(readOnly = true)
+    public List<GeoJson> getAllCountries() {
+        return geoRepository.findAll()
+                .stream()
+                .map(GeoJson::fromEntity)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

@@ -12,26 +12,16 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "museum")
-public class MuseumEntity implements Serializable {
+@Table(name = "country")
+public class CountryEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, columnDefinition = "UUID default gen_random_uuid()")
     private UUID id;
 
-    @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String description;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String photo;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "geo_id", nullable = false)
-    private GeoEntity geo;
+    @Column(nullable = false, unique = true)
+    private String name;
 
     @Override
     public final boolean equals(Object o) {
@@ -44,7 +34,7 @@ public class MuseumEntity implements Serializable {
                 ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass()
                 : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        MuseumEntity that = (MuseumEntity) o;
+        CountryEntity that = (CountryEntity) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 
