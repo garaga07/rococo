@@ -1,6 +1,5 @@
 package guru.qa.rococo.service;
 
-import guru.qa.rococo.data.ArtistEntity;
 import guru.qa.rococo.data.repository.ArtistRepository;
 import guru.qa.rococo.model.ArtistJson;
 import org.springframework.beans.factory.annotation.Autowired;
