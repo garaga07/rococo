@@ -3,16 +3,13 @@ package guru.qa.rococo.controller;
 import guru.qa.rococo.model.ArtistJson;
 import guru.qa.rococo.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/internal/artists")
+@RequestMapping("/internal/artist")
 public class ArtistController {
 
     private final ArtistService artistService;
@@ -30,5 +27,15 @@ public class ArtistController {
     @GetMapping("/all")
     public List<ArtistJson> getAllArtists() {
         return artistService.getAllArtists();
+    }
+
+    @PostMapping
+    public ArtistJson addArtist(@RequestBody ArtistJson artist) {
+        return artistService.addArtist(artist);
+    }
+
+    @PatchMapping
+    public ArtistJson updateArtist(@RequestBody ArtistJson artist) {
+        return artistService.updateArtist(artist);
     }
 }
