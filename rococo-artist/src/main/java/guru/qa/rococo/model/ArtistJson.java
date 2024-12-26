@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import guru.qa.rococo.data.ArtistEntity;
 import jakarta.annotation.Nonnull;
 
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public record ArtistJson(
@@ -21,7 +22,7 @@ public record ArtistJson(
                 entity.getId(),
                 entity.getName(),
                 entity.getBiography(),
-                entity.getPhoto()
+                entity.getPhoto() != null && entity.getPhoto().length > 0 ? new String(entity.getPhoto(), StandardCharsets.UTF_8) : null
         );
     }
 }
