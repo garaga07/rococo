@@ -26,8 +26,8 @@ public class MuseumEntity implements Serializable {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String photo;
+    @Column(columnDefinition = "bytea", nullable = false)
+    private byte[] photo;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "geo_id", nullable = false)
