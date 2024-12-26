@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS museum (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     title VARCHAR NOT NULL,
     description TEXT NOT NULL,
-    photo TEXT NOT NULL,
+    photo bytea NOT NULL,
     geo_id UUID NOT NULL REFERENCES geo(id) ON DELETE CASCADE
 );
 
