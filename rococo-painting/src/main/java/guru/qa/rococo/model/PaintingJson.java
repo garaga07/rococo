@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import guru.qa.rococo.data.PaintingEntity;
 import jakarta.annotation.Nonnull;
 
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public record PaintingJson(
@@ -16,19 +17,21 @@ public record PaintingJson(
         @JsonProperty("content")
         String content,
         @JsonProperty("museum")
-        UUID museum,
+        MuseumJson museumJson,
         @JsonProperty("artist")
-        UUID artist
+        ArtistJson artistJson
         ) {
 
-    public static @Nonnull PaintingJson fromEntity(@Nonnull PaintingEntity entity) {
+    public static @Nonnull PaintingJson fromEntity(@Nonnull PaintingEntity entity,
+                                                   @Nonnull ArtistJson artist,
+                                                   @Nonnull MuseumJson museum) {
         return new PaintingJson(
                 entity.getId(),
                 entity.getTitle(),
                 entity.getDescription(),
-                entity.getContent(),
-                entity.getMuseum(),
-                entity.getArtist()
+                entity.getContent() != null && entity.getContent().length > 0 ? new String(entity.getContent(), StandardCharsets.UTF_8) : null,
+                museum,
+                artist
         );
     }
 }

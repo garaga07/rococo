@@ -26,8 +26,8 @@ public class PaintingEntity implements Serializable {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @Column(columnDefinition = "TEXT")
-    private String content;
+    @Column(columnDefinition = "bytea", nullable = false)
+    private byte[] content;
 
     @Column(name = "museum_id", nullable = false)
     private UUID museum;
