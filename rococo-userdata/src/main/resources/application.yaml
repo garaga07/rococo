@@ -1,12 +1,12 @@
 server:
-  port: 8283
+  port: 8285
   error:
     include:
       message: true
 
 spring:
   application:
-    name: rococo-museum
+    name: rococo-userdata
   datasource:
     hikari:
       connection-timeout: 20000
@@ -20,7 +20,7 @@ spring:
     baseline-on-migrate: true
     baseline-version: 0
     schemas: public
-    locations: classpath:db/migration/rococo-museum
+    locations: classpath:db/migration/rococo-userdata
   jpa:
     hibernate:
       ddl-auto: none
@@ -30,16 +30,19 @@ spring:
           lob:
             non_contextual_creation: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
+    show-sql: false
     generate-ddl: true
     open-in-view: false
 
 logging:
   level:
     root: INFO
+    org.springframework.kafka: INFO
     org.springframework.web: INFO
-    org.springframework.security: INFO
-    org.springframework.security.oauth2: INFO
+    org.springframework.ws: INFO
+
+  file:
+    name: 'userdata.log'
 
 ---
 spring:
@@ -51,10 +54,17 @@ spring:
       - 'org.springframework.cloud.vault.config.VaultAutoConfiguration'
       - 'org.springframework.cloud.vault.config.VaultObservationAutoConfiguration'
       - 'org.springframework.cloud.vault.config.VaultReactiveAutoConfiguration'
+  kafka:
+    bootstrap-servers: 'localhost:9092'
+    consumer:
+      group-id: 'userdata'
+      auto-offset-reset: earliest
   datasource:
-    url: 'jdbc:postgresql://localhost:5432/rococo-museum'
+    url: 'jdbc:postgresql://localhost:5432/rococo-userdata'
     username: postgres
     password: secret
+rococo-userdata:
+  base-uri: 'http://127.0.0.1:8285'
 ---
 spring:
   config:
@@ -65,7 +75,14 @@ spring:
       - 'org.springframework.cloud.vault.config.VaultAutoConfiguration'
       - 'org.springframework.cloud.vault.config.VaultObservationAutoConfiguration'
       - 'org.springframework.cloud.vault.config.VaultReactiveAutoConfiguration'
+  kafka:
+    bootstrap-servers: 'kafka:9092'
+    consumer:
+      group-id: 'userdata'
+      auto-offset-reset: earliest
   datasource:
-    url: 'jdbc:postgresql://rococo-all-db:5432/rococo-museum'
+    url: 'jdbc:postgresql://rococo-all-db:5432/rococo-userdata'
     username: postgres
     password: secret
+rococo-userdata:
+  base-uri: 'http://userdata.rococo.dc:8285'
