@@ -3,6 +3,7 @@ package guru.qa.rococo.service;
 import guru.qa.rococo.data.UserdataEntity;
 import guru.qa.rococo.data.repository.UserdataRepository;
 import guru.qa.rococo.ex.NotFoundException;
+import guru.qa.rococo.ex.SameUsernameException;
 import guru.qa.rococo.model.UserdataJson;
 import jakarta.annotation.Nonnull;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 @Component
 public class UserdataService {
@@ -33,17 +35,13 @@ public class UserdataService {
     public void listener(@Payload UserdataJson user, ConsumerRecord<String, UserdataJson> cr) {
         userRepository.findByUsername(user.username())
                 .ifPresentOrElse(
-                        u -> LOG.info("### User already exist in DB, kafka event will be skipped: {}", cr.toString()),
+                        u -> LOG.info("### User already exists in DB, kafka event will be skipped: {}", cr.toString()),
                         () -> {
                             LOG.info("### Kafka consumer record: {}", cr.toString());
-                            UserdataEntity userDataEntity = new UserdataEntity();
-                            userDataEntity.setUsername(user.username());
-                            UserdataEntity userEntity = userRepository.save(userDataEntity);
-                            LOG.info(
-                                    "### User '{}' successfully saved to database with id: {}",
-                                    user.username(),
-                                    userEntity.getId()
-                            );
+                            UserdataEntity newUser = new UserdataEntity();
+                            newUser.setUsername(user.username());
+                            UserdataEntity savedUser = userRepository.save(newUser);
+                            LOG.info("### User '{}' saved to DB with id: {}", user.username(), savedUser.getId());
                         }
                 );
     }
@@ -51,11 +49,20 @@ public class UserdataService {
     @Transactional
     public @Nonnull
     UserdataJson update(@Nonnull UserdataJson user) {
-        UserdataEntity userEntity = getRequiredUser(user.username());
+        UserdataEntity userEntity = userRepository.findById(user.id())
+                .orElseThrow(() -> new NotFoundException("User not found by id: " + user.id()));
+
+        if (!Objects.equals(userEntity.getUsername(), user.username())) {
+            if (userRepository.findByUsername(user.username()).isPresent()) {
+                throw new SameUsernameException("Username '" + user.username() + "' is already taken.");
+            }
+            userEntity.setUsername(user.username());
+        }
+
         userEntity.setFirstname(user.firstname());
         userEntity.setLastname(user.lastname());
-        userEntity.setUsername(user.username());
         userEntity.setAvatar(user.avatar() != null ? user.avatar().getBytes(StandardCharsets.UTF_8) : null);
+
         UserdataEntity saved = userRepository.save(userEntity);
         return UserdataJson.fromEntity(saved);
     }
@@ -63,12 +70,8 @@ public class UserdataService {
     @Transactional(readOnly = true)
     public @Nonnull
     UserdataJson getUser(@Nonnull String username) {
-        return UserdataJson.fromEntity(getRequiredUser(username));
-    }
-
-    @Nonnull
-    private UserdataEntity getRequiredUser(@Nonnull String username) {
         return userRepository.findByUsername(username)
+                .map(UserdataJson::fromEntity)
                 .orElseThrow(() -> new NotFoundException("User not found: " + username));
     }
 }

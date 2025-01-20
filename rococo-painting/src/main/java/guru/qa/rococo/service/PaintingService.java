@@ -2,21 +2,20 @@ package guru.qa.rococo.service;
 
 import guru.qa.rococo.data.PaintingEntity;
 import guru.qa.rococo.data.repository.PaintingRepository;
+import guru.qa.rococo.ex.NotFoundException;
 import guru.qa.rococo.model.ArtistJson;
 import guru.qa.rococo.model.MuseumJson;
 import guru.qa.rococo.model.PaintingJson;
 import guru.qa.rococo.service.api.RestArtistClient;
 import guru.qa.rococo.service.api.RestMuseumClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.nio.charset.StandardCharsets;
 
 @Service
 public class PaintingService {
@@ -37,7 +36,7 @@ public class PaintingService {
     @Transactional(readOnly = true)
     public PaintingJson getPaintingById(UUID id) {
         PaintingEntity paintingEntity = paintingRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Painting not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("Painting not found with id: " + id));
 
         ArtistJson artist = artistClient.getArtistById(paintingEntity.getArtist().toString());
         MuseumJson museum = museumClient.getMuseumById(paintingEntity.getMuseum().toString());
@@ -73,6 +72,13 @@ public class PaintingService {
 
     @Transactional
     public PaintingJson addPainting(PaintingJson paintingJson) {
+        // Проверка наличия артиста
+        artistClient.getArtistById(paintingJson.artistJson().id().toString());
+
+        // Проверка наличия музея
+        museumClient.getMuseumById(paintingJson.museumJson().id().toString());
+
+        // Если все проверки пройдены, сохраняем картину
         PaintingEntity paintingEntity = new PaintingEntity();
         paintingEntity.setDescription(paintingJson.description());
         paintingEntity.setTitle(paintingJson.title());
@@ -81,7 +87,10 @@ public class PaintingService {
         }
         paintingEntity.setArtist(paintingJson.artistJson().id());
         paintingEntity.setMuseum(paintingJson.museumJson().id());
+
         PaintingEntity savedPainting = paintingRepository.save(paintingEntity);
+
+        // Получение данных артиста и музея для ответа
         ArtistJson artist = artistClient.getArtistById(savedPainting.getArtist().toString());
         MuseumJson museum = museumClient.getMuseumById(savedPainting.getMuseum().toString());
 
@@ -91,8 +100,7 @@ public class PaintingService {
     @Transactional
     public PaintingJson updatePainting(PaintingJson paintingJson) {
         PaintingEntity paintingEntity = paintingRepository.findById(paintingJson.id())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        "Can`t find painting by id: " + paintingJson.id()));
+                .orElseThrow(() -> new NotFoundException("Painting not found with id: " + paintingJson.id()));
         paintingEntity.setDescription(paintingJson.description());
         paintingEntity.setTitle(paintingJson.title());
         if (isPhotoString(paintingJson.content())) {
@@ -103,7 +111,6 @@ public class PaintingService {
         PaintingEntity savedPainting = paintingRepository.save(paintingEntity);
         ArtistJson artist = artistClient.getArtistById(savedPainting.getArtist().toString());
         MuseumJson museum = museumClient.getMuseumById(savedPainting.getMuseum().toString());
-
         return PaintingJson.fromEntity(savedPainting, artist, museum);
     }
 

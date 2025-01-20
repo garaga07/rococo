@@ -1,13 +1,17 @@
 package guru.qa.rococo.service.api;
 
+import guru.qa.rococo.ex.NotFoundException;
+import guru.qa.rococo.model.ArtistJson;
 import guru.qa.rococo.model.MuseumJson;
 import jakarta.annotation.Nonnull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -23,12 +27,14 @@ public class RestMuseumClient {
     }
 
     public @Nonnull MuseumJson getMuseumById(@Nonnull String museumId) {
-        return Optional.ofNullable(
-                restTemplate.getForObject(
-                        museumApiUrl + "/{id}",
-                        MuseumJson.class,
-                        museumId
-                )
-        ).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Museum not found with ID: " + museumId));
+        try {
+            return Objects.requireNonNull(restTemplate.getForObject(
+                    museumApiUrl + "/{id}",
+                    MuseumJson.class,
+                    museumId
+            ));
+        } catch (HttpClientErrorException.NotFound e) {
+            throw new NotFoundException("Museum not found with ID: " + museumId);
+        }
     }
 }

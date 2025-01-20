@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/internal")
@@ -26,7 +25,7 @@ public class MuseumGeoController {
     }
 
     @GetMapping("/museum/{id}")
-    public MuseumJson getMuseumById(@PathVariable UUID id) {
+    public MuseumJson getMuseumById(@PathVariable String id) {
         return museumGeoService.getMuseumById(id);
     }
 
