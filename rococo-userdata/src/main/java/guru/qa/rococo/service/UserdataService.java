@@ -4,7 +4,7 @@ import guru.qa.rococo.data.UserdataEntity;
 import guru.qa.rococo.data.repository.UserdataRepository;
 import guru.qa.rococo.ex.NotFoundException;
 import guru.qa.rococo.ex.SameUsernameException;
-import guru.qa.rococo.model.UserdataJson;
+import guru.qa.rococo.model.UserJson;
 import jakarta.annotation.Nonnull;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class UserdataService {
 
     @Transactional
     @KafkaListener(topics = "users", groupId = "userdata")
-    public void listener(@Payload UserdataJson user, ConsumerRecord<String, UserdataJson> cr) {
+    public void listener(@Payload UserJson user, ConsumerRecord<String, UserJson> cr) {
         userRepository.findByUsername(user.username())
                 .ifPresentOrElse(
                         u -> LOG.info("### User already exists in DB, kafka event will be skipped: {}", cr.toString()),
@@ -48,7 +48,7 @@ public class UserdataService {
 
     @Transactional
     public @Nonnull
-    UserdataJson update(@Nonnull UserdataJson user) {
+    UserJson update(@Nonnull UserJson user) {
         UserdataEntity userEntity = userRepository.findById(user.id())
                 .orElseThrow(() -> new NotFoundException("User not found by id: " + user.id()));
 
@@ -64,14 +64,14 @@ public class UserdataService {
         userEntity.setAvatar(user.avatar() != null ? user.avatar().getBytes(StandardCharsets.UTF_8) : null);
 
         UserdataEntity saved = userRepository.save(userEntity);
-        return UserdataJson.fromEntity(saved);
+        return UserJson.fromEntity(saved);
     }
 
     @Transactional(readOnly = true)
     public @Nonnull
-    UserdataJson getUser(@Nonnull String username) {
+    UserJson getUser(@Nonnull String username) {
         return userRepository.findByUsername(username)
-                .map(UserdataJson::fromEntity)
+                .map(UserJson::fromEntity)
                 .orElseThrow(() -> new NotFoundException("User not found: " + username));
     }
 }
