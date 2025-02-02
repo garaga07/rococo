@@ -15,13 +15,13 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 
 @EnableWebSecurity
 @Configuration
-@Profile({"local", "docker"})
-public class SecurityConfigLocal {
+@Profile({"staging", "prod"})
+public class SecurityConfigMain {
 
     private final CorsCustomizer corsCustomizer;
 
     @Autowired
-    public SecurityConfigLocal(CorsCustomizer corsCustomizer) {
+    public SecurityConfigMain(CorsCustomizer corsCustomizer) {
         this.corsCustomizer = corsCustomizer;
     }
 
@@ -32,6 +32,7 @@ public class SecurityConfigLocal {
         http.authorizeHttpRequests(customizer ->
                 customizer.requestMatchers(
                                 antMatcher(HttpMethod.GET, "/api/session"),
+                                antMatcher("/actuator/health"),
                                 antMatcher(HttpMethod.GET, "/api/country/**"),
                                 antMatcher(HttpMethod.GET, "/api/artist/**"),
                                 antMatcher(HttpMethod.GET, "/api/museum/**"),

@@ -1,5 +1,6 @@
 package guru.qa.rococo.service;
 
+import guru.qa.rococo.ex.BadRequestException;
 import guru.qa.rococo.ex.NotFoundException;
 import guru.qa.rococo.model.ErrorJson;
 import jakarta.annotation.Nonnull;
@@ -26,6 +27,21 @@ public class GlobalExceptionHandler {
                         "Not Found",
                         HttpStatus.NOT_FOUND.getReasonPhrase(),
                         HttpStatus.NOT_FOUND.value(),
+                        ex.getMessage(),
+                        request.getRequestURI()
+                ));
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorJson> handleBadRequestException(@Nonnull BadRequestException ex,
+                                                               @Nonnull HttpServletRequest request) {
+        LOG.warn("Bad request: {}", ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorJson(
+                        "Bad Request",
+                        HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                        HttpStatus.BAD_REQUEST.value(),
                         ex.getMessage(),
                         request.getRequestURI()
                 ));

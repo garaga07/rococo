@@ -3,9 +3,10 @@ package guru.qa.rococo.controller;
 import guru.qa.rococo.model.ArtistJson;
 import guru.qa.rococo.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -24,9 +25,9 @@ public class ArtistController {
         return artistService.getArtistById(id);
     }
 
-    @GetMapping("/all")
-    public List<ArtistJson> getAllArtists() {
-        return artistService.getAllArtists();
+    @GetMapping
+    public Page<ArtistJson> getAllArtists(Pageable pageable, @RequestParam(required = false) String name) {
+        return artistService.getAllArtists(pageable, name);
     }
 
     @PostMapping

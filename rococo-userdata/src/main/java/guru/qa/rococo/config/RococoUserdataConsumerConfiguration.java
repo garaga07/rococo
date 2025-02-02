@@ -1,6 +1,6 @@
 package guru.qa.rococo.config;
 
-import guru.qa.rococo.model.UserdataJson;
+import guru.qa.rococo.model.UserJson;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -23,8 +23,8 @@ public class RococoUserdataConsumerConfiguration {
     }
 
     @Bean
-    public ConsumerFactory<String, UserdataJson> consumerFactory(SslBundles sslBundles) {
-        final JsonDeserializer<UserdataJson> jsonDeserializer = new JsonDeserializer<>();
+    public ConsumerFactory<String, UserJson> consumerFactory(SslBundles sslBundles) {
+        final JsonDeserializer<UserJson> jsonDeserializer = new JsonDeserializer<>();
         jsonDeserializer.addTrustedPackages("*");
         return new DefaultKafkaConsumerFactory<>(
                 kafkaProperties.buildConsumerProperties(sslBundles),
@@ -34,8 +34,8 @@ public class RococoUserdataConsumerConfiguration {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, UserdataJson> kafkaListenerContainerFactory(SslBundles sslBundles) {
-        ConcurrentKafkaListenerContainerFactory<String, UserdataJson> concurrentKafkaListenerContainerFactory
+    public ConcurrentKafkaListenerContainerFactory<String, UserJson> kafkaListenerContainerFactory(SslBundles sslBundles) {
+        ConcurrentKafkaListenerContainerFactory<String, UserJson> concurrentKafkaListenerContainerFactory
                 = new ConcurrentKafkaListenerContainerFactory<>();
         concurrentKafkaListenerContainerFactory.setConsumerFactory(consumerFactory(sslBundles));
         return concurrentKafkaListenerContainerFactory;

@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.UUID;
 
 public interface GeoRepository extends JpaRepository<GeoEntity, UUID> {
-    @Query("SELECT g FROM GeoEntity g WHERE g.city = :city AND g.country.id = :countryId")
+    @Query("SELECT g FROM GeoEntity g WHERE LOWER(g.city) = LOWER(:city) AND g.country.id = :countryId")
     GeoEntity findByCityAndCountryId(@Param("city") String city, @Param("countryId") UUID countryId);
 }

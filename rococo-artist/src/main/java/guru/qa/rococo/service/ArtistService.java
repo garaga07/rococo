@@ -2,17 +2,19 @@ package guru.qa.rococo.service;
 
 import guru.qa.rococo.data.ArtistEntity;
 import guru.qa.rococo.data.repository.ArtistRepository;
+import guru.qa.rococo.ex.BadRequestException;
 import guru.qa.rococo.ex.NotFoundException;
 import guru.qa.rococo.model.ArtistJson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -30,15 +32,26 @@ public class ArtistService {
     public ArtistJson getArtistById(UUID id) {
         return artistRepository.findById(id)
                 .map(ArtistJson::fromEntity)
-                .orElseThrow(() -> new NotFoundException("Artist not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("id: Художник не найден с id: " + id));
     }
 
     @Transactional(readOnly = true)
-    public List<ArtistJson> getAllArtists() {
-        return artistRepository.findAll()
+    public Page<ArtistJson> getAllArtists(Pageable pageable, String name) {
+        Page<ArtistEntity> artists;
+
+        if (name != null && !name.isBlank()) {
+            String decodedName = URLDecoder.decode(name, StandardCharsets.UTF_8).trim();
+            artists = artistRepository.searchArtists(decodedName, pageable);
+        } else {
+            artists = artistRepository.findAll(pageable);
+        }
+
+        List<ArtistJson> artistJsons = artists.getContent()
                 .stream()
                 .map(ArtistJson::fromEntity)
                 .collect(Collectors.toList());
+
+        return new PageImpl<>(artistJsons, pageable, artists.getTotalElements());
     }
 
     @Transactional
@@ -55,8 +68,11 @@ public class ArtistService {
 
     @Transactional
     public ArtistJson updateArtist(ArtistJson artist) {
+        if (artist.id() == null) {
+            throw new BadRequestException("id: ID художника обязателен для заполнения");
+        }
         ArtistEntity artistEntity = artistRepository.findById(artist.id())
-                .orElseThrow(() -> new NotFoundException("Artist not found with id: " + artist.id()));
+                .orElseThrow(() -> new NotFoundException("id: Художник не найден с id: " + artist.id()));
 
         artistEntity.setBiography(artist.biography());
         artistEntity.setName(artist.name());

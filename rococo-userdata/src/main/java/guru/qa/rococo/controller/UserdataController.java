@@ -1,5 +1,5 @@
 package guru.qa.rococo.controller;
-import guru.qa.rococo.model.UserdataJson;
+import guru.qa.rococo.model.UserJson;
 
 import guru.qa.rococo.service.UserdataService;
 import org.slf4j.Logger;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/internal/user")
 public class UserdataController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserdataController.class);
@@ -21,12 +21,12 @@ public class UserdataController {
     }
 
     @GetMapping()
-    public UserdataJson currentUser(@RequestParam String username) {
+    public UserJson currentUser(@RequestParam String username) {
         return userService.getUser(username);
     }
 
     @PatchMapping()
-    public UserdataJson updateUserInfo(@RequestBody UserdataJson user) {
+    public UserJson updateUserInfo(@RequestBody UserJson user) {
         return userService.update(user);
     }
 }

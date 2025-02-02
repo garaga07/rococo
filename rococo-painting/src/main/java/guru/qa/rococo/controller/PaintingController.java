@@ -1,11 +1,13 @@
 package guru.qa.rococo.controller;
 
-import guru.qa.rococo.model.PaintingJson;
+import guru.qa.rococo.model.PaintingRequestJson;
+import guru.qa.rococo.model.PaintingResponseJson;
 import guru.qa.rococo.service.PaintingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,28 +21,28 @@ public class PaintingController {
         this.paintingService = paintingService;
     }
 
-    @GetMapping()
-    public List<PaintingJson> getAllPainting() {
-        return paintingService.getAllPainting();
+    @GetMapping
+    public Page<PaintingResponseJson> getAllPaintings(Pageable pageable, @RequestParam(required = false) String title) {
+        return paintingService.getAllPainting(pageable, title);
     }
 
     @GetMapping("/author/{authorId}")
-    public List<PaintingJson> getPaintingByAuthorId(@PathVariable UUID authorId) {
-        return paintingService.getPaintingByAuthorId(authorId);
+    public Page<PaintingResponseJson> getPaintingsByAuthorId(@PathVariable UUID authorId, Pageable pageable) {
+        return paintingService.getPaintingsByAuthorId(authorId, pageable);
     }
 
     @GetMapping("/{paintingId}")
-    public PaintingJson getPaintingById(@PathVariable UUID paintingId) {
+    public PaintingResponseJson getPaintingById(@PathVariable UUID paintingId) {
         return paintingService.getPaintingById(paintingId);
     }
 
     @PostMapping
-    public PaintingJson addPainting(@RequestBody PaintingJson paintingJson) {
-        return paintingService.addPainting(paintingJson);
+    public PaintingResponseJson addPainting(@RequestBody PaintingRequestJson paintingRequestJson) {
+        return paintingService.addPainting(paintingRequestJson);
     }
 
     @PatchMapping
-    public PaintingJson updatePainting(@RequestBody PaintingJson paintingJson) {
-        return paintingService.updatePainting(paintingJson);
+    public PaintingResponseJson updatePainting(@RequestBody PaintingRequestJson paintingRequestJson) {
+        return paintingService.updatePainting(paintingRequestJson);
     }
 }

@@ -1,37 +1,51 @@
 package guru.qa.rococo.controller;
 
-import guru.qa.rococo.service.PaintingService;
+import guru.qa.rococo.model.PaintingRequestJson;
+import guru.qa.rococo.model.PaintingResponseJson;
+import guru.qa.rococo.service.api.RestPaintingDataClient;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/painting")
+@Validated
 public class PaintingController {
-    private final PaintingService paintingService;
+
+    private final RestPaintingDataClient restPaintingDataClient;
 
     @Autowired
-    public PaintingController(PaintingService paintingService) {
-        this.paintingService = paintingService;
+    public PaintingController(RestPaintingDataClient restPaintingDataClient) {
+        this.restPaintingDataClient = restPaintingDataClient;
     }
 
-    @GetMapping()
-    public ResponseEntity<String> getAllPainting() throws IOException {
-        return ResponseEntity.ok(paintingService.getAllPaintingJson());
+    @GetMapping("/{id}")
+    public PaintingResponseJson getPaintingById(@PathVariable UUID id) {
+        return restPaintingDataClient.getPaintingById(id);
+    }
+
+    @GetMapping
+    public Page<PaintingResponseJson> getAllPaintings(Pageable pageable, @RequestParam(required = false) String title) {
+        return restPaintingDataClient.getAllPaintings(pageable, title);
     }
 
     @GetMapping("/author/{authorId}")
-    public ResponseEntity<String> getPaintingByAuthor(@PathVariable String authorId) throws IOException {
-        return ResponseEntity.ok(paintingService.getPaintingByAuthorJson(authorId));
+    public Page<PaintingResponseJson> getPaintingsByAuthorId(@PathVariable UUID authorId, Pageable pageable) {
+        return restPaintingDataClient.getPaintingsByAuthorId(authorId, pageable);
     }
 
-    @GetMapping("/{paintingId}")
-    public ResponseEntity<String> getPaintingById(@PathVariable String paintingId) throws IOException {
-        return ResponseEntity.ok(paintingService.getPaintingByIdJson(paintingId));
+    @PostMapping
+    public PaintingResponseJson addPainting(@Valid @RequestBody PaintingRequestJson painting) {
+        return restPaintingDataClient.addPainting(painting);
+    }
+
+    @PatchMapping
+    public PaintingResponseJson updatePainting(@Valid @RequestBody PaintingRequestJson painting) {
+        return restPaintingDataClient.updatePainting(painting);
     }
 }

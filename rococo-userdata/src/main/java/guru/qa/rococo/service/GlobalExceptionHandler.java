@@ -1,10 +1,12 @@
 package guru.qa.rococo.service;
 
+import guru.qa.rococo.ex.BadRequestException;
 import guru.qa.rococo.ex.NotFoundException;
 import guru.qa.rococo.ex.SameUsernameException;
 import guru.qa.rococo.model.ErrorJson;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +35,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorJson> handleSameUsernameException(@Nonnull RuntimeException ex,
                                                                  @Nonnull HttpServletRequest request) {
         LOG.warn("Resolve SameUsernameException: ", ex);
+        return buildResponse("Validation error", HttpStatus.BAD_REQUEST, ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorJson> handleBadRequestException(@Nonnull RuntimeException ex,
+                                                               @Nonnull HttpServletRequest request) {
+        LOG.warn("Resolve BadRequestException: ", ex);
         return buildResponse("Validation error", HttpStatus.BAD_REQUEST, ex.getMessage(), request);
     }
 

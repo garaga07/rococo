@@ -1,12 +1,14 @@
 package guru.qa.rococo.controller;
 
-import guru.qa.rococo.model.GeoJson;
+import guru.qa.rococo.model.CountryJson;
 import guru.qa.rococo.model.MuseumJson;
 import guru.qa.rococo.service.MuseumGeoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/internal")
@@ -20,18 +22,18 @@ public class MuseumGeoController {
     }
 
     @GetMapping("/country")
-    public List<GeoJson> getAllCountries() {
-        return museumGeoService.getAllCountries();
+    public Page<CountryJson> getAllCountries(Pageable pageable) {
+        return museumGeoService.getAllCountries(pageable);
     }
 
     @GetMapping("/museum/{id}")
-    public MuseumJson getMuseumById(@PathVariable String id) {
+    public MuseumJson getMuseumById(@PathVariable UUID id) {
         return museumGeoService.getMuseumById(id);
     }
 
     @GetMapping("/museum")
-    public List<MuseumJson> getAllMuseums() {
-        return museumGeoService.getAllMuseums();
+    public Page<MuseumJson> getAllMuseums(Pageable pageable, @RequestParam(required = false) String title) {
+        return museumGeoService.getAllMuseums(pageable, title);
     }
 
     @PostMapping("/museum")
