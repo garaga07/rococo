@@ -19,6 +19,9 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -50,6 +53,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 ));
     }
 
+    @ExceptionHandler({
+            HttpClientErrorException.NotFound.class,
+            HttpClientErrorException.BadRequest.class,
+            HttpClientErrorException.Conflict.class,
+            HttpClientErrorException.NotAcceptable.class,
+            HttpServerErrorException.InternalServerError.class,
+            HttpServerErrorException.ServiceUnavailable.class
+    })
+    public ResponseEntity<ErrorJson> handleRestTemplateExceptions(@Nonnull HttpClientErrorException ex,
+                                                                  @Nonnull HttpServletRequest request) {
+        LOG.warn("### REST Exception caught in Gateway: {}", ex.getMessage());
+        return handleForwardedException(ex, request);
+    }
+
     @ExceptionHandler(NoRestResponseException.class)
     public ResponseEntity<ErrorJson> handleApiNoResponseException(@Nonnull RuntimeException ex,
                                                                   @Nonnull HttpServletRequest request) {
@@ -75,6 +92,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                         status.getReasonPhrase(),
                         status.value(),
                         message,
+                        request.getRequestURI()
+                ));
+    }
+
+    @Nonnull
+    private ResponseEntity<ErrorJson> handleForwardedException(@Nonnull HttpClientErrorException ex,
+                                                               @Nonnull HttpServletRequest request) {
+        ErrorJson originalError = ex.getResponseBodyAs(ErrorJson.class);
+        assert originalError != null;
+        return ResponseEntity
+                .status(originalError.status())
+                .body(new ErrorJson(
+                        originalError.type(),
+                        originalError.title(),
+                        originalError.status(),
+                        originalError.detail(),
                         request.getRequestURI()
                 ));
     }

@@ -6,6 +6,7 @@ import guru.qa.rococo.data.MuseumEntity;
 import guru.qa.rococo.data.repository.CountryRepository;
 import guru.qa.rococo.data.repository.GeoRepository;
 import guru.qa.rococo.data.repository.MuseumRepository;
+import guru.qa.rococo.ex.BadRequestException;
 import guru.qa.rococo.ex.NotFoundException;
 import guru.qa.rococo.model.CountryJson;
 import guru.qa.rococo.model.MuseumJson;
@@ -40,7 +41,7 @@ public class MuseumGeoService {
     public MuseumJson getMuseumById(UUID id) {
         return museumRepository.findById(id)
                 .map(MuseumJson::fromEntity)
-                .orElseThrow(() -> new NotFoundException("Museum not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("id: Музей не найден с id: " + id));
     }
 
     @Transactional(readOnly = true)
@@ -77,7 +78,7 @@ public class MuseumGeoService {
     public MuseumJson addMuseum(MuseumJson museum) {
         UUID countryId = museum.geo().country().id();
         CountryEntity countryEntity = countryRepository.findById(countryId)
-                .orElseThrow(() -> new NotFoundException("Country not found with id: " + countryId));
+                .orElseThrow(() -> new NotFoundException("country.id: Страна не найдена с id: " + countryId));
 
         GeoEntity geoEntity = getOrCreateGeo(museum, countryEntity);
         MuseumEntity museumEntity = createAndSaveMuseum(museum, geoEntity);
@@ -87,13 +88,15 @@ public class MuseumGeoService {
 
     @Transactional
     public MuseumJson updateMuseum(MuseumJson museum) {
-        UUID museumId = museum.id();
-        UUID countryId = museum.geo().country().id();
+        if (museum.id() == null) {
+            throw new BadRequestException("museum.id: ID музея обязателен для заполнения");
+        }
 
-        MuseumEntity museumEntity = museumRepository.findById(museumId)
-                .orElseThrow(() -> new NotFoundException("Museum not found with id: " + museumId));
-        CountryEntity countryEntity = countryRepository.findById(countryId)
-                .orElseThrow(() -> new NotFoundException("Country not found with id: " + countryId));
+        MuseumEntity museumEntity = museumRepository.findById(museum.id())
+                .orElseThrow(() -> new NotFoundException("museum.id: Музей не найден с id: " + museum.id()));
+
+        CountryEntity countryEntity = countryRepository.findById(museum.geo().country().id())
+                .orElseThrow(() -> new NotFoundException("country.id: Страна не найдена с id: " + museum.geo().country().id()));
 
         GeoEntity geoEntity = getOrCreateGeo(museum, countryEntity);
         museumEntity.setGeo(geoEntity);

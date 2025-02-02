@@ -7,7 +7,7 @@ import jakarta.annotation.Nonnull;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-public record PaintingJson(
+public record PaintingResponseJson(
         @JsonProperty("id")
         UUID id,
         @JsonProperty("title")
@@ -22,10 +22,10 @@ public record PaintingJson(
         ArtistJson artistJson
         ) {
 
-    public static @Nonnull PaintingJson fromEntity(@Nonnull PaintingEntity entity,
-                                                   @Nonnull ArtistJson artist,
-                                                   @Nonnull MuseumJson museum) {
-        return new PaintingJson(
+    public static @Nonnull PaintingResponseJson fromEntity(@Nonnull PaintingEntity entity,
+                                                           @Nonnull ArtistJson artist,
+                                                           @Nonnull MuseumJson museum) {
+        return new PaintingResponseJson(
                 entity.getId(),
                 entity.getTitle(),
                 entity.getDescription(),

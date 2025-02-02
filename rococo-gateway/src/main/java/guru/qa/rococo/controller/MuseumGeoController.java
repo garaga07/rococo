@@ -3,15 +3,18 @@ package guru.qa.rococo.controller;
 import guru.qa.rococo.model.CountryJson;
 import guru.qa.rococo.model.MuseumJson;
 import guru.qa.rococo.service.api.RestMuseumDataClient;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
+@Validated
 public class MuseumGeoController {
 
     private final RestMuseumDataClient restMuseumDataClient;
@@ -39,12 +42,12 @@ public class MuseumGeoController {
     }
 
     @PostMapping("/museum")
-    public MuseumJson addMuseum(@RequestBody MuseumJson museum) {
+    public MuseumJson addMuseum(@Valid @RequestBody MuseumJson museum) {
         return restMuseumDataClient.addMuseum(museum);
     }
 
     @PatchMapping("/museum")
-    public MuseumJson updateMuseum(@RequestBody MuseumJson museum) {
+    public MuseumJson updateMuseum(@Valid @RequestBody MuseumJson museum) {
         return restMuseumDataClient.updateMuseum(museum);
     }
 }

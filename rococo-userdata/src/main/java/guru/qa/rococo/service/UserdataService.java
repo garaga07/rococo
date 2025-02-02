@@ -2,6 +2,7 @@ package guru.qa.rococo.service;
 
 import guru.qa.rococo.data.UserdataEntity;
 import guru.qa.rococo.data.repository.UserdataRepository;
+import guru.qa.rococo.ex.BadRequestException;
 import guru.qa.rococo.ex.NotFoundException;
 import guru.qa.rococo.ex.SameUsernameException;
 import guru.qa.rococo.model.UserJson;
@@ -49,12 +50,16 @@ public class UserdataService {
     @Transactional
     public @Nonnull
     UserJson update(@Nonnull UserJson user) {
+        if (user.id() == null) {
+            throw new BadRequestException("id: ID пользователя обязателен для заполнения");
+        }
+
         UserdataEntity userEntity = userRepository.findById(user.id())
-                .orElseThrow(() -> new NotFoundException("User not found by id: " + user.id()));
+                .orElseThrow(() -> new NotFoundException("id: Пользователь не найден по id: " + user.id()));
 
         if (!Objects.equals(userEntity.getUsername(), user.username())) {
             if (userRepository.findByUsername(user.username()).isPresent()) {
-                throw new SameUsernameException("Username '" + user.username() + "' is already taken.");
+                throw new SameUsernameException("username: Имя пользователя '" + user.username() + "' уже занято.");
             }
             userEntity.setUsername(user.username());
         }
@@ -72,6 +77,6 @@ public class UserdataService {
     UserJson getUser(@Nonnull String username) {
         return userRepository.findByUsername(username)
                 .map(UserJson::fromEntity)
-                .orElseThrow(() -> new NotFoundException("User not found: " + username));
+                .orElseThrow(() -> new NotFoundException("username: Пользователь не найден: " + username));
     }
 }

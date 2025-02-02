@@ -11,20 +11,20 @@ public record UserJson(
         @JsonProperty("id")
         UUID id,
 
-        @NotNull(message = "Имя пользователя не может быть пустым")
-        @Size(min = 3, max = 30, message = "Имя пользователя должно быть от 3 до 30 символов")
+        @NotNull(message = "username: Имя пользователя обязательно для заполнения")
+        @Size(min = 3, max = 30, message = "username: Имя пользователя должно содержать от 3 до 30 символов")
         @JsonProperty("username")
         String username,
 
-        @Size(max = 30, message = "Имя не может быть длиннее 30 символов")
+        @Size(max = 255, message = "firstname: Имя не может быть длиннее 255 символов")
         @JsonProperty("firstname")
         String firstname,
 
-        @Size(max = 50, message = "Фамилия не может быть длиннее 50 символов")
+        @Size(max = 255, message = "lastname: Фамилия не может быть длиннее 255 символов")
         @JsonProperty("lastname")
         String lastname,
 
-        @Size(max = RococoGatewayServiceConfig.ONE_MB, message = "Аватар не должен превышать 1MB")
+        @Size(max = RococoGatewayServiceConfig.ONE_MB, message = "avatar: Размер аватара не должен превышать 1MB")
         @JsonProperty("avatar")
         String avatar
 ) {

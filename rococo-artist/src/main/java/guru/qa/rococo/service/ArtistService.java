@@ -2,6 +2,7 @@ package guru.qa.rococo.service;
 
 import guru.qa.rococo.data.ArtistEntity;
 import guru.qa.rococo.data.repository.ArtistRepository;
+import guru.qa.rococo.ex.BadRequestException;
 import guru.qa.rococo.ex.NotFoundException;
 import guru.qa.rococo.model.ArtistJson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ArtistService {
     public ArtistJson getArtistById(UUID id) {
         return artistRepository.findById(id)
                 .map(ArtistJson::fromEntity)
-                .orElseThrow(() -> new NotFoundException("Artist not found with id: " + id));
+                .orElseThrow(() -> new NotFoundException("id: Художник не найден с id: " + id));
     }
 
     @Transactional(readOnly = true)
@@ -67,8 +68,11 @@ public class ArtistService {
 
     @Transactional
     public ArtistJson updateArtist(ArtistJson artist) {
+        if (artist.id() == null) {
+            throw new BadRequestException("id: ID художника обязателен для заполнения");
+        }
         ArtistEntity artistEntity = artistRepository.findById(artist.id())
-                .orElseThrow(() -> new NotFoundException("Artist not found with id: " + artist.id()));
+                .orElseThrow(() -> new NotFoundException("id: Художник не найден с id: " + artist.id()));
 
         artistEntity.setBiography(artist.biography());
         artistEntity.setName(artist.name());

@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
-public record MuseumJson(
+public record PaintingRequestJson(
         @JsonProperty("id")
         UUID id,
 
@@ -22,14 +22,19 @@ public record MuseumJson(
         @JsonProperty("description")
         String description,
 
-        @NotNull(message = "photo: Фото обязательно для заполнения")
-        @Size(max = RococoGatewayServiceConfig.ONE_MB, message = "photo: Размер фото не должен превышать 1MB")
-        @JsonProperty("photo")
-        String photo,
+        @NotNull(message = "content: Фото обязательно для заполнения")
+        @Size(max = RococoGatewayServiceConfig.ONE_MB, message = "content: Размер фото не должен превышать 1MB")
+        @JsonProperty("content")
+        String content,
 
         @Valid
-        @NotNull(message = "geo: Геоданные обязательны для заполнения")
-        @JsonProperty("geo")
-        GeoJson geo
+        @NotNull(message = "artist: Художник обязателен для заполнения")
+        @JsonProperty("artist")
+        ArtistRef artist,
+
+        @Valid
+        @NotNull(message = "museum: Музей обязателен для заполнения")
+        @JsonProperty("museum")
+        MuseumRef museum
 ) {
 }

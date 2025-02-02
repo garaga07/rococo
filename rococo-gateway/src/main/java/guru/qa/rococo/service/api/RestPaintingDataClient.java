@@ -1,7 +1,8 @@
 package guru.qa.rococo.service.api;
 
 import guru.qa.rococo.ex.NoRestResponseException;
-import guru.qa.rococo.model.PaintingJson;
+import guru.qa.rococo.model.PaintingRequestJson;
+import guru.qa.rococo.model.PaintingResponseJson;
 import guru.qa.rococo.model.page.RestPage;
 import guru.qa.rococo.service.utils.HttpQueryPaginationAndSort;
 import jakarta.annotation.Nonnull;
@@ -34,14 +35,14 @@ public class RestPaintingDataClient {
         this.rococoPaintingBaseUri = rococoPaintingBaseUri;
     }
 
-    public @Nonnull PaintingJson getPaintingById(@Nonnull UUID id) {
+    public @Nonnull PaintingResponseJson getPaintingById(@Nonnull UUID id) {
         URI uri = URI.create(rococoPaintingBaseUri + "/internal/painting/" + id);
-        ResponseEntity<PaintingJson> response = restTemplate.exchange(uri, HttpMethod.GET, null, PaintingJson.class);
+        ResponseEntity<PaintingResponseJson> response = restTemplate.exchange(uri, HttpMethod.GET, null, PaintingResponseJson.class);
         return Optional.ofNullable(response.getBody())
                 .orElseThrow(() -> new NoRestResponseException("No REST response is given [/internal/painting/{id} GET]"));
     }
 
-    public @Nonnull Page<PaintingJson> getAllPaintings(@Nonnull Pageable pageable, String title) {
+    public @Nonnull Page<PaintingResponseJson> getAllPaintings(@Nonnull Pageable pageable, String title) {
         String queryParams = new HttpQueryPaginationAndSort(pageable).string();
 
         if (title != null && !title.isBlank()) {
@@ -52,7 +53,7 @@ public class RestPaintingDataClient {
                 .build()
                 .toUri();
 
-        ResponseEntity<RestPage<PaintingJson>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
+        ResponseEntity<RestPage<PaintingResponseJson>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
                 new ParameterizedTypeReference<>() {
                 });
 
@@ -60,14 +61,14 @@ public class RestPaintingDataClient {
                 .orElseThrow(() -> new NoRestResponseException("No REST response is given [/internal/painting GET]"));
     }
 
-    public @Nonnull Page<PaintingJson> getPaintingsByAuthorId(@Nonnull UUID authorId, @Nonnull Pageable pageable) {
+    public @Nonnull Page<PaintingResponseJson> getPaintingsByAuthorId(@Nonnull UUID authorId, @Nonnull Pageable pageable) {
         String queryParams = new HttpQueryPaginationAndSort(pageable).string();
 
         URI uri = UriComponentsBuilder.fromHttpUrl(rococoPaintingBaseUri + "/internal/painting/author/" + authorId + "?" + queryParams)
                 .build()
                 .toUri();
 
-        ResponseEntity<RestPage<PaintingJson>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
+        ResponseEntity<RestPage<PaintingResponseJson>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
                 new ParameterizedTypeReference<>() {
                 });
 
@@ -75,24 +76,24 @@ public class RestPaintingDataClient {
                 .orElseThrow(() -> new NoRestResponseException("No REST response is given [/internal/painting/author/{id} GET]"));
     }
 
-    public @Nonnull PaintingJson addPainting(@Nonnull PaintingJson painting) {
+    public @Nonnull PaintingResponseJson addPainting(@Nonnull PaintingRequestJson painting) {
         URI uri = URI.create(rococoPaintingBaseUri + "/internal/painting");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<PaintingJson> requestEntity = new HttpEntity<>(painting, headers);
+        HttpEntity<PaintingRequestJson> requestEntity = new HttpEntity<>(painting, headers);
 
-        ResponseEntity<PaintingJson> response = restTemplate.exchange(uri, HttpMethod.POST, requestEntity, PaintingJson.class);
+        ResponseEntity<PaintingResponseJson> response = restTemplate.exchange(uri, HttpMethod.POST, requestEntity, PaintingResponseJson.class);
         return Optional.ofNullable(response.getBody())
                 .orElseThrow(() -> new NoRestResponseException("No REST response is given [/internal/painting POST]"));
     }
 
-    public @Nonnull PaintingJson updatePainting(@Nonnull PaintingJson painting) {
+    public @Nonnull PaintingResponseJson updatePainting(@Nonnull PaintingRequestJson painting) {
         URI uri = URI.create(rococoPaintingBaseUri + "/internal/painting");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<PaintingJson> requestEntity = new HttpEntity<>(painting, headers);
+        HttpEntity<PaintingRequestJson> requestEntity = new HttpEntity<>(painting, headers);
 
-        ResponseEntity<PaintingJson> response = restTemplate.exchange(uri, HttpMethod.PATCH, requestEntity, PaintingJson.class);
+        ResponseEntity<PaintingResponseJson> response = restTemplate.exchange(uri, HttpMethod.PATCH, requestEntity, PaintingResponseJson.class);
         return Optional.ofNullable(response.getBody())
                 .orElseThrow(() -> new NoRestResponseException("No REST response is given [/internal/painting PATCH]"));
     }

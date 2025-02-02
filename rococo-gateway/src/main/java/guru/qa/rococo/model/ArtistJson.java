@@ -11,18 +11,18 @@ public record ArtistJson(
         @JsonProperty("id")
         UUID id,
 
-        @Size(min = 3, max = 50, message = "Имя должно содержать от 3 до 50 символов")
-        @NotNull(message = "Имя не может быть пустым")
+        @Size(min = 3, max = 255, message = "name: Имя должно содержать от 3 до 255 символов")
+        @NotNull(message = "name: Имя обязательно для заполнения")
         @JsonProperty("name")
         String name,
 
-        @Size(max = 255, message = "Биография не должна превышать 255 символов")
-        @NotNull(message = "Биография обязательна для заполнения")
+        @Size(min = 11, max = 2000, message = "biography: Биография должна содержать от 11 до 2000 символов")
+        @NotNull(message = "biography: Биография обязательна для заполнения")
         @JsonProperty("biography")
         String biography,
 
-        @NotNull(message = "Фото обязательно")
-        @Size(max = RococoGatewayServiceConfig.ONE_MB, message = "Размер фото не должен превышать 1MB")
+        @NotNull(message = "photo: Фото обязательно для заполнения")
+        @Size(max = RococoGatewayServiceConfig.ONE_MB, message = "photo: Размер фото не должен превышать 1MB")
         @JsonProperty("photo")
         String photo) {
 }
