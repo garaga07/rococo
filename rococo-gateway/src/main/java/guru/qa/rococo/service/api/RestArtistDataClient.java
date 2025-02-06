@@ -12,8 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
@@ -48,7 +46,8 @@ public class RestArtistDataClient {
                 .toUri();
 
         ResponseEntity<RestPage<ArtistJson>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
-                new ParameterizedTypeReference<>() {});
+                new ParameterizedTypeReference<>() {
+                });
 
         return Optional.ofNullable(response.getBody())
                 .orElseThrow(() -> new NoRestResponseException("No REST response is given [/internal/artist GET]"));

@@ -1,6 +1,6 @@
 package guru.qa.rococo.controller;
-import guru.qa.rococo.model.UserJson;
 
+import guru.qa.rococo.model.UserJson;
 import guru.qa.rococo.service.UserdataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

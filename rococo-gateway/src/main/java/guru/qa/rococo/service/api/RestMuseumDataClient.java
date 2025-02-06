@@ -54,7 +54,8 @@ public class RestMuseumDataClient {
                 .toUri();
 
         ResponseEntity<RestPage<MuseumJson>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
-                new ParameterizedTypeReference<>() {});
+                new ParameterizedTypeReference<>() {
+                });
 
         return Optional.ofNullable(response.getBody())
                 .orElseThrow(() -> new NoRestResponseException("No REST response is given [/internal/museum GET]"));
@@ -68,7 +69,8 @@ public class RestMuseumDataClient {
                 .toUri();
 
         ResponseEntity<RestPage<CountryJson>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
-                new ParameterizedTypeReference<>() {});
+                new ParameterizedTypeReference<>() {
+                });
 
         return Optional.ofNullable(response.getBody())
                 .orElseThrow(() -> new NoRestResponseException("No REST response is given [/internal/country GET]"));

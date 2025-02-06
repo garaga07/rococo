@@ -6,7 +6,6 @@ import guru.qa.rococo.ex.SameUsernameException;
 import guru.qa.rococo.model.ErrorJson;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

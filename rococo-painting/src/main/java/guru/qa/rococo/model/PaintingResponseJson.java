@@ -20,7 +20,7 @@ public record PaintingResponseJson(
         MuseumJson museumJson,
         @JsonProperty("artist")
         ArtistJson artistJson
-        ) {
+) {
 
     public static @Nonnull PaintingResponseJson fromEntity(@Nonnull PaintingEntity entity,
                                                            @Nonnull ArtistJson artist,

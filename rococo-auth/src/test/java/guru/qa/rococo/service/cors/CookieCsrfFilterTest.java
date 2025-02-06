@@ -10,9 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.web.csrf.CsrfToken;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CookieCsrfFilterTest {
