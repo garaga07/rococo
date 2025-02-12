@@ -245,3 +245,25 @@ void exampleTest2(PaintingJson createdPainting, MuseumJson createdMuseum, Artist
 Очень важно думать о том, что если чего-то не будет описано в README, то и проверить я это что-то не смогу.
 
 <img src="rococo.png" width="800">
+
+# Запуск Rococo локально в IDE:
+
+#### 1. Находясь в корне проекта выполнить команду:
+
+для REST:
+
+```posh
+bash localenv.sh
+```
+
+#### 2. Прописать run конфигурацию для всех сервисов rococo-* - Active profiles local
+
+Для этого зайти в меню Run -> Edit Configurations -> выбрать main класс -> указать Active profiles: local
+[Инструкция](https://stackoverflow.com/questions/39738901/how-do-i-activate-a-spring-boot-profile-when-running-from-intellij).
+
+#### 3 Запустить сервис Rococo-auth c помощью gradle или командой Run в IDE:
+
+Или просто перейдя к main-классу приложения NifflerAuthApplication выбрать run в IDEA (предварительно удостовериться что
+выполнен предыдущий пункт)
+
+#### 5  Запустить в любой последовательности другие сервисы: rococo-artist, rococo-museum, rococo-gateway, rococo-userdata, rococo-painting
