@@ -4,6 +4,7 @@ import guru.qa.rococo.model.rest.ArtistJson;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,6 +13,9 @@ public interface ArtistClient {
 
     @Nonnull
     ArtistJson createArtist(ArtistJson artist);
+
+    @Nonnull
+    List<ArtistJson> createArtists(List<ArtistJson> artist);
 
     @Nonnull
     ArtistJson updateArtist(ArtistJson artist);

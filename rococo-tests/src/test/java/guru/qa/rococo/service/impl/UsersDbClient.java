@@ -36,7 +36,7 @@ public class UsersDbClient implements UsersClient {
             CFG.userdataJdbcUrl()
     );
 
-    @Step("Crete user using SQL")
+    @Step("Create user using SQL")
     @Nonnull
     @Override
     public UserJson createUser(String username, String password) {

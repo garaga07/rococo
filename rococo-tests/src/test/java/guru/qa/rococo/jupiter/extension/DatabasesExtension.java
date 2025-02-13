@@ -1,13 +1,12 @@
 package guru.qa.rococo.jupiter.extension;
 
 import guru.qa.rococo.config.Config;
-import guru.qa.rococo.data.jdbc.Connections;
 import guru.qa.rococo.data.jdbc.DataSources;
-import guru.qa.rococo.data.jpa.EntityManagers;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class DatabasesExtension implements SuiteExtension {
+public class DatabasesExtension implements BeforeEachCallback {
     private static final Config CFG = Config.getInstance();
     private final JdbcTemplate authJdbcTemplate = new JdbcTemplate(DataSources.dataSource(CFG.authJdbcUrl()));
     private final JdbcTemplate userdataJdbcTemplate = new JdbcTemplate(DataSources.dataSource(CFG.userdataJdbcUrl()));
@@ -16,15 +15,8 @@ public class DatabasesExtension implements SuiteExtension {
     private final JdbcTemplate paintingJdbcTemplate = new JdbcTemplate(DataSources.dataSource(CFG.paintingJdbcUrl()));
 
     @Override
-    public void beforeSuite(ExtensionContext context) {
-        // Очищаем все таблицы перед началом тестов
+    public void beforeEach(ExtensionContext context) {
         clearDatabaseTables();
-    }
-
-    @Override
-    public void afterSuite() {
-        Connections.closeAllConnections();
-        EntityManagers.closeAllEmfs();
     }
 
     private void clearDatabaseTables() {

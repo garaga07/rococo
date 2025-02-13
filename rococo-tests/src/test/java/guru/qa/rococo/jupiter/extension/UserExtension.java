@@ -16,12 +16,14 @@ public class UserExtension implements BeforeEachCallback, ParameterResolver {
     private final UsersClient usersClient = new UsersDbClient();
 
     @Override
-    public void beforeEach(ExtensionContext context) throws Exception {
+    public void beforeEach(ExtensionContext context) {
         AnnotationSupport.findAnnotation(context.getRequiredTestMethod(), User.class)
                 .ifPresent(userAnno -> {
                     if ("".equals(userAnno.username())) {
                         final String username = RandomDataUtils.randomUsername();
+                        System.out.println("Creating test user...");
                         UserJson testUser = usersClient.createUser(username, defaultPassword);
+                        System.out.println("User created: " + testUser);
                         setUser(testUser);
                     }
                 });

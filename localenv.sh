@@ -7,7 +7,7 @@ docker run --name rococo-all -p 5432:5432 \
 -e POSTGRES_PASSWORD=secret \
 -e CREATE_DATABASES=rococo-auth,rococo-artist,rococo-userdata,rococo-museum,rococo-painting \
 -v pgdata:/var/lib/postgresql/data \
--v D:/IdeaProjects/rococo/postgres/script/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh \
+-v D:/IdeaProjects/rococo/postgres/init-database.sh:/docker-entrypoint-initdb.d/init-database.sh \
 -d postgres:15.1 \
 --max_prepared_transactions=100
 docker run --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=2181 -p 2181:2181 -d confluentinc/cp-zookeeper:7.3.2

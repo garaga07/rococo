@@ -7,9 +7,12 @@ import guru.qa.rococo.data.repository.impl.ArtistRepositoryHibernate;
 import guru.qa.rococo.data.tpl.XaTransactionTemplate;
 import guru.qa.rococo.model.rest.ArtistJson;
 import guru.qa.rococo.service.ArtistClient;
+import io.qameta.allure.Step;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,6 +25,7 @@ public class ArtistDbClient implements ArtistClient {
     private final ArtistRepository artistRepository = new ArtistRepositoryHibernate();
     private final XaTransactionTemplate xaTransactionTemplate = new XaTransactionTemplate(CFG.artistJdbcUrl());
 
+    @Step("Create artist using SQL")
     @Nonnull
     @Override
     public ArtistJson createArtist(ArtistJson artist) {
@@ -36,6 +40,27 @@ public class ArtistDbClient implements ArtistClient {
         );
     }
 
+    @Step("Create artists using SQL")
+    @Nonnull
+    @Override
+    public List<ArtistJson> createArtists(List<ArtistJson> artists) {
+        return requireNonNull(
+                xaTransactionTemplate.execute(() -> {
+                    List<ArtistJson> createdArtists = new ArrayList<>();
+                    for (ArtistJson artist : artists) {
+                        ArtistJson createdArtist = ArtistJson.fromEntity(
+                                artistRepository.create(
+                                        ArtistEntity.fromJson(artist)
+                                )
+                        );
+                        createdArtists.add(createdArtist);
+                    }
+                    return createdArtists;
+                })
+        );
+    }
+
+    @Step("Update artist using SQL")
     @Nonnull
     @Override
     public ArtistJson updateArtist(ArtistJson artist) {
@@ -50,6 +75,7 @@ public class ArtistDbClient implements ArtistClient {
         );
     }
 
+    @Step("Find artist by id using SQL")
     @Nonnull
     @Override
     public Optional<ArtistJson> findArtistById(UUID id) {
@@ -58,6 +84,7 @@ public class ArtistDbClient implements ArtistClient {
         ));
     }
 
+    @Step("Find artist by name using SQL")
     @Nonnull
     @Override
     public Optional<ArtistJson> findArtistByName(String name) {

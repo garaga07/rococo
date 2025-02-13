@@ -5,12 +5,14 @@ import guru.qa.rococo.model.rest.ArtistJson;
 import guru.qa.rococo.service.ArtistClient;
 import guru.qa.rococo.service.impl.ArtistDbClient;
 import guru.qa.rococo.utils.RandomDataUtils;
-import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.api.extension.ParameterResolver;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class ArtistExtension implements BeforeEachCallback, ParameterResolver {
 
@@ -19,21 +21,23 @@ public class ArtistExtension implements BeforeEachCallback, ParameterResolver {
 
     @Override
     public void beforeEach(ExtensionContext context) {
-        Optional<Artist> artistAnno = context.getTestMethod().flatMap(m -> Optional.ofNullable(m.getAnnotation(Artist.class)));
+        Optional<Artist> artistAnno = context.getTestMethod()
+                .flatMap(m -> Optional.ofNullable(m.getAnnotation(Artist.class)));
 
         artistAnno.ifPresent(artist -> {
+            List<ArtistJson> artistsToCreate = new ArrayList<>();
             int count = Math.max(artist.count(), 1);
-            List<ArtistJson> createdArtists = new ArrayList<>();
+            String[] names = artist.names();
 
             for (int i = 0; i < count; i++) {
-                String name = artist.name().isEmpty() ? RandomDataUtils.randomArtistName() : artist.name();
-                String biography = artist.biography().isEmpty() ? RandomDataUtils.randomBiography() : artist.biography();
-                String photo = artist.photo().isEmpty() ? RandomDataUtils.randomBase64Image() : artist.photo();
+                String name = (i < names.length && !names[i].isEmpty()) ? names[i] : RandomDataUtils.randomArtistName();
+                String biography = RandomDataUtils.randomBiography();
+                String photo = RandomDataUtils.randomBase64Image();
 
-                ArtistJson artistJson = new ArtistJson(UUID.randomUUID(), name, biography, photo);
-                createdArtists.add(artistClient.createArtist(artistJson));
+                artistsToCreate.add(new ArtistJson(null, name, biography, photo));
             }
 
+            List<ArtistJson> createdArtists = artistClient.createArtists(artistsToCreate);
             context.getStore(NAMESPACE).put(context.getUniqueId(), createdArtists);
         });
     }
@@ -46,6 +50,7 @@ public class ArtistExtension implements BeforeEachCallback, ParameterResolver {
     @Override
     @SuppressWarnings("unchecked")
     public List<ArtistJson> resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-        return (List<ArtistJson>) extensionContext.getStore(NAMESPACE).get(extensionContext.getUniqueId(), List.class);
+        return (List<ArtistJson>) extensionContext.getStore(NAMESPACE)
+                .get(extensionContext.getUniqueId(), List.class);
     }
 }
