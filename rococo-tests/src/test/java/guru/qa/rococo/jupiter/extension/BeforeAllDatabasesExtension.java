@@ -2,11 +2,11 @@ package guru.qa.rococo.jupiter.extension;
 
 import guru.qa.rococo.config.Config;
 import guru.qa.rococo.data.jdbc.DataSources;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class DatabasesExtension implements BeforeEachCallback {
+public class BeforeAllDatabasesExtension implements BeforeAllCallback {
     private static final Config CFG = Config.getInstance();
     private final JdbcTemplate authJdbcTemplate = new JdbcTemplate(DataSources.dataSource(CFG.authJdbcUrl()));
     private final JdbcTemplate userdataJdbcTemplate = new JdbcTemplate(DataSources.dataSource(CFG.userdataJdbcUrl()));
@@ -15,7 +15,7 @@ public class DatabasesExtension implements BeforeEachCallback {
     private final JdbcTemplate paintingJdbcTemplate = new JdbcTemplate(DataSources.dataSource(CFG.paintingJdbcUrl()));
 
     @Override
-    public void beforeEach(ExtensionContext context) {
+    public void beforeAll(ExtensionContext context) {
         clearDatabaseTables();
     }
 
