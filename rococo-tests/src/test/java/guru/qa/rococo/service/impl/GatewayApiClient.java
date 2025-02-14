@@ -1,7 +1,9 @@
 package guru.qa.rococo.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.qa.rococo.api.GatewayApi;
 import guru.qa.rococo.api.core.RestClient;
+import guru.qa.rococo.model.ErrorJson;
 import guru.qa.rococo.model.rest.*;
 import guru.qa.rococo.model.rest.pageable.RestResponsePage;
 import io.qameta.allure.Step;
@@ -15,6 +17,7 @@ import java.util.UUID;
 
 public class GatewayApiClient extends RestClient {
     private final GatewayApi gatewayApi;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public GatewayApiClient() {
         super(CFG.gatewayUrl());
@@ -112,5 +115,16 @@ public class GatewayApiClient extends RestClient {
         } catch (IOException e) {
             throw new AssertionError(e);
         }
+    }
+
+    public ErrorJson parseError(Response<?> response) {
+        try {
+            if (response.errorBody() != null) {
+                return objectMapper.readValue(response.errorBody().string(), ErrorJson.class);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to parse error response", e);
+        }
+        return null;
     }
 }

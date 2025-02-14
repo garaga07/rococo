@@ -3,6 +3,7 @@ package guru.qa.rococo.test.rest;
 import guru.qa.rococo.jupiter.annotation.Artist;
 import guru.qa.rococo.jupiter.annotation.meta.RestTest;
 import guru.qa.rococo.jupiter.extension.ArtistExtension;
+import guru.qa.rococo.jupiter.extension.BeforeEachDatabasesExtension;
 import guru.qa.rococo.model.rest.ArtistJson;
 import guru.qa.rococo.model.rest.pageable.RestResponsePage;
 import guru.qa.rococo.service.impl.GatewayApiClient;
@@ -10,13 +11,11 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.api.parallel.Isolated;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,10 +26,14 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Isolated
+@Order(99)
 @RestTest
 @DisplayName("GetAllArtist")
 public class GetAllArtistApiTest {
 
+    @RegisterExtension
+    public static final BeforeEachDatabasesExtension beforeEachDatabasesExtension = new BeforeEachDatabasesExtension();
     @RegisterExtension
     static final ArtistExtension artistExtension = new ArtistExtension();
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();

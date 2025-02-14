@@ -57,8 +57,8 @@ public class ArtistService {
     @Transactional
     public ArtistJson addArtist(ArtistJson artist) {
         ArtistEntity artistEntity = new ArtistEntity();
-        artistEntity.setName(artist.name());
-        artistEntity.setBiography(artist.biography());
+        artistEntity.setName(artist.name().trim());
+        artistEntity.setBiography(artist.biography().trim());
         if (isPhotoString(artist.photo())) {
             artistEntity.setPhoto(artist.photo().getBytes(StandardCharsets.UTF_8));
         }
@@ -74,8 +74,8 @@ public class ArtistService {
         ArtistEntity artistEntity = artistRepository.findById(artist.id())
                 .orElseThrow(() -> new NotFoundException("id: Художник не найден с id: " + artist.id()));
 
-        artistEntity.setBiography(artist.biography());
-        artistEntity.setName(artist.name());
+        artistEntity.setBiography(artist.biography().trim());
+        artistEntity.setName(artist.name().trim());
         if (isPhotoString(artist.photo())) {
             artistEntity.setPhoto(artist.photo().getBytes(StandardCharsets.UTF_8));
         }

@@ -1,5 +1,5 @@
 guru.qa.rococo.jupiter.extension.CookieJarExtension
-guru.qa.rococo.jupiter.extension.DatabasesExtension
+guru.qa.rococo.jupiter.extension.BeforeAllDatabasesExtension
 guru.qa.rococo.jupiter.extension.TestMethodContextExtension
 guru.qa.rococo.jupiter.extension.AllureBackendLogsExtension
 guru.qa.rococo.jupiter.extension.AllureResultsExtension
