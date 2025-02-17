@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import guru.qa.rococo.config.RococoGatewayServiceConfig;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
@@ -22,6 +23,7 @@ public record MuseumJson(
         @JsonProperty("description")
         String description,
 
+        @Pattern(regexp = "^data:image/.*", message = "photo: Фото должно начинаться с 'data:image/'")
         @NotNull(message = "photo: Фото обязательно для заполнения")
         @Size(max = RococoGatewayServiceConfig.ONE_MB, message = "photo: Размер фото не должен превышать 1MB")
         @JsonProperty("photo")
@@ -32,4 +34,19 @@ public record MuseumJson(
         @JsonProperty("geo")
         GeoJson geo
 ) {
+        public MuseumJson(UUID id, String title, String description, String photo, GeoJson geo) {
+                this.id = id;
+                this.title = normalizeString(title);
+                this.description = normalizeString(description);
+                this.photo = photo;
+                this.geo = geo;
+        }
+
+        private static String normalizeString(String value) {
+                if (value == null) {
+                        return null;
+                }
+                String trimmed = value.trim();
+                return trimmed.isEmpty() ? " " : trimmed;
+        }
 }

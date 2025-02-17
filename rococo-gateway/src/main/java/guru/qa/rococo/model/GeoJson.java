@@ -16,4 +16,16 @@ public record GeoJson(
         @JsonProperty("country")
         CountryJson country
 ) {
+        public GeoJson(String city, CountryJson country) {
+                this.city = normalizeString(city);
+                this.country = country;
+        }
+
+        private static String normalizeString(String value) {
+                if (value == null) {
+                        return null;
+                }
+                String trimmed = value.trim();
+                return trimmed.isEmpty() ? " " : trimmed;
+        }
 }

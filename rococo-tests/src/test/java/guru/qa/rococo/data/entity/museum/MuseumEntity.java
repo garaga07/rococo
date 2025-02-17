@@ -1,5 +1,6 @@
 package guru.qa.rococo.data.entity.museum;
 
+import guru.qa.rococo.model.rest.MuseumJson;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +34,16 @@ public class MuseumEntity implements Serializable {
     @JoinColumn(name = "geo_id", nullable = false)
     private GeoEntity geo;
 
+    public static MuseumEntity fromJson(MuseumJson json, GeoEntity geo) {
+        MuseumEntity entity = new MuseumEntity();
+        entity.setId(json.id());
+        entity.setTitle(json.title());
+        entity.setDescription(json.description());
+        entity.setPhoto(json.photo().getBytes());
+        entity.setGeo(geo);
+        return entity;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
@@ -50,8 +61,6 @@ public class MuseumEntity implements Serializable {
 
     @Override
     public final int hashCode() {
-        return this instanceof HibernateProxy
-                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
-                : getClass().hashCode();
+        return Objects.hashCode(id);
     }
 }

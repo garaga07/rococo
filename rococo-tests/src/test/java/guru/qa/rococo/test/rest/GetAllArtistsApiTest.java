@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Order(99)
 @RestTest
 @DisplayName("GetAllArtist")
-public class GetAllArtistApiTest {
+public class GetAllArtistsApiTest {
 
     @RegisterExtension
     public static final BeforeEachDatabasesExtension beforeEachDatabasesExtension = new BeforeEachDatabasesExtension();

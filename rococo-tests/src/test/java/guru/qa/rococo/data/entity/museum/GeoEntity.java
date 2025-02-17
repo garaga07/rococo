@@ -1,5 +1,6 @@
 package guru.qa.rococo.data.entity.museum;
 
+import guru.qa.rococo.model.rest.GeoJson;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,25 +28,28 @@ public class GeoEntity implements Serializable {
     @JoinColumn(name = "country_id", nullable = false)
     private CountryEntity country;
 
+    public static GeoEntity fromJson(GeoJson json, CountryEntity country) {
+        GeoEntity entity = new GeoEntity();
+        entity.setId(null);
+        entity.setCity(json.city());
+        entity.setCountry(country);
+        return entity;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy
-                ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass()
-                : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy
-                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass()
-                : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
+        if (o instanceof HibernateProxy) {
+            o = ((HibernateProxy) o).getHibernateLazyInitializer().getImplementation();
+        }
+        if (getClass() != o.getClass()) return false;
         GeoEntity that = (GeoEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        return Objects.equals(city, that.city) && Objects.equals(country.getId(), that.country.getId());
     }
 
     @Override
     public final int hashCode() {
-        return this instanceof HibernateProxy
-                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
-                : getClass().hashCode();
+        return Objects.hashCode(id);
     }
 }

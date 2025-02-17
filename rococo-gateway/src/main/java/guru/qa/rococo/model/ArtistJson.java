@@ -28,12 +28,11 @@ public record ArtistJson(
         @JsonProperty("photo")
         String photo) {
 
-        @JsonCreator
         public ArtistJson(
-                @JsonProperty("id") UUID id,
-                @JsonProperty("name") String name,
-                @JsonProperty("biography") String biography,
-                @JsonProperty("photo") String photo) {
+                UUID id,
+                String name,
+                String biography,
+                String photo) {
                 this.id = id;
                 this.name = normalizeString(name);
                 this.biography = normalizeString(biography);

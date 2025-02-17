@@ -1,5 +1,6 @@
 package guru.qa.rococo.data.entity.museum;
 
+import guru.qa.rococo.model.rest.CountryJson;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,13 @@ public class CountryEntity implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
+    public static CountryEntity fromJson(CountryJson json) {
+        CountryEntity entity = new CountryEntity();
+        entity.setId(json.id());
+        entity.setName(json.name());
+        return entity;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
@@ -40,8 +48,6 @@ public class CountryEntity implements Serializable {
 
     @Override
     public final int hashCode() {
-        return this instanceof HibernateProxy
-                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
-                : getClass().hashCode();
+        return Objects.hashCode(id);
     }
 }
