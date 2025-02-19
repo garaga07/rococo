@@ -1,10 +1,11 @@
-package guru.qa.rococo.test.rest;
+package guru.qa.rococo.test.rest.artist;
 
 import guru.qa.rococo.jupiter.annotation.ApiLogin;
 import guru.qa.rococo.jupiter.annotation.Token;
 import guru.qa.rococo.jupiter.annotation.User;
 import guru.qa.rococo.jupiter.annotation.meta.RestTest;
 import guru.qa.rococo.jupiter.extension.ApiLoginExtension;
+import guru.qa.rococo.jupiter.extension.UserExtension;
 import guru.qa.rococo.model.ErrorJson;
 import guru.qa.rococo.model.rest.ArtistJson;
 import guru.qa.rococo.service.impl.GatewayApiClient;
@@ -25,12 +26,13 @@ import retrofit2.Response;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @RestTest
 @DisplayName("AddArtist")
 public class AddArtistApiTest {
+    @RegisterExtension
+    static final UserExtension userExtension = new UserExtension();
     @RegisterExtension
     private static final ApiLoginExtension apiLoginExtension = ApiLoginExtension.rest();
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();
@@ -47,7 +49,7 @@ public class AddArtistApiTest {
     @User
     @ApiLogin()
     @Story("Художники")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
     @DisplayName("Успешное добавление нового художника")
@@ -60,35 +62,22 @@ public class AddArtistApiTest {
         );
         Response<ArtistJson> response = gatewayApiClient.addArtist(token, artist);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
-        assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Artist ID should not be null");
-        assertEquals(response.body().name(), artist.name(),
-                String.format("Artist name mismatch! Expected: '%s', Actual: '%s'",
-                        artist.name(),
-                        response.body().name()
-                )
-        );
-
-        assertEquals(response.body().biography(), artist.biography(),
-                String.format(
-                        "Artist biography mismatch! Expected: '%s', Actual: '%s'",
-                        artist.biography(),
-                        response.body().biography()
-                )
-        );
-
-        assertEquals(response.body().photo(), artist.photo(),
-                String.format(
-                        "Artist photo mismatch! Expected: '%s', Actual: '%s'",
-                        artist.photo(),
-                        response.body().photo()
-                )
+        ArtistJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Artist ID should not be null"),
+                () -> assertEquals(artist.name(), responseBody.name(),
+                        String.format("Artist name mismatch! Expected: '%s', Actual: '%s'", artist.name(), responseBody.name())),
+                () -> assertEquals(artist.biography(), responseBody.biography(),
+                        String.format("Artist biography mismatch! Expected: '%s', Actual: '%s'", artist.biography(), responseBody.biography())),
+                () -> assertEquals(artist.photo(), responseBody.photo(),
+                        String.format("Artist photo mismatch! Expected: '%s', Actual: '%s'", artist.photo(), responseBody.photo()))
         );
     }
 
     @Test
     @Story("Художники")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
     @DisplayName("Добавление художника с невалидным значением токена")
@@ -184,29 +173,16 @@ public class AddArtistApiTest {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<ArtistJson> response = gatewayApiClient.addArtist(token, artist);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
-        assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Artist ID should not be null");
-        assertEquals(response.body().name(), artist.name(),
-                String.format(
-                        "Artist name mismatch! Expected: '%s', Actual: '%s'",
-                        artist.name(),
-                        response.body().name()
-                )
-        );
-
-        assertEquals(response.body().biography(), artist.biography(),
-                String.format(
-                        "Artist biography mismatch! Expected: '%s', Actual: '%s'",
-                        artist.biography(),
-                        response.body().biography()
-                )
-        );
-
-        assertEquals(response.body().photo(), artist.photo(),
-                String.format("Artist photo mismatch! Expected: '%s', Actual: '%s'",
-                        artist.photo(),
-                        response.body().photo()
-                )
+        ArtistJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Artist ID should not be null"),
+                () -> assertEquals(artist.name(), responseBody.name(),
+                        String.format("Artist name mismatch! Expected: '%s', Actual: '%s'", artist.name(), responseBody.name())),
+                () -> assertEquals(artist.biography(), responseBody.biography(),
+                        String.format("Artist biography mismatch! Expected: '%s', Actual: '%s'", artist.biography(), responseBody.biography())),
+                () -> assertEquals(artist.photo(), responseBody.photo(),
+                        String.format("Artist photo mismatch! Expected: '%s', Actual: '%s'", artist.photo(), responseBody.photo()))
         );
     }
 
@@ -304,30 +280,16 @@ public class AddArtistApiTest {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<ArtistJson> response = gatewayApiClient.addArtist(token, artist);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
-        assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Artist ID should not be null");
-        assertEquals(response.body().name(), artist.name(),
-                String.format(
-                        "Artist name mismatch! Expected: '%s', Actual: '%s'",
-                        artist.name(),
-                        response.body().name()
-                )
-        );
-
-        assertEquals(response.body().biography(), artist.biography(),
-                String.format(
-                        "Artist biography mismatch! Expected: '%s', Actual: '%s'",
-                        artist.biography(),
-                        response.body().biography()
-                )
-        );
-
-        assertEquals(response.body().photo(), artist.photo(),
-                String.format(
-                        "Artist photo mismatch! Expected: '%s', Actual: '%s'",
-                        artist.photo(),
-                        response.body().photo()
-                )
+        ArtistJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Artist ID should not be null"),
+                () -> assertEquals(artist.name(), responseBody.name(),
+                        String.format("Artist name mismatch! Expected: '%s', Actual: '%s'", artist.name(), responseBody.name())),
+                () -> assertEquals(artist.biography(), responseBody.biography(),
+                        String.format("Artist biography mismatch! Expected: '%s', Actual: '%s'", artist.biography(), responseBody.biography())),
+                () -> assertEquals(artist.photo(), responseBody.photo(),
+                        String.format("Artist photo mismatch! Expected: '%s', Actual: '%s'", artist.photo(), responseBody.photo()))
         );
     }
 
@@ -467,7 +429,7 @@ public class AddArtistApiTest {
     @User
     @ApiLogin()
     @Story("Художники")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
     @DisplayName("Успешное добавление нового художника")
@@ -481,26 +443,16 @@ public class AddArtistApiTest {
         Response<ArtistJson> response = gatewayApiClient.addArtist(token, artist);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
         assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Artist ID should not be null");
-        assertEquals(response.body().name(), artist.name(),
-                String.format("Artist name mismatch! Expected: '%s', Actual: '%s'",
-                        artist.name(),
-                        response.body().name()
-                )
-        );
-        assertEquals(response.body().biography(), artist.biography(),
-                String.format(
-                        "Artist biography mismatch! Expected: '%s', Actual: '%s'",
-                        artist.biography(),
-                        response.body().biography()
-                )
-        );
-        assertEquals(response.body().photo(), artist.photo(),
-                String.format(
-                        "Artist photo mismatch! Expected: '%s', Actual: '%s'",
-                        artist.photo(),
-                        response.body().photo()
-                )
+        ArtistJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Artist ID should not be null"),
+                () -> assertEquals(artist.name(), responseBody.name(),
+                        String.format("Artist name mismatch! Expected: '%s', Actual: '%s'", artist.name(), responseBody.name())),
+                () -> assertEquals(artist.biography(), responseBody.biography(),
+                        String.format("Artist biography mismatch! Expected: '%s', Actual: '%s'", artist.biography(), responseBody.biography())),
+                () -> assertEquals(artist.photo(), responseBody.photo(),
+                        String.format("Artist photo mismatch! Expected: '%s', Actual: '%s'", artist.photo(), responseBody.photo()))
         );
     }
 }

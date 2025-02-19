@@ -89,11 +89,11 @@ public class MuseumGeoService {
     @Transactional
     public MuseumJson updateMuseum(MuseumJson museum) {
         if (museum.id() == null) {
-            throw new BadRequestException("museum.id: ID музея обязателен для заполнения");
+            throw new BadRequestException("id: ID музея обязателен для заполнения");
         }
 
         MuseumEntity museumEntity = museumRepository.findById(museum.id())
-                .orElseThrow(() -> new NotFoundException("museum.id: Музей не найден с id: " + museum.id()));
+                .orElseThrow(() -> new NotFoundException("id: Музей не найден с id: " + museum.id()));
 
         CountryEntity countryEntity = countryRepository.findById(museum.geo().country().id())
                 .orElseThrow(() -> new NotFoundException("country.id: Страна не найдена с id: " + museum.geo().country().id()));

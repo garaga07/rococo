@@ -1,4 +1,4 @@
-package guru.qa.rococo.test.rest;
+package guru.qa.rococo.test.rest.museum;
 
 import guru.qa.rococo.jupiter.annotation.Museum;
 import guru.qa.rococo.jupiter.annotation.meta.RestTest;
@@ -31,7 +31,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @RestTest
 @DisplayName("GetAllMuseums")
 public class GetAllMuseumsApiTest {
-
     @RegisterExtension
     public static final BeforeEachDatabasesExtension beforeEachDatabasesExtension = new BeforeEachDatabasesExtension();
     @RegisterExtension

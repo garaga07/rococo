@@ -1,4 +1,4 @@
-package guru.qa.rococo.test.rest;
+package guru.qa.rococo.test.rest.artist;
 
 import guru.qa.rococo.jupiter.annotation.Artist;
 import guru.qa.rococo.jupiter.annotation.meta.RestTest;
@@ -29,9 +29,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @Isolated
 @Order(99)
 @RestTest
-@DisplayName("GetAllArtist")
+@DisplayName("GetAllArtists")
 public class GetAllArtistsApiTest {
-
     @RegisterExtension
     public static final BeforeEachDatabasesExtension beforeEachDatabasesExtension = new BeforeEachDatabasesExtension();
     @RegisterExtension

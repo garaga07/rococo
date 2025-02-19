@@ -1,10 +1,11 @@
-package guru.qa.rococo.test.rest;
+package guru.qa.rococo.test.rest.museum;
 
 import guru.qa.rococo.jupiter.annotation.ApiLogin;
 import guru.qa.rococo.jupiter.annotation.Token;
 import guru.qa.rococo.jupiter.annotation.User;
 import guru.qa.rococo.jupiter.annotation.meta.RestTest;
 import guru.qa.rococo.jupiter.extension.ApiLoginExtension;
+import guru.qa.rococo.jupiter.extension.UserExtension;
 import guru.qa.rococo.model.ErrorJson;
 import guru.qa.rococo.model.rest.CountryJson;
 import guru.qa.rococo.model.rest.GeoJson;
@@ -28,12 +29,13 @@ import retrofit2.Response;
 import java.util.UUID;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @RestTest
 @DisplayName("AddMuseum")
 public class AddMuseumApiTest {
+    @RegisterExtension
+    static final UserExtension userExtension = new UserExtension();
     @RegisterExtension
     private static final ApiLoginExtension apiLoginExtension = ApiLoginExtension.rest();
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();
@@ -58,7 +60,7 @@ public class AddMuseumApiTest {
     @User
     @ApiLogin()
     @Story("Музеи")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление музея")
     @Tags({@Tag("museum")})
     @DisplayName("Успешное добавление нового музея")
@@ -72,37 +74,35 @@ public class AddMuseumApiTest {
         );
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
-        assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Museum ID should not be null");
-        assertEquals(response.body().title(), museum.title(),
-                String.format("Museum title mismatch! Expected: '%s', Actual: '%s'",
-                        museum.title(),
-                        response.body().title()
-                )
-        );
-        assertEquals(response.body().description(), museum.description(),
-                String.format("Museum description mismatch! Expected: '%s', Actual: '%s'",
-                        museum.description(),
-                        response.body().description()
-                )
-        );
-        assertEquals(response.body().photo(), museum.photo(),
-                String.format("Museum photo mismatch! Expected: '%s', Actual: '%s'",
-                        museum.photo(),
-                        response.body().photo()
-                )
-        );
-        assertNotNull(response.body().geo(), "Museum geo should not be null");
-        assertEquals(response.body().geo().city(), museum.geo().city(),
-                String.format("Museum city mismatch! Expected: '%s', Actual: '%s'",
-                        museum.geo().city(),
-                        response.body().geo().city()
-                )
-        );
-        assertEquals(response.body().geo().country().id(), museum.geo().country().id(),
-                String.format("Museum country ID mismatch! Expected: '%s', Actual: '%s'",
-                        museum.geo().country().id(),
-                        response.body().geo().country().id()
+        MuseumJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Museum ID should not be null"),
+                () -> assertEquals(responseBody.title(), museum.title(),
+                        String.format("Museum title mismatch! Expected: '%s', Actual: '%s'",
+                                museum.title(),
+                                responseBody.title())
+                ),
+                () -> assertEquals(responseBody.description(), museum.description(),
+                        String.format("Museum description mismatch! Expected: '%s', Actual: '%s'",
+                                museum.description(),
+                                responseBody.description())
+                ),
+                () -> assertEquals(responseBody.photo(), museum.photo(),
+                        String.format("Museum photo mismatch! Expected: '%s', Actual: '%s'",
+                                museum.photo(),
+                                responseBody.photo())
+                ),
+                () -> assertNotNull(responseBody.geo(), "Museum geo should not be null"),
+                () -> assertEquals(responseBody.geo().city(), museum.geo().city(),
+                        String.format("Museum city mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().city(),
+                                responseBody.geo().city())
+                ),
+                () -> assertEquals(responseBody.geo().country().id(), museum.geo().country().id(),
+                        String.format("Museum country ID mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().country().id(),
+                                responseBody.geo().country().id())
                 )
         );
     }
@@ -255,13 +255,35 @@ public class AddMuseumApiTest {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
-        assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Museum ID should not be null");
-        assertEquals(response.body().title(), museum.title(),
-                String.format(
-                        "Museum title mismatch! Expected: '%s', Actual: '%s'",
-                        museum.title(),
-                        response.body().title()
+        MuseumJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Museum ID should not be null"),
+                () -> assertEquals(responseBody.title(), museum.title(),
+                        String.format("Museum title mismatch! Expected: '%s', Actual: '%s'",
+                                museum.title(),
+                                responseBody.title())
+                ),
+                () -> assertEquals(responseBody.description(), museum.description(),
+                        String.format("Museum description mismatch! Expected: '%s', Actual: '%s'",
+                                museum.description(),
+                                responseBody.description())
+                ),
+                () -> assertEquals(responseBody.photo(), museum.photo(),
+                        String.format("Museum photo mismatch! Expected: '%s', Actual: '%s'",
+                                museum.photo(),
+                                responseBody.photo())
+                ),
+                () -> assertNotNull(responseBody.geo(), "Museum geo should not be null"),
+                () -> assertEquals(responseBody.geo().city(), museum.geo().city(),
+                        String.format("Museum city mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().city(),
+                                responseBody.geo().city())
+                ),
+                () -> assertEquals(responseBody.geo().country().id(), museum.geo().country().id(),
+                        String.format("Museum country ID mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().country().id(),
+                                responseBody.geo().country().id())
                 )
         );
     }
@@ -366,46 +388,35 @@ public class AddMuseumApiTest {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
-        assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Museum ID should not be null");
-        assertEquals(response.body().title(), museum.title(),
-                String.format(
-                        "Museum title mismatch! Expected: '%s', Actual: '%s'",
-                        museum.title(),
-                        response.body().title()
-                )
-        );
-
-        assertEquals(response.body().description(), museum.description(),
-                String.format(
-                        "Museum description mismatch! Expected: '%s', Actual: '%s'",
-                        museum.description(),
-                        response.body().description()
-                )
-        );
-
-        assertEquals(response.body().photo(), museum.photo(),
-                String.format(
-                        "Museum photo mismatch! Expected: '%s', Actual: '%s'",
-                        museum.photo(),
-                        response.body().photo()
-                )
-        );
-
-        assertNotNull(response.body().geo(), "Museum geo should not be null");
-        assertEquals(response.body().geo().city(), museum.geo().city(),
-                String.format(
-                        "Museum city mismatch! Expected: '%s', Actual: '%s'",
-                        museum.geo().city(),
-                        response.body().geo().city()
-                )
-        );
-
-        assertEquals(response.body().geo().country().id(), museum.geo().country().id(),
-                String.format(
-                        "Museum country ID mismatch! Expected: '%s', Actual: '%s'",
-                        museum.geo().country().id(),
-                        response.body().geo().country().id()
+        MuseumJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Museum ID should not be null"),
+                () -> assertEquals(responseBody.title(), museum.title(),
+                        String.format("Museum title mismatch! Expected: '%s', Actual: '%s'",
+                                museum.title(),
+                                responseBody.title())
+                ),
+                () -> assertEquals(responseBody.description(), museum.description(),
+                        String.format("Museum description mismatch! Expected: '%s', Actual: '%s'",
+                                museum.description(),
+                                responseBody.description())
+                ),
+                () -> assertEquals(responseBody.photo(), museum.photo(),
+                        String.format("Museum photo mismatch! Expected: '%s', Actual: '%s'",
+                                museum.photo(),
+                                responseBody.photo())
+                ),
+                () -> assertNotNull(responseBody.geo(), "Museum geo should not be null"),
+                () -> assertEquals(responseBody.geo().city(), museum.geo().city(),
+                        String.format("Museum city mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().city(),
+                                responseBody.geo().city())
+                ),
+                () -> assertEquals(responseBody.geo().country().id(), museum.geo().country().id(),
+                        String.format("Museum country ID mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().country().id(),
+                                responseBody.geo().country().id())
                 )
         );
     }
@@ -510,46 +521,35 @@ public class AddMuseumApiTest {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
-        assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Museum ID should not be null");
-        assertEquals(response.body().title(), museum.title(),
-                String.format(
-                        "Museum title mismatch! Expected: '%s', Actual: '%s'",
-                        museum.title(),
-                        response.body().title()
-                )
-        );
-
-        assertEquals(response.body().description(), museum.description(),
-                String.format(
-                        "Museum description mismatch! Expected: '%s', Actual: '%s'",
-                        museum.description(),
-                        response.body().description()
-                )
-        );
-
-        assertEquals(response.body().photo(), museum.photo(),
-                String.format(
-                        "Museum photo mismatch! Expected: '%s', Actual: '%s'",
-                        museum.photo(),
-                        response.body().photo()
-                )
-        );
-
-        assertNotNull(response.body().geo(), "Museum geo should not be null");
-        assertEquals(response.body().geo().city(), museum.geo().city(),
-                String.format(
-                        "Museum city mismatch! Expected: '%s', Actual: '%s'",
-                        museum.geo().city(),
-                        response.body().geo().city()
-                )
-        );
-
-        assertEquals(response.body().geo().country().id(), museum.geo().country().id(),
-                String.format(
-                        "Museum country ID mismatch! Expected: '%s', Actual: '%s'",
-                        museum.geo().country().id(),
-                        response.body().geo().country().id()
+        MuseumJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Museum ID should not be null"),
+                () -> assertEquals(responseBody.title(), museum.title(),
+                        String.format("Museum title mismatch! Expected: '%s', Actual: '%s'",
+                                museum.title(),
+                                responseBody.title())
+                ),
+                () -> assertEquals(responseBody.description(), museum.description(),
+                        String.format("Museum description mismatch! Expected: '%s', Actual: '%s'",
+                                museum.description(),
+                                responseBody.description())
+                ),
+                () -> assertEquals(responseBody.photo(), museum.photo(),
+                        String.format("Museum photo mismatch! Expected: '%s', Actual: '%s'",
+                                museum.photo(),
+                                responseBody.photo())
+                ),
+                () -> assertNotNull(responseBody.geo(), "Museum geo should not be null"),
+                () -> assertEquals(responseBody.geo().city(), museum.geo().city(),
+                        String.format("Museum city mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().city(),
+                                responseBody.geo().city())
+                ),
+                () -> assertEquals(responseBody.geo().country().id(), museum.geo().country().id(),
+                        String.format("Museum country ID mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().country().id(),
+                                responseBody.geo().country().id())
                 )
         );
     }
@@ -710,41 +710,35 @@ public class AddMuseumApiTest {
         );
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
-        assertNotNull(response.body(), "Response body should not be null");
-        assertNotNull(response.body().id(), "Museum ID should not be null");
-        assertEquals(response.body().title(), museum.title(),
-                String.format("Museum title mismatch! Expected: '%s', Actual: '%s'",
-                        museum.title(),
-                        response.body().title()
-                )
-        );
-        assertEquals(response.body().description(), museum.description(),
-                String.format(
-                        "Museum description mismatch! Expected: '%s', Actual: '%s'",
-                        museum.description(),
-                        response.body().description()
-                )
-        );
-        assertEquals(response.body().photo(), museum.photo(),
-                String.format(
-                        "Museum photo mismatch! Expected: '%s', Actual: '%s'",
-                        museum.photo(),
-                        response.body().photo()
-                )
-        );
-        assertNotNull(response.body().geo(), "Museum geo should not be null");
-        assertEquals(response.body().geo().city(), museum.geo().city(),
-                String.format(
-                        "Museum city mismatch! Expected: '%s', Actual: '%s'",
-                        museum.geo().city(),
-                        response.body().geo().city()
-                )
-        );
-        assertEquals(response.body().geo().country().id(), museum.geo().country().id(),
-                String.format(
-                        "Museum country ID mismatch! Expected: '%s', Actual: '%s'",
-                        museum.geo().country().id(),
-                        response.body().geo().country().id()
+        MuseumJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertNotNull(responseBody.id(), "Museum ID should not be null"),
+                () -> assertEquals(responseBody.title(), museum.title(),
+                        String.format("Museum title mismatch! Expected: '%s', Actual: '%s'",
+                                museum.title(),
+                                responseBody.title())
+                ),
+                () -> assertEquals(responseBody.description(), museum.description(),
+                        String.format("Museum description mismatch! Expected: '%s', Actual: '%s'",
+                                museum.description(),
+                                responseBody.description())
+                ),
+                () -> assertEquals(responseBody.photo(), museum.photo(),
+                        String.format("Museum photo mismatch! Expected: '%s', Actual: '%s'",
+                                museum.photo(),
+                                responseBody.photo())
+                ),
+                () -> assertNotNull(responseBody.geo(), "Museum geo should not be null"),
+                () -> assertEquals(responseBody.geo().city(), museum.geo().city(),
+                        String.format("Museum city mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().city(),
+                                responseBody.geo().city())
+                ),
+                () -> assertEquals(responseBody.geo().country().id(), museum.geo().country().id(),
+                        String.format("Museum country ID mismatch! Expected: '%s', Actual: '%s'",
+                                museum.geo().country().id(),
+                                responseBody.geo().country().id())
                 )
         );
     }

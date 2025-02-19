@@ -7,12 +7,11 @@ import retrofit2.http.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.UUID;
 
 public interface GatewayApi {
 
     @GET("api/artist/{id}")
-    Call<ArtistJson> getArtistById(@Path("id") @Nonnull UUID id);
+    Call<ArtistJson> getArtistById(@Path("id") @Nonnull String id);
 
     @GET("api/artist")
     Call<RestResponsePage<ArtistJson>> getAllArtists(@Query("page") int page,
@@ -28,7 +27,7 @@ public interface GatewayApi {
                                   @Body ArtistJson artist);
 
     @GET("api/museum/{id}")
-    Call<MuseumJson> getMuseumById(@Path("id") @Nonnull UUID id);
+    Call<MuseumJson> getMuseumById(@Path("id") @Nonnull String id);
 
     @GET("api/museum")
     Call<RestResponsePage<MuseumJson>> getAllMuseums(@Query("page") int page,
@@ -48,7 +47,7 @@ public interface GatewayApi {
                                                         @Query("size") int size);
 
     @GET("api/painting/{id}")
-    Call<PaintingResponseJson> getPaintingById(@Path("id") @Nonnull UUID id);
+    Call<PaintingResponseJson> getPaintingById(@Path("id") @Nonnull String id);
 
     @GET("api/painting")
     Call<RestResponsePage<PaintingResponseJson>> getAllPaintings(@Query("page") int page,
@@ -56,7 +55,7 @@ public interface GatewayApi {
                                                                  @Query("title") @Nullable String title);
 
     @GET("api/painting/author/{authorId}")
-    Call<RestResponsePage<PaintingResponseJson>> getPaintingsByAuthorId(@Path("authorId") @Nonnull UUID authorId,
+    Call<RestResponsePage<PaintingResponseJson>> getPaintingsByAuthorId(@Path("authorId") @Nonnull String authorId,
                                                                         @Query("page") int page,
                                                                         @Query("size") int size);
 

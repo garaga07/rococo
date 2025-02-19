@@ -13,7 +13,6 @@ import retrofit2.Response;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.util.UUID;
 
 public class GatewayApiClient extends RestClient {
     private final GatewayApi gatewayApi;
@@ -25,7 +24,7 @@ public class GatewayApiClient extends RestClient {
     }
 
     @Step("Send GET /api/artist/{id} request")
-    public Response<ArtistJson> getArtistById(@Nonnull UUID id) {
+    public Response<ArtistJson> getArtistById(@Nonnull String id) {
         return executeRequest(gatewayApi.getArtistById(id));
     }
 
@@ -45,7 +44,7 @@ public class GatewayApiClient extends RestClient {
     }
 
     @Step("Send GET /api/museum/{id} request")
-    public Response<MuseumJson> getMuseumById(@Nonnull UUID id) {
+    public Response<MuseumJson> getMuseumById(@Nonnull String id) {
         return executeRequest(gatewayApi.getMuseumById(id));
     }
 
@@ -70,7 +69,7 @@ public class GatewayApiClient extends RestClient {
     }
 
     @Step("Send GET /api/painting/{id} request")
-    public Response<PaintingResponseJson> getPaintingById(@Nonnull UUID id) {
+    public Response<PaintingResponseJson> getPaintingById(@Nonnull String id) {
         return executeRequest(gatewayApi.getPaintingById(id));
     }
 
@@ -80,7 +79,7 @@ public class GatewayApiClient extends RestClient {
     }
 
     @Step("Send GET /api/painting/author/{authorId} request with pagination")
-    public Response<RestResponsePage<PaintingResponseJson>> getPaintingsByAuthorId(@Nonnull UUID authorId, int page, int size) {
+    public Response<RestResponsePage<PaintingResponseJson>> getPaintingsByAuthorId(@Nonnull String authorId, int page, int size) {
         return executeRequest(gatewayApi.getPaintingsByAuthorId(authorId, page, size));
     }
 
