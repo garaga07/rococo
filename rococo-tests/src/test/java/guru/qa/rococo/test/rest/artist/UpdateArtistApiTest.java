@@ -21,9 +21,13 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import retrofit2.Response;
 
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,15 +43,23 @@ public class UpdateArtistApiTest {
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();
 
     public static final String ERROR_ID_REQUIRED = "id: ID художника обязателен для заполнения";
+    public static final String ERROR_NAME_REQUIRED = "name: Имя обязательно для заполнения";
+    public static final String ERROR_NAME_LENGTH = "name: Имя должно содержать от 3 до 255 символов";
+    public static final String ERROR_BIOGRAPHY_REQUIRED = "biography: Биография обязательна для заполнения";
+    public static final String ERROR_BIOGRAPHY_LENGTH = "biography: Биография должна содержать от 11 до 2000 символов";
+    public static final String ERROR_PHOTO_REQUIRED = "photo: Фото обязательно для заполнения";
+    public static final String ERROR_PHOTO_FORMAT = "photo: Фото должно начинаться с 'data:image/'";
+    public static final String ERROR_PHOTO_SIZE = "photo: Размер фото не должен превышать 1MB";
 
-    @Test
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Artist
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление художника")
     @Tags({@Tag("artist")})
+    @Test
     @DisplayName("Успешное обновление данных художника")
     void shouldSuccessfullyUpdateArtist(@Token String token, ArtistJson artist) {
         ArtistJson updatedArtist = new ArtistJson(
@@ -75,12 +87,13 @@ public class UpdateArtistApiTest {
         );
     }
 
-    @Test
+
     @Artist
     @Story("Художники")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Обновление художника")
     @Tags({@Tag("artist")})
+    @Test
     @DisplayName("Обновление художника с невалидным значением токена")
     void shouldUpdateArtistWithIncorrectToken(ArtistJson artist) {
         ArtistJson updatedArtist = new ArtistJson(
@@ -93,13 +106,14 @@ public class UpdateArtistApiTest {
         assertEquals(401, response.code(), "Expected HTTP status 401 but got " + response.code());
     }
 
-    @Test
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
     @Tags({@Tag("artist")})
+    @Test
     @DisplayName("Попытка обновить данные несуществующего художника")
     void shouldFailToUpdateNonExistentArtist(@Token String token) {
         UUID nonExistentArtistId = UUID.randomUUID(); // Генерируем случайный ID, которого нет в базе
@@ -116,39 +130,316 @@ public class UpdateArtistApiTest {
 
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
+        assertEquals("id: Художник не найден с id: " + nonExistentArtistId, error.detail(), "Error detail mismatch");
+    }
 
-        assertAll(
-                () -> assertEquals("Not Found", error.type(), "Error type mismatch"),
-                () -> assertEquals("Not Found", error.title(), "Error title mismatch"),
-                () -> assertEquals("id: Художник не найден с id: " + nonExistentArtistId, error.detail(), "Error detail mismatch"),
-                () -> assertEquals("/api/artist", error.instance(), "Error instance mismatch")
+    static Stream<Arguments> requiredFieldProvider() {
+        return Stream.of(
+                Arguments.of("id", ERROR_ID_REQUIRED),
+                Arguments.of("name", ERROR_NAME_REQUIRED),
+                Arguments.of("biography", ERROR_BIOGRAPHY_REQUIRED),
+                Arguments.of("photo", ERROR_PHOTO_REQUIRED)
         );
     }
 
-    @Test
+
     @User
-    @ApiLogin()
+    @ApiLogin
+    @Artist
     @Story("Художники")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
     @Tags({@Tag("artist")})
-    @DisplayName("Попытка обновить художника без ID")
-    void shouldFailToUpdateArtistWithoutId(@Token String token) {
-        ArtistJson invalidArtist = new ArtistJson(
-                null, // ID отсутствует
-                RandomDataUtils.randomArtistName(),
-                RandomDataUtils.randomBiography(),
-                RandomDataUtils.randomBase64Image()
-        );
+    @ParameterizedTest
+    @MethodSource("requiredFieldProvider")
+    @DisplayName("Проверка обязательности полей при обновлении художника")
+    void shouldFailToUpdateArtistWithNullFields(String fieldToNullify, String expectedDetail) {
+        ArtistJson artist = ArtistExtension.getArtistForTest();
+        String token = "Bearer " + ApiLoginExtension.getToken();
+        ArtistJson invalidArtist = switch (fieldToNullify) {
+            case "id" -> new ArtistJson(null, artist.name(), artist.biography(), artist.photo());
+            case "name" -> new ArtistJson(artist.id(), null, artist.biography(), artist.photo());
+            case "biography" -> new ArtistJson(artist.id(), artist.name(), null, artist.photo());
+            case "photo" -> new ArtistJson(artist.id(), artist.name(), artist.biography(), null);
+            default -> throw new IllegalArgumentException("Unexpected field: " + fieldToNullify);
+        };
+
         Response<ArtistJson> response = gatewayApiClient.updateArtist(token, invalidArtist);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
+        assertEquals(expectedDetail, error.detail(), "Unexpected error detail");
+    }
+
+    static Stream<Arguments> validArtistNameValuesProvider() {
+        return Stream.of(
+                Arguments.of(RandomDataUtils.randomArtistName(3)),
+                Arguments.of(RandomDataUtils.randomArtistName(255))
+        );
+    }
+
+
+    @User
+    @ApiLogin
+    @Artist
+    @Story("Художники")
+    @Severity(SeverityLevel.NORMAL)
+    @Feature("Обновление художника")
+    @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("validArtistNameValuesProvider")
+    @DisplayName("Проверка валидных значений для поля name при обновлении художника")
+    void shouldSuccessForValidArtistNameValues(String validName) {
+        ArtistJson artist = ArtistExtension.getArtistForTest();
+        String token = "Bearer " + ApiLoginExtension.getToken();
+
+        ArtistJson updatedArtist = new ArtistJson(
+                artist.id(),
+                validName,
+                artist.biography(),
+                artist.photo()
+        );
+
+        Response<ArtistJson> response = gatewayApiClient.updateArtist(token, updatedArtist);
+        assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
+
+        ArtistJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
         assertAll(
-                () -> assertEquals("Bad Request", error.type(), "Error type mismatch"),
-                () -> assertEquals("Bad Request", error.title(), "Unexpected error title"),
-                () -> assertEquals(ERROR_ID_REQUIRED, error.detail(), "Unexpected error detail"),
-                () -> assertEquals("/api/artist", error.instance(), "Unexpected error instance")
+                () -> assertEquals(artist.id(), responseBody.id(), "Artist ID should remain unchanged"),
+                () -> assertEquals(validName, responseBody.name(),
+                        String.format("Artist name mismatch! Expected: '%s', Actual: '%s'", validName, responseBody.name())),
+                () -> assertEquals(artist.biography(), responseBody.biography(),
+                        String.format("Artist biography mismatch! Expected: '%s', Actual: '%s'", artist.biography(), responseBody.biography())),
+                () -> assertEquals(artist.photo(), responseBody.photo(),
+                        String.format("Artist photo mismatch! Expected: '%s', Actual: '%s'", artist.photo(), responseBody.photo()))
+        );
+    }
+
+    static Stream<Arguments> invalidArtistNameValuesProvider() {
+        return Stream.of(
+                Arguments.of(RandomDataUtils.randomArtistName(2)),
+                Arguments.of(RandomDataUtils.randomArtistName(256)),
+                Arguments.of(""),
+                Arguments.of("             ")
+        );
+    }
+
+
+    @User
+    @ApiLogin
+    @Artist
+    @Story("Художники")
+    @Severity(SeverityLevel.NORMAL)
+    @Feature("Обновление художника")
+    @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("invalidArtistNameValuesProvider")
+    @DisplayName("Проверка невалидных значений для поля name при обновлении художника")
+    void shouldFailForInvalidArtistNameValues(String invalidName) {
+        ArtistJson artist = ArtistExtension.getArtistForTest();
+        String token = "Bearer " + ApiLoginExtension.getToken();
+
+        ArtistJson updatedArtist = new ArtistJson(
+                artist.id(),
+                invalidName,
+                artist.biography(),
+                artist.photo()
+        );
+
+        Response<ArtistJson> response = gatewayApiClient.updateArtist(token, updatedArtist);
+        assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
+
+        ErrorJson error = gatewayApiClient.parseError(response);
+        assertNotNull(error, "ErrorJson should not be null");
+        assertEquals(ERROR_NAME_LENGTH, error.detail(), "Unexpected error detail");
+    }
+
+    static Stream<Arguments> validArtistBiographyValuesProvider() {
+        return Stream.of(
+                Arguments.of(RandomDataUtils.randomBiography(11)),
+                Arguments.of(RandomDataUtils.randomBiography(2000))
+        );
+    }
+
+
+    @User
+    @ApiLogin
+    @Artist
+    @Story("Художники")
+    @Severity(SeverityLevel.NORMAL)
+    @Feature("Обновление художника")
+    @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("validArtistBiographyValuesProvider")
+    @DisplayName("Проверка валидных значений для поля biography при обновлении художника")
+    void shouldSuccessForValidArtistBiographyValues(String validBiography) {
+        ArtistJson artist = ArtistExtension.getArtistForTest();
+        String token = "Bearer " + ApiLoginExtension.getToken();
+
+        ArtistJson updatedArtist = new ArtistJson(
+                artist.id(),
+                artist.name(),
+                validBiography,
+                artist.photo()
+        );
+
+        Response<ArtistJson> response = gatewayApiClient.updateArtist(token, updatedArtist);
+        assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
+
+        ArtistJson responseBody = response.body();
+        assertNotNull(responseBody, "Response body should not be null");
+        assertAll(
+                () -> assertEquals(artist.id(), responseBody.id(), "Artist ID should remain unchanged"),
+                () -> assertEquals(artist.name(), responseBody.name(),
+                        String.format("Artist name mismatch! Expected: '%s', Actual: '%s'", artist.name(), responseBody.name())),
+                () -> assertEquals(validBiography, responseBody.biography(),
+                        String.format("Artist biography mismatch! Expected: '%s', Actual: '%s'", validBiography, responseBody.biography())),
+                () -> assertEquals(artist.photo(), responseBody.photo(),
+                        String.format("Artist photo mismatch! Expected: '%s', Actual: '%s'", artist.photo(), responseBody.photo()))
+        );
+    }
+
+    static Stream<Arguments> invalidArtistBiographyValuesProvider() {
+        return Stream.of(
+                Arguments.of(RandomDataUtils.randomBiography(10)),
+                Arguments.of(RandomDataUtils.randomBiography(2001)),
+                Arguments.of(""),
+                Arguments.of("             ")
+        );
+    }
+
+
+    @User
+    @ApiLogin
+    @Artist
+    @Story("Художники")
+    @Severity(SeverityLevel.NORMAL)
+    @Feature("Обновление художника")
+    @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("invalidArtistBiographyValuesProvider")
+    @DisplayName("Проверка невалидных значений для поля biography при обновлении художника")
+    void shouldFailForInvalidArtistBiographyValues(String invalidBiography) {
+        ArtistJson artist = ArtistExtension.getArtistForTest();
+        String token = "Bearer " + ApiLoginExtension.getToken();
+
+        ArtistJson updatedArtist = new ArtistJson(
+                artist.id(),
+                artist.name(),
+                invalidBiography,
+                artist.photo()
+        );
+
+        Response<ArtistJson> response = gatewayApiClient.updateArtist(token, updatedArtist);
+        assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
+
+        ErrorJson error = gatewayApiClient.parseError(response);
+        assertNotNull(error, "ErrorJson should not be null");
+        assertEquals(ERROR_BIOGRAPHY_LENGTH, error.detail(), "Unexpected error detail");
+    }
+
+
+    @User
+    @ApiLogin
+    @Artist
+    @Story("Художники")
+    @Severity(SeverityLevel.NORMAL)
+    @Feature("Обновление художника")
+    @Tags({@Tag("artist")})
+    @Test
+    @DisplayName("Попытка загрузки изображения больше 1MB при обновлении художника")
+    void shouldFailWhenUpdatingArtistWithImageLargerThan1MB(@Token String token) {
+        String largeImage = RandomDataUtils.randomBase64Image(2 * 700 * 1024); // ~2MB
+        ArtistJson artist = ArtistExtension.getArtistForTest();
+
+        ArtistJson updatedArtist = new ArtistJson(
+                artist.id(),
+                artist.name(),
+                artist.biography(),
+                largeImage
+        );
+
+        Response<ArtistJson> response = gatewayApiClient.updateArtist(token, updatedArtist);
+        assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
+
+        ErrorJson error = gatewayApiClient.parseError(response);
+        assertNotNull(error, "ErrorJson should not be null");
+        assertEquals(ERROR_PHOTO_SIZE, error.detail(), "Error detail mismatch");
+    }
+
+    static Stream<Arguments> invalidPhotoValuesProvider() {
+        return Stream.of(
+                Arguments.of(""),
+                Arguments.of("               "),
+                Arguments.of("арапапыурпоаыур"),
+                Arguments.of("http://example.com/image.png")
+        );
+    }
+
+
+    @User
+    @ApiLogin
+    @Artist
+    @Story("Художники")
+    @Severity(SeverityLevel.NORMAL)
+    @Feature("Обновление художника")
+    @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("invalidPhotoValuesProvider")
+    @DisplayName("Проверка, что поле photo должно начинаться с 'data:image/' при обновлении художника")
+    void shouldFailForInvalidPhotoValuesWhenUpdating(String invalidPhoto) {
+        String token = "Bearer " + ApiLoginExtension.getToken();
+        ArtistJson artist = ArtistExtension.getArtistForTest();
+
+        ArtistJson updatedArtist = new ArtistJson(
+                artist.id(),
+                artist.name(),
+                artist.biography(),
+                invalidPhoto
+        );
+
+        Response<ArtistJson> response = gatewayApiClient.updateArtist(token, updatedArtist);
+        assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
+
+        ErrorJson error = gatewayApiClient.parseError(response);
+        assertNotNull(error, "ErrorJson should not be null");
+        assertEquals(ERROR_PHOTO_FORMAT, error.detail(), "Error detail mismatch");
+    }
+
+
+    @User
+    @ApiLogin
+    @Artist
+    @Story("Художники")
+    @Severity(SeverityLevel.BLOCKER)
+    @Feature("Обновление художника")
+    @Tags({@Tag("artist")})
+    @Test
+    @DisplayName("Успешное обновление художника с фото размером 1MB")
+    void shouldSuccessfullyUpdateArtistWithPhotoEqual1MB(@Token String token) {
+        ArtistJson artist = ArtistExtension.getArtistForTest();
+
+        ArtistJson updatedArtist = new ArtistJson(
+                artist.id(),
+                artist.name(),
+                artist.biography(),
+                RandomDataUtils.randomBase64Image(700 * 1024) // ~1MB
+        );
+
+        Response<ArtistJson> response = gatewayApiClient.updateArtist(token, updatedArtist);
+        assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
+        assertNotNull(response.body(), "Response body should not be null");
+
+        ArtistJson responseBody = response.body();
+        assertAll(
+                () -> assertEquals(artist.id(), responseBody.id(), "Artist ID should remain unchanged"),
+                () -> assertEquals(artist.name(), responseBody.name(),
+                        String.format("Artist name mismatch! Expected: '%s', Actual: '%s'", artist.name(), responseBody.name())),
+                () -> assertEquals(artist.biography(), responseBody.biography(),
+                        String.format("Artist biography mismatch! Expected: '%s', Actual: '%s'", artist.biography(), responseBody.biography())),
+                () -> assertEquals(updatedArtist.photo(), responseBody.photo(),
+                        String.format("Artist photo mismatch! Expected: '%s', Actual: '%s'", updatedArtist.photo(), responseBody.photo()))
         );
     }
 }

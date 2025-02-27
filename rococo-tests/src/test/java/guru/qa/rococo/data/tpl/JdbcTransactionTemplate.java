@@ -29,33 +29,39 @@ public class JdbcTransactionTemplate {
         return this;
     }
 
-    @Nullable
     public <T> T execute(Supplier<T> action, int isolationLvl) {
         Connection connection = null;
         try {
             connection = holder.connection();
             connection.setTransactionIsolation(isolationLvl);
             connection.setAutoCommit(false);
+
             T result = action.get();
+
             connection.commit();
-            connection.setAutoCommit(true);
             return result;
         } catch (Exception e) {
             if (connection != null) {
                 try {
                     connection.rollback();
-                    connection.setAutoCommit(true);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                } catch (SQLException rollbackEx) {
+                    e.addSuppressed(rollbackEx);
                 }
             }
             throw new RuntimeException(e);
         } finally {
-            if (closeAfterAction.get()) {
-                holder.close();
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                } catch (SQLException ignored) {
+                }
+                if (closeAfterAction.get()) {
+                    holder.close();
+                }
             }
         }
     }
+
 
     @Nullable
     public <T> T execute(Supplier<T> action) {

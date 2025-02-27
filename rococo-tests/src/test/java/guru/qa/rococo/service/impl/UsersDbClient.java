@@ -20,6 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
+import java.util.Optional;
+
 import static java.util.Objects.requireNonNull;
 
 @ParametersAreNonnullByDefault
@@ -44,11 +46,7 @@ public class UsersDbClient implements UsersClient {
                 xaTransactionTemplate.execute(
                         () -> UserJson.fromEntity(
                                 createNewUser(username, password)
-                        ).addTestData(
-                                new TestData(
-                                        password
-                                )
-                        )
+                        ).addTestData(new TestData(password))
                 )
         );
     }
@@ -57,7 +55,26 @@ public class UsersDbClient implements UsersClient {
     private UserdataEntity createNewUser(String username, String password) {
         AuthUserEntity authUser = authUserEntity(username, password);
         authUserRepository.create(authUser);
+
         return userdataUserRepository.create(userdataEntity(username));
+    }
+
+    @Step("Delete user using SQL")
+    @Override
+    public void deleteUserByUsername(String username) {
+        xaTransactionTemplate.execute(() -> {
+            userdataUserRepository.findByUsername(username).ifPresent(userdataUserRepository::delete);
+            authUserRepository.findByUsername(username).ifPresent(authUserRepository::delete);
+            return null;
+        });
+    }
+
+    @Nonnull
+    @Override
+    @Step("Find user by username")
+    public Optional<UserJson> findUserByUsername(String username) {
+        return userdataUserRepository.findByUsername(username)
+                .map(UserJson::fromEntity);
     }
 
     @Nonnull

@@ -5,6 +5,7 @@ import guru.qa.rococo.data.entity.artist.ArtistEntity;
 import guru.qa.rococo.data.repository.ArtistRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
@@ -16,13 +17,11 @@ import static guru.qa.rococo.data.jpa.EntityManagers.em;
 public class ArtistRepositoryHibernate implements ArtistRepository {
 
     private static final Config CFG = Config.getInstance();
-
     private final EntityManager entityManager = em(CFG.artistJdbcUrl());
 
     @Nonnull
     @Override
     public ArtistEntity create(ArtistEntity artist) {
-        entityManager.joinTransaction();
         entityManager.persist(artist);
         return artist;
     }
@@ -30,7 +29,6 @@ public class ArtistRepositoryHibernate implements ArtistRepository {
     @Nonnull
     @Override
     public ArtistEntity update(ArtistEntity artist) {
-        entityManager.joinTransaction();
         return entityManager.merge(artist);
     }
 
@@ -47,12 +45,20 @@ public class ArtistRepositoryHibernate implements ArtistRepository {
     public Optional<ArtistEntity> findByName(String name) {
         try {
             return Optional.of(
-                    entityManager.createQuery("SELECT a FROM ArtistEntity a WHERE a.name =: name", ArtistEntity.class)
+                    entityManager.createQuery("SELECT a FROM ArtistEntity a WHERE a.name = :name", ArtistEntity.class)
                             .setParameter("name", name)
                             .getSingleResult()
             );
         } catch (NoResultException e) {
             return Optional.empty();
+        }
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        ArtistEntity artist = entityManager.find(ArtistEntity.class, id);
+        if (artist != null) {
+            entityManager.remove(artist);
         }
     }
 }

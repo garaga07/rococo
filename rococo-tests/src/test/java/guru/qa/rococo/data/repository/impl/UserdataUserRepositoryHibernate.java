@@ -17,13 +17,11 @@ import static guru.qa.rococo.data.jpa.EntityManagers.em;
 public class UserdataUserRepositoryHibernate implements UserdataUserRepository {
 
     private static final Config CFG = Config.getInstance();
-
     private final EntityManager entityManager = em(CFG.userdataJdbcUrl());
 
     @Nonnull
     @Override
     public UserdataEntity create(UserdataEntity user) {
-        entityManager.joinTransaction();
         entityManager.persist(user);
         return user;
     }
@@ -31,16 +29,13 @@ public class UserdataUserRepositoryHibernate implements UserdataUserRepository {
     @Nonnull
     @Override
     public UserdataEntity update(UserdataEntity user) {
-        entityManager.joinTransaction();
         return entityManager.merge(user);
     }
 
     @Nonnull
     @Override
     public Optional<UserdataEntity> findById(UUID id) {
-        return Optional.ofNullable(
-                entityManager.find(UserdataEntity.class, id)
-        );
+        return Optional.ofNullable(entityManager.find(UserdataEntity.class, id));
     }
 
     @Nonnull
@@ -48,12 +43,19 @@ public class UserdataUserRepositoryHibernate implements UserdataUserRepository {
     public Optional<UserdataEntity> findByUsername(String username) {
         try {
             return Optional.of(
-                    entityManager.createQuery("select u from UserdataEntity u where u.username =: username", UserdataEntity.class)
+                    entityManager.createQuery("SELECT u FROM UserdataEntity u WHERE u.username = :username", UserdataEntity.class)
                             .setParameter("username", username)
                             .getSingleResult()
             );
         } catch (NoResultException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public void delete(UserdataEntity user) {
+        UserdataEntity managedUser = entityManager.contains(user) ? user : entityManager.merge(user);
+        entityManager.remove(managedUser);
+        entityManager.flush();
     }
 }

@@ -6,7 +6,6 @@ import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,15 +20,13 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
-    @Value("${spring.application.name}")
-    private String appName;
 
     @Override
     protected @Nonnull ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -40,8 +37,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity
                 .status(status)
                 .body(new ErrorJson(
-                        appName + ": Ошибка валидации данных",
-                        HttpStatus.resolve(status.value()).getReasonPhrase(),
+                        "Ошибка валидации данных",
+                        Objects.requireNonNull(HttpStatus.resolve(status.value())).getReasonPhrase(),
                         status.value(),
                         ex.getBindingResult()
                                 .getFieldErrors()
@@ -87,7 +84,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity
                 .status(status)
                 .body(new ErrorJson(
-                        appName + ": " + type,
+                        type,
                         status.getReasonPhrase(),
                         status.value(),
                         message,

@@ -147,7 +147,7 @@ class MuseumGeoControllerTest {
                         .content(om.writeValueAsString(invalidMuseum)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.status").value(400))
-                .andExpect(jsonPath("$.detail").value("museum.id: ID музея обязателен для заполнения"));
+                .andExpect(jsonPath("$.detail").value("id: ID музея обязателен для заполнения"));
     }
 
     @Test

@@ -22,7 +22,6 @@ public class MuseumRepositoryHibernate implements MuseumRepository {
     @Nonnull
     @Override
     public MuseumEntity create(MuseumEntity museum) {
-        entityManager.joinTransaction();
         entityManager.persist(museum);
         return museum;
     }
@@ -30,7 +29,6 @@ public class MuseumRepositoryHibernate implements MuseumRepository {
     @Nonnull
     @Override
     public MuseumEntity update(MuseumEntity museum) {
-        entityManager.joinTransaction();
         return entityManager.merge(museum);
     }
 
@@ -52,5 +50,12 @@ public class MuseumRepositoryHibernate implements MuseumRepository {
         } catch (NoResultException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public void delete(@Nonnull MuseumEntity museum) {
+        MuseumEntity managedMuseum = entityManager.contains(museum) ? museum : entityManager.merge(museum);
+        entityManager.remove(managedMuseum);
+        entityManager.flush();
     }
 }

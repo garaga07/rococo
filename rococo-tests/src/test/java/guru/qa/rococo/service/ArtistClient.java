@@ -25,4 +25,5 @@ public interface ArtistClient {
 
     @Nonnull
     Optional<ArtistJson> findArtistByName(String name);
-}
+
+    void deleteArtistById(UUID id);}

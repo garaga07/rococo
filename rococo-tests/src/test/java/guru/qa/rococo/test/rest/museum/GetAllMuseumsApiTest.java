@@ -2,7 +2,6 @@ package guru.qa.rococo.test.rest.museum;
 
 import guru.qa.rococo.jupiter.annotation.Museum;
 import guru.qa.rococo.jupiter.annotation.meta.RestTest;
-import guru.qa.rococo.jupiter.extension.BeforeEachDatabasesExtension;
 import guru.qa.rococo.jupiter.extension.MuseumExtension;
 import guru.qa.rococo.model.rest.MuseumJson;
 import guru.qa.rococo.model.rest.pageable.RestResponsePage;
@@ -13,9 +12,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
-import org.junit.jupiter.api.parallel.Isolated;
+import org.junit.jupiter.api.parallel.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,31 +23,29 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Order(2)
 @Isolated
-@Order(99)
+@ResourceLock(value = "museums", mode = ResourceAccessMode.READ_WRITE)
 @RestTest
 @DisplayName("GetAllMuseums")
 public class GetAllMuseumsApiTest {
     @RegisterExtension
-    public static final BeforeEachDatabasesExtension beforeEachDatabasesExtension = new BeforeEachDatabasesExtension();
-    @RegisterExtension
     static final MuseumExtension museumExtension = new MuseumExtension();
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();
 
-    @ParameterizedTest
+
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка музеев")
     @Tags({@Tag("museum")})
-    @Museum(count = 10)
+    @Museum(count = 5)
+    @ParameterizedTest
     @CsvSource({
-            "0, 3, 3",  // Первая страница, size=3 → должно быть 3 записи
-            "2, 3, 3",  // Третья страница, size=3 → должно быть 3 записи
-            "3, 3, 1",  // Четвертая страница, size=3 → должна быть 1 запись
-            "4, 3, 0"   // Пятая страница, size=3 → пустой список (нет данных)
+            "0, 4, 4",  // Первая страница, size=4 → должно быть 4 записи
+            "1, 4, 1",  // Вторая страница, size=4 → должна быть 1 запись
+            "2, 4, 0",  // Третья страница, size=4 → пустой список (нет данных)
     })
     @DisplayName("Проверка пагинации списка музеев")
-    @Execution(ExecutionMode.SAME_THREAD)
     void shouldReturnCorrectNumberOfMuseumsForPagination(int page, int size, int expectedCount) {
         Response<RestResponsePage<MuseumJson>> response = gatewayApiClient.getAllMuseums(page, size, null);
 
@@ -63,12 +58,13 @@ public class GetAllMuseumsApiTest {
                         expectedCount, page, size, museumList.size()));
     }
 
-    @ParameterizedTest
+
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка музеев")
     @Tags({@Tag("museum")})
     @Museum(count = 4, titles = {"Luvr", "Эрмитаж", "Метрополитен", "Третьяковка"})
+    @ParameterizedTest
     @CsvSource({
             "Luvr, Luvr",   // Полное совпадение
             "LUVR, Luvr",   // Поиск без учета регистра
@@ -78,7 +74,6 @@ public class GetAllMuseumsApiTest {
             "Третьяковка, Третьяковка"  // Поиск по кириллическим символам
     })
     @DisplayName("Фильтрация списка музеев по существующему названию")
-    @Execution(ExecutionMode.SAME_THREAD)
     void shouldReturnMuseumWhenSearchingForExistentTitle(String searchTitle, String expectedMuseumTitle) {
         Response<RestResponsePage<MuseumJson>> response = gatewayApiClient.getAllMuseums(0, 10, searchTitle);
 
@@ -90,12 +85,13 @@ public class GetAllMuseumsApiTest {
         assertEquals(expectedMuseumTitle, museumList.getFirst().title(), "Returned museum title does not match the search query");
     }
 
-    @Test
+
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка музеев")
     @Tags({@Tag("museum")})
-    @Museum(count = 3, titles = {"Лувр", "Эрмитаж", "Метрополитен"})
+    @Museum(count = 3, titles = {"British Museum", "Guggenheim Museum", "Museo del Prado"})
+    @Test
     @DisplayName("Фильтрация списка музеев по несуществующему названию")
     void shouldReturnEmptyListWhenSearchingForNonExistentTitle() {
         Response<RestResponsePage<MuseumJson>> response = gatewayApiClient.getAllMuseums(0, 10, "NonExistentMuseum");
@@ -105,15 +101,15 @@ public class GetAllMuseumsApiTest {
         assertEquals(0, museumList.size(), "Expected empty list but got " + museumList.size());
     }
 
-    @ParameterizedTest
+
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка музеев")
     @Tags({@Tag("museum")})
     @Museum(count = 4)
+    @ParameterizedTest
     @MethodSource("provideEmptyAndWhitespaceStrings")
     @DisplayName("Запрос всех музеев при пустом или пробельном значении фильтра")
-    @Execution(ExecutionMode.SAME_THREAD)
     void shouldReturnUnfilteredListWhenSearchTitleIsEmptyOrWhitespace(String searchTitle) {
         Response<RestResponsePage<MuseumJson>> response = gatewayApiClient.getAllMuseums(0, 4, searchTitle);
 

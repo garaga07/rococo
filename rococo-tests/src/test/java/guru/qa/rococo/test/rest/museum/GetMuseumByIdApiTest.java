@@ -30,12 +30,13 @@ public class GetMuseumByIdApiTest {
 
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();
 
-    @Test
+
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение музея по ID")
     @Tags({@Tag("museum")})
-    @Museum()
+    @Museum
+    @Test
     @DisplayName("Успешное получение данных о музее по ID")
     void shouldReturnMuseumById(MuseumJson museum) {
         Response<MuseumJson> response = gatewayApiClient.getMuseumById(museum.id().toString());

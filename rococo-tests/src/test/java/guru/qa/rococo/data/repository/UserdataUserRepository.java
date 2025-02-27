@@ -21,4 +21,6 @@ public interface UserdataUserRepository {
 
     @Nonnull
     Optional<UserdataEntity> findByUsername(String username);
+
+    void delete(UserdataEntity user);
 }

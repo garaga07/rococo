@@ -197,7 +197,7 @@ class MuseumGeoServiceTest {
 
         assertThatThrownBy(() -> museumGeoService.updateMuseum(invalidMuseum))
                 .isInstanceOf(BadRequestException.class)
-                .hasMessageContaining("museum.id: ID музея обязателен");
+                .hasMessageContaining("id: ID музея обязателен");
     }
 
     @Test
@@ -214,7 +214,7 @@ class MuseumGeoServiceTest {
 
         assertThatThrownBy(() -> museumGeoService.updateMuseum(updatedMuseum))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessageContaining("museum.id: Музей не найден");
+                .hasMessageContaining("id: Музей не найден с id:");
     }
 
     @Test

@@ -5,38 +5,64 @@ import guru.qa.rococo.model.rest.ArtistJson;
 import guru.qa.rococo.service.ArtistClient;
 import guru.qa.rococo.service.impl.ArtistDbClient;
 import guru.qa.rococo.utils.RandomDataUtils;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.ParameterContext;
-import org.junit.jupiter.api.extension.ParameterResolver;
+import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.support.AnnotationSupport;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-public class ArtistExtension implements BeforeEachCallback, ParameterResolver {
+public class ArtistExtension implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-    private static final ExtensionContext.Namespace NAMESPACE = ExtensionContext.Namespace.create(ArtistExtension.class);
+    private static final Logger LOGGER = Logger.getLogger(ArtistExtension.class.getName());
     private final ArtistClient artistClient = new ArtistDbClient();
+
+    // Потокобезопасное хранилище данных
+    private static final ThreadLocal<List<ArtistJson>> artistStore = ThreadLocal.withInitial(ArrayList::new);
 
     @Override
     public void beforeEach(ExtensionContext context) {
         AnnotationSupport.findAnnotation(context.getRequiredTestMethod(), Artist.class)
                 .ifPresent(artistAnno -> {
-                    List<ArtistJson> result = new ArrayList<>();
+                    List<ArtistJson> artistsToCreate = new ArrayList<>();
                     String[] names = artistAnno.names();
 
                     for (int i = 0; i < artistAnno.count(); i++) {
                         String name = (i < names.length && !names[i].isEmpty()) ? names[i] : RandomDataUtils.randomArtistName();
                         String biography = RandomDataUtils.randomBiography();
                         String photo = RandomDataUtils.randomBase64Image();
-
-                        result.add(new ArtistJson(null, name, biography, photo));
+                        artistsToCreate.add(new ArtistJson(null, name, biography, photo));
                     }
 
-                    List<ArtistJson> createdArtists = artistClient.createArtists(result);
-                    context.getStore(NAMESPACE).put(context.getUniqueId(), createdArtists);
+                    List<ArtistJson> createdArtists = artistClient.createArtists(artistsToCreate);
+                    artistStore.set(createdArtists);
+
+                    LOGGER.info(() -> "Created artists: " + createdArtists);
                 });
+    }
+
+    @Override
+    public void afterEach(ExtensionContext context) {
+        List<ArtistJson> createdArtists = artistStore.get();
+        if (createdArtists != null) {
+            for (ArtistJson artist : createdArtists) {
+                try {
+                    artistClient.deleteArtistById(artist.id());
+                    LOGGER.info(() -> "Deleted artist: " + artist.id());
+                } catch (Exception e) {
+                    LOGGER.severe(() -> "Failed to delete artist: " + artist.id() + " due to " + e.getMessage());
+                }
+            }
+        }
+        artistStore.remove(); // Удаляем данные потока
+    }
+
+    public static ArtistJson getArtistForTest() {
+        List<ArtistJson> artists = artistStore.get();
+        if (artists == null || artists.isEmpty()) {
+            throw new IllegalStateException("No artists were created in ArtistExtension");
+        }
+        return artists.getFirst();
     }
 
     @Override
@@ -51,10 +77,8 @@ public class ArtistExtension implements BeforeEachCallback, ParameterResolver {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-        List<ArtistJson> artists = (List<ArtistJson>) extensionContext.getStore(NAMESPACE)
-                .get(extensionContext.getUniqueId(), List.class);
+        List<ArtistJson> artists = artistStore.get();
 
         if (artists == null || artists.isEmpty()) {
             throw new IllegalStateException("No artists were created in ArtistExtension");

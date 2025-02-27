@@ -28,12 +28,13 @@ public class GetArtistByIdApiTest {
     static final ArtistExtension artistExtension = new ArtistExtension();
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();
 
-    @Test
+
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение художника по ID")
     @Tags({@Tag("artist")})
-    @Artist()
+    @Artist
+    @Test
     @DisplayName("Успешное получение данных о художнике по ID")
     void shouldReturnArtistById(ArtistJson artist) {
         Response<ArtistJson> response = gatewayApiClient.getArtistById(artist.id().toString());
@@ -51,11 +52,12 @@ public class GetArtistByIdApiTest {
         );
     }
 
-    @Test
+
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение художника по ID")
     @Tags({@Tag("artist")})
+    @Test
     @DisplayName("Попытка получить данные о несуществующем художнике")
     void shouldFailWhenArtistDoesNotExist() {
         UUID nonExistentArtistId = UUID.randomUUID();
@@ -63,11 +65,12 @@ public class GetArtistByIdApiTest {
         assertEquals(404, response.code(), "Expected HTTP status 404 but got " + response.code());
     }
 
-    @Test
+
     @Story("Художники")
     @Severity(SeverityLevel.MINOR)
     @Feature("Получение художника по ID")
     @Tags({@Tag("artist")})
+    @Test
     @DisplayName("Попытка получить данные о художнике с некорректным UUID")
     void shouldFailWhenArtistIdIsInvalid() {
         String invalidUuid = "3ed0e8878627-4074-b323573c3741499d";

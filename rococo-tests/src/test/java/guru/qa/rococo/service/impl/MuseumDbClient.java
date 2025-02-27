@@ -18,10 +18,10 @@ import io.qameta.allure.Step;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
@@ -42,7 +42,7 @@ public class MuseumDbClient implements MuseumClient {
                 xaTransactionTemplate.execute(
                         () -> MuseumJson.fromEntity(
                                 museumRepository.create(
-                                        MuseumEntity.fromJson(museum, ensureGeoExists(museum.geo()))
+                                        MuseumEntity.fromJson(museum, createGeo(museum.geo()))
                                 )
                         )
                 )
@@ -54,19 +54,15 @@ public class MuseumDbClient implements MuseumClient {
     @Override
     public List<MuseumJson> createMuseums(List<MuseumJson> museums) {
         return requireNonNull(
-                xaTransactionTemplate.execute(() -> {
-                    List<MuseumJson> createdMuseums = new ArrayList<>();
-                    for (MuseumJson museum : museums) {
-                        createdMuseums.add(
-                                MuseumJson.fromEntity(
+                xaTransactionTemplate.execute(() ->
+                        museums.stream()
+                                .map(museum -> MuseumJson.fromEntity(
                                         museumRepository.create(
-                                                MuseumEntity.fromJson(museum, ensureGeoExists(museum.geo()))
+                                                MuseumEntity.fromJson(museum, createGeo(museum.geo()))
                                         )
-                                )
-                        );
-                    }
-                    return createdMuseums;
-                })
+                                ))
+                                .collect(Collectors.toList())
+                )
         );
     }
 
@@ -78,7 +74,7 @@ public class MuseumDbClient implements MuseumClient {
                 xaTransactionTemplate.execute(
                         () -> MuseumJson.fromEntity(
                                 museumRepository.update(
-                                        MuseumEntity.fromJson(museum, ensureGeoExists(museum.geo()))
+                                        MuseumEntity.fromJson(museum, createGeo(museum.geo()))
                                 )
                         )
                 )
@@ -103,16 +99,22 @@ public class MuseumDbClient implements MuseumClient {
         ));
     }
 
-    private GeoEntity ensureGeoExists(GeoJson geoJson) {
-        UUID countryId = geoJson.country().id();
-        String city = geoJson.city();
+    @Step("Delete museum by id using SQL")
+    @Override
+    public void deleteMuseumById(UUID id) {
+        xaTransactionTemplate.execute(() -> {
+            museumRepository.findById(id).ifPresent(museum -> {
+                museumRepository.delete(museum);
+                geoRepository.findByCityAndCountry(museum.getGeo().getCountry().getId(), museum.getGeo().getCity())
+                        .ifPresent(geoRepository::delete);
+            });
+            return null;
+        });
+    }
 
-        // Проверяем, существует ли страна
-        CountryEntity countryEntity = countryRepository.findById(countryId)
-                .orElseThrow(() -> new IllegalStateException("Country not found: " + countryId));
-
-        // Проверяем, существуют ли гео-данные и если отсутствуют создаем
-        return geoRepository.findByCityAndCountry(countryId, city)
-                .orElseGet(() -> geoRepository.create(GeoEntity.fromJson(geoJson, countryEntity)));
+    private GeoEntity createGeo(GeoJson geoJson) {
+        CountryEntity countryEntity = countryRepository.findById(geoJson.country().id())
+                .orElseThrow(() -> new IllegalStateException("Country not found: " + geoJson.country().id()));
+        return geoRepository.create(GeoEntity.fromJson(geoJson, countryEntity));
     }
 }

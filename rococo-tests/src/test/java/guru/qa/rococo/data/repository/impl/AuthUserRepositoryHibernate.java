@@ -17,13 +17,11 @@ import static guru.qa.rococo.data.jpa.EntityManagers.em;
 public class AuthUserRepositoryHibernate implements AuthUserRepository {
 
     private static final Config CFG = Config.getInstance();
-
     private final EntityManager entityManager = em(CFG.authJdbcUrl());
 
     @Nonnull
     @Override
     public AuthUserEntity create(AuthUserEntity user) {
-        entityManager.joinTransaction();
         entityManager.persist(user);
         return user;
     }
@@ -31,9 +29,7 @@ public class AuthUserRepositoryHibernate implements AuthUserRepository {
     @Nonnull
     @Override
     public Optional<AuthUserEntity> findById(UUID id) {
-        return Optional.ofNullable(
-                entityManager.find(AuthUserEntity.class, id)
-        );
+        return Optional.ofNullable(entityManager.find(AuthUserEntity.class, id));
     }
 
     @Nonnull
@@ -41,12 +37,19 @@ public class AuthUserRepositoryHibernate implements AuthUserRepository {
     public Optional<AuthUserEntity> findByUsername(String username) {
         try {
             return Optional.of(
-                    entityManager.createQuery("select u from AuthUserEntity u where u.username =: username", AuthUserEntity.class)
+                    entityManager.createQuery("SELECT u FROM AuthUserEntity u WHERE u.username = :username", AuthUserEntity.class)
                             .setParameter("username", username)
                             .getSingleResult()
             );
         } catch (NoResultException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public void delete(AuthUserEntity user) {
+        AuthUserEntity managedUser = entityManager.contains(user) ? user : entityManager.merge(user);
+        entityManager.remove(managedUser);
+        entityManager.flush();
     }
 }

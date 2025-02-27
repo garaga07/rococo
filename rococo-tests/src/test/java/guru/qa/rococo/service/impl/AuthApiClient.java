@@ -75,8 +75,19 @@ public class AuthApiClient extends RestClient {
                 codeVerifier
         ).execute();
 
+        assert tokenResponse.body() != null;
         return new ObjectMapper().readTree(
                 tokenResponse.body().getBytes(StandardCharsets.UTF_8)
         ).get("id_token").asText();
+    }
+
+    @SneakyThrows
+    public Response<Void> register(String username, String password, String confirmPassword) {
+        // Получение CSRF-токена
+        authApi.requestRegisterForm().execute();
+        String csrfToken = ThreadSafeCookieStore.INSTANCE.cookieValue("XSRF-TOKEN");
+        // Отправка данных на регистрацию
+        Response<Void> response = authApi.register(username, password, confirmPassword, csrfToken).execute();
+        return response;
     }
 }

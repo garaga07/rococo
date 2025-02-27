@@ -22,7 +22,6 @@ public class GeoRepositoryHibernate implements GeoRepository {
     @Nonnull
     @Override
     public GeoEntity create(GeoEntity geo) {
-        entityManager.joinTransaction();
         entityManager.persist(geo);
         return geo;
     }
@@ -43,5 +42,12 @@ public class GeoRepositoryHibernate implements GeoRepository {
         } catch (NoResultException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public void delete(@Nonnull GeoEntity geo) {
+        GeoEntity managedGeo = entityManager.contains(geo) ? geo : entityManager.merge(geo);
+        entityManager.remove(managedGeo);
+        entityManager.flush();
     }
 }

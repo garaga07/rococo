@@ -21,4 +21,6 @@ public interface ArtistRepository {
 
     @Nonnull
     Optional<ArtistEntity> findByName(String name);
+
+    void deleteById(UUID id);
 }

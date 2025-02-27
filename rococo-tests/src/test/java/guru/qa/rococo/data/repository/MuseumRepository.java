@@ -21,4 +21,6 @@ public interface MuseumRepository {
 
     @Nonnull
     Optional<MuseumEntity> findByTitle(String title);
+
+    void delete(@Nonnull MuseumEntity museum);
 }

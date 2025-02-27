@@ -54,6 +54,9 @@ public class PaintingService {
 
     @Transactional(readOnly = true)
     public Page<PaintingResponseJson> getPaintingsByAuthorId(UUID authorId, Pageable pageable) {
+        // Проверяем существование художника перед поиском картин
+        artistClient.getArtistById(authorId.toString());
+
         Page<PaintingEntity> paintings = paintingRepository.findAllByArtist(authorId, pageable);
 
         List<PaintingResponseJson> paintingResponseJsons = paintings.stream()
@@ -99,8 +102,8 @@ public class PaintingService {
 
         // Если все проверки пройдены, сохраняем картину
         PaintingEntity paintingEntity = new PaintingEntity();
-        paintingEntity.setDescription(paintingRequestJson.description());
-        paintingEntity.setTitle(paintingRequestJson.title());
+        paintingEntity.setDescription(paintingRequestJson.description().trim());
+        paintingEntity.setTitle(paintingRequestJson.title().trim());
         if (isPhotoString(paintingRequestJson.content())) {
             paintingEntity.setContent(paintingRequestJson.content().getBytes(StandardCharsets.UTF_8));
         }
@@ -125,8 +128,8 @@ public class PaintingService {
         PaintingEntity paintingEntity = paintingRepository.findById(paintingRequestJson.id())
                 .orElseThrow(() -> new NotFoundException("id: Картина не найдена с id: " + paintingRequestJson.id()));
 
-        paintingEntity.setDescription(paintingRequestJson.description());
-        paintingEntity.setTitle(paintingRequestJson.title());
+        paintingEntity.setDescription(paintingRequestJson.description().trim());
+        paintingEntity.setTitle(paintingRequestJson.title().trim());
 
         if (isPhotoString(paintingRequestJson.content())) {
             paintingEntity.setContent(paintingRequestJson.content().getBytes(StandardCharsets.UTF_8));

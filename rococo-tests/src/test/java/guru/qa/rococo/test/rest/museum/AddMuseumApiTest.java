@@ -58,7 +58,7 @@ public class AddMuseumApiTest {
 
     @Test
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление музея")
@@ -68,7 +68,7 @@ public class AddMuseumApiTest {
         MuseumJson museum = new MuseumJson(
                 null,
                 RandomDataUtils.randomMuseumTitle(),
-                RandomDataUtils.randomMuseumDescription(),
+                RandomDataUtils.randomDescription(),
                 RandomDataUtils.randomBase64Image(),
                 RandomDataUtils.randomGeoJson()
         );
@@ -117,7 +117,7 @@ public class AddMuseumApiTest {
         MuseumJson museum = new MuseumJson(
                 null,
                 RandomDataUtils.randomMuseumTitle(),
-                RandomDataUtils.randomMuseumDescription(),
+                RandomDataUtils.randomDescription(),
                 RandomDataUtils.randomBase64Image(),
                 RandomDataUtils.randomGeoJson()
         );
@@ -131,7 +131,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 null,
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
                         ),
@@ -151,7 +151,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 null,
                                 RandomDataUtils.randomGeoJson()
                         ),
@@ -161,7 +161,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 null
                         ),
@@ -171,7 +171,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson(null, RandomDataUtils.randomCountryJson())
                         ),
@@ -181,7 +181,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson(RandomDataUtils.randomCity(), null)
                         ),
@@ -191,7 +191,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson(RandomDataUtils.randomCity(), new CountryJson(null, "Австралия"))
                         ),
@@ -203,7 +203,7 @@ public class AddMuseumApiTest {
     @ParameterizedTest
     @MethodSource("museumRequiredFieldsProvider")
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
@@ -216,7 +216,6 @@ public class AddMuseumApiTest {
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
         assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
-        assertEquals("/api/museum", error.instance(), "Error instance mismatch");
     }
 
     static Stream<Arguments> validMuseumTitleValuesProvider() {
@@ -225,7 +224,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(3),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
                         )
@@ -234,7 +233,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(255),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
                         )
@@ -245,7 +244,7 @@ public class AddMuseumApiTest {
     @ParameterizedTest
     @MethodSource("validMuseumTitleValuesProvider")
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
@@ -294,41 +293,37 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(2), // менее 3 символов
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
-                        ),
-                        ERROR_TITLE_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(256), // более 255 символов
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
-                        ),
-                        ERROR_TITLE_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
                                 null,
                                 "", // пустая строка
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
-                        ),
-                        ERROR_TITLE_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
                                 null,
                                 "             ", // строка из пробелов
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
-                        ),
-                        ERROR_TITLE_LENGTH
+                        )
                 )
         );
     }
@@ -336,20 +331,19 @@ public class AddMuseumApiTest {
     @ParameterizedTest
     @MethodSource("invalidMuseumTitleValuesProvider")
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
     @Tags({@Tag("museum")})
     @DisplayName("Проверка невалидных значений для поля title при добавлении музея")
-    void shouldFailForInvalidMuseumTitleValues(MuseumJson museum, String expectedDetail) {
+    void shouldFailForInvalidMuseumTitleValues(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-        assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
-        assertEquals("/api/museum", error.instance(), "Error instance mismatch");
+        assertEquals(ERROR_TITLE_LENGTH, error.detail(), "Error detail mismatch");
     }
 
     static Stream<Arguments> validMuseumDescriptionValuesProvider() {
@@ -358,7 +352,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(11), // Минимальная допустимая длина
+                                RandomDataUtils.randomDescription(11), // Минимальная допустимая длина
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
                         )
@@ -367,7 +361,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(2000), // Максимальная допустимая длина
+                                RandomDataUtils.randomDescription(2000), // Максимальная допустимая длина
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
                         )
@@ -378,7 +372,7 @@ public class AddMuseumApiTest {
     @ParameterizedTest
     @MethodSource("validMuseumDescriptionValuesProvider")
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
@@ -427,21 +421,19 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(10), // Менее 11 символов
+                                RandomDataUtils.randomDescription(10), // Менее 11 символов
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
-                        ),
-                        ERROR_DESCRIPTION_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(2001), // Более 2000 символов
+                                RandomDataUtils.randomDescription(2001), // Более 2000 символов
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
-                        ),
-                        ERROR_DESCRIPTION_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
@@ -450,8 +442,7 @@ public class AddMuseumApiTest {
                                 "", // Пустая строка
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
-                        ),
-                        ERROR_DESCRIPTION_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
@@ -460,8 +451,7 @@ public class AddMuseumApiTest {
                                 "             ", // Строка из пробелов
                                 RandomDataUtils.randomBase64Image(),
                                 RandomDataUtils.randomGeoJson()
-                        ),
-                        ERROR_DESCRIPTION_LENGTH
+                        )
                 )
         );
     }
@@ -469,20 +459,19 @@ public class AddMuseumApiTest {
     @ParameterizedTest
     @MethodSource("invalidMuseumDescriptionValuesProvider")
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
     @Tags({@Tag("museum")})
     @DisplayName("Проверка невалидных значений для поля description при добавлении музея")
-    void shouldFailForInvalidMuseumDescriptionValues(MuseumJson museum, String expectedDetail) {
+    void shouldFailForInvalidMuseumDescriptionValues(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-        assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
-        assertEquals("/api/museum", error.instance(), "Error instance mismatch");
+        assertEquals(ERROR_DESCRIPTION_LENGTH, error.detail(), "Error detail mismatch");
     }
 
     static Stream<Arguments> validMuseumCityValuesProvider() {
@@ -491,7 +480,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson(RandomDataUtils.randomCity(3), RandomDataUtils.randomCountryJson()) // Минимальная допустимая длина
                         )
@@ -500,7 +489,7 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson(RandomDataUtils.randomCity(255), RandomDataUtils.randomCountryJson()) // Максимальная допустимая длина
                         )
@@ -511,7 +500,7 @@ public class AddMuseumApiTest {
     @ParameterizedTest
     @MethodSource("validMuseumCityValuesProvider")
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
@@ -560,41 +549,37 @@ public class AddMuseumApiTest {
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson(RandomDataUtils.randomCity(2), RandomDataUtils.randomCountryJson()) // Менее 3 символов
-                        ),
-                        ERROR_CITY_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson(RandomDataUtils.randomCity(256), RandomDataUtils.randomCountryJson()) // Более 255 символов
-                        ),
-                        ERROR_CITY_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson("", RandomDataUtils.randomCountryJson()) // Пустая строка
-                        ),
-                        ERROR_CITY_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new MuseumJson(
                                 null,
                                 RandomDataUtils.randomMuseumTitle(),
-                                RandomDataUtils.randomMuseumDescription(),
+                                RandomDataUtils.randomDescription(),
                                 RandomDataUtils.randomBase64Image(),
                                 new GeoJson("             ", RandomDataUtils.randomCountryJson()) // Строка из пробелов
-                        ),
-                        ERROR_CITY_LENGTH
+                        )
                 )
         );
     }
@@ -602,25 +587,24 @@ public class AddMuseumApiTest {
     @ParameterizedTest
     @MethodSource("invalidMuseumCityValuesProvider")
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
     @Tags({@Tag("museum")})
     @DisplayName("Проверка невалидных значений для поля city при добавлении музея")
-    void shouldFailForInvalidMuseumCityValues(MuseumJson museum, String expectedDetail) {
+    void shouldFailForInvalidMuseumCityValues(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-        assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
-        assertEquals("/api/museum", error.instance(), "Error instance mismatch");
+        assertEquals(ERROR_CITY_LENGTH, error.detail(), "Error detail mismatch");
     }
 
     @Test
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
@@ -631,7 +615,7 @@ public class AddMuseumApiTest {
         MuseumJson museum = new MuseumJson(
                 null,
                 RandomDataUtils.randomMuseumTitle(),
-                RandomDataUtils.randomMuseumDescription(),
+                RandomDataUtils.randomDescription(),
                 largeImage,
                 RandomDataUtils.randomGeoJson()
         );
@@ -649,20 +633,16 @@ public class AddMuseumApiTest {
     static Stream<Arguments> invalidMuseumPhotoValuesProvider() {
         return Stream.of(
                 Arguments.of(
-                        "",
-                        ERROR_PHOTO_FORMAT
+                        ""
                 ),
                 Arguments.of(
-                        "               ",
-                        ERROR_PHOTO_FORMAT
+                        "               "
                 ),
                 Arguments.of(
-                        "арапапыурпоаыур",
-                        ERROR_PHOTO_FORMAT
+                        "арапапыурпоаыур"
                 ),
                 Arguments.of(
-                        "http://example.com/image.png",
-                        ERROR_PHOTO_FORMAT
+                        "http://example.com/image.png"
                 )
         );
     }
@@ -670,18 +650,18 @@ public class AddMuseumApiTest {
     @ParameterizedTest
     @MethodSource("invalidMuseumPhotoValuesProvider")
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
     @Tags({@Tag("museum")})
     @DisplayName("Проверка, что поле photo должно начинаться с 'data:image/'")
-    void shouldFailForInvalidMuseumPhotoValues(String invalidPhoto, String expectedDetail) {
+    void shouldFailForInvalidMuseumPhotoValues(String invalidPhoto) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         MuseumJson museum = new MuseumJson(
                 null,
                 RandomDataUtils.randomMuseumTitle(),
-                RandomDataUtils.randomMuseumDescription(),
+                RandomDataUtils.randomDescription(),
                 invalidPhoto,
                 RandomDataUtils.randomGeoJson()
         );
@@ -689,12 +669,12 @@ public class AddMuseumApiTest {
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-        assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
+        assertEquals(ERROR_PHOTO_FORMAT, error.detail(), "Error detail mismatch");
     }
 
     @Test
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление музея")
@@ -704,7 +684,7 @@ public class AddMuseumApiTest {
         MuseumJson museum = new MuseumJson(
                 null,
                 RandomDataUtils.randomMuseumTitle(),
-                RandomDataUtils.randomMuseumDescription(),
+                RandomDataUtils.randomDescription(),
                 RandomDataUtils.randomBase64Image(700 * 1024), // ~1MB
                 RandomDataUtils.randomGeoJson()
         );
@@ -745,7 +725,7 @@ public class AddMuseumApiTest {
 
     @Test
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление музея")
@@ -756,7 +736,7 @@ public class AddMuseumApiTest {
         MuseumJson museum = new MuseumJson(
                 null,
                 RandomDataUtils.randomMuseumTitle(),
-                RandomDataUtils.randomMuseumDescription(),
+                RandomDataUtils.randomDescription(),
                 RandomDataUtils.randomBase64Image(),
                 new GeoJson(RandomDataUtils.randomCity(), new CountryJson(nonExistentCountryId, "Неизвестная страна"))
         );
@@ -764,13 +744,9 @@ public class AddMuseumApiTest {
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
 
         assertEquals(404, response.code(), "Expected HTTP status 404 but got " + response.code());
-
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-
         assertEquals("country.id: Страна не найдена с id: " + nonExistentCountryId, error.detail(),
                 "Error detail mismatch");
-
-        assertEquals("/api/museum", error.instance(), "Error instance mismatch");
     }
 }

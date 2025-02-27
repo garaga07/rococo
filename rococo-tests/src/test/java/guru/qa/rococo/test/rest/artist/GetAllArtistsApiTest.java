@@ -3,7 +3,6 @@ package guru.qa.rococo.test.rest.artist;
 import guru.qa.rococo.jupiter.annotation.Artist;
 import guru.qa.rococo.jupiter.annotation.meta.RestTest;
 import guru.qa.rococo.jupiter.extension.ArtistExtension;
-import guru.qa.rococo.jupiter.extension.BeforeEachDatabasesExtension;
 import guru.qa.rococo.model.rest.ArtistJson;
 import guru.qa.rococo.model.rest.pageable.RestResponsePage;
 import guru.qa.rococo.service.impl.GatewayApiClient;
@@ -13,9 +12,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
-import org.junit.jupiter.api.parallel.Isolated;
+import org.junit.jupiter.api.parallel.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,32 +23,28 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Order(1)
 @Isolated
-@Order(99)
+@ResourceLock(value = "artists", mode = ResourceAccessMode.READ_WRITE)
 @RestTest
 @DisplayName("GetAllArtists")
 public class GetAllArtistsApiTest {
     @RegisterExtension
-    public static final BeforeEachDatabasesExtension beforeEachDatabasesExtension = new BeforeEachDatabasesExtension();
-    @RegisterExtension
     static final ArtistExtension artistExtension = new ArtistExtension();
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();
 
-
-    @ParameterizedTest
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка художников")
     @Tags({@Tag("artist")})
-    @Artist(count = 10)
+    @Artist(count = 19)
+    @ParameterizedTest
     @CsvSource({
-            "0, 3, 3",  // Первая страница, size=3 → должно быть 3 записи
-            "2, 3, 3",  // Третья страница, size=3 → должно быть 3 записи
-            "3, 3, 1",  // Четвертая страница, size=3 → должна быть 1 запись
-            "4, 3, 0"   // Пятая страница, size=3 → пустой список (нет данных)
+            "0, 18, 18",  // Первая страница, size=18 → должно быть 18 записей
+            "1, 18, 1",  // Вторая страница, size=18 → должна быть 1 запись
+            "2, 18, 0",  // Третья страница, size=18 → пустой список (нет данных)
     })
     @DisplayName("Проверка пагинации списка художников")
-    @Execution(ExecutionMode.SAME_THREAD)
     void shouldReturnCorrectNumberOfArtistsForPagination(int page, int size, int expectedCount) {
         Response<RestResponsePage<ArtistJson>> response = gatewayApiClient.getAllArtists(page, size, null);
 
@@ -64,22 +57,21 @@ public class GetAllArtistsApiTest {
                         expectedCount, page, size, artistList.size()));
     }
 
-    @ParameterizedTest
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка художников")
     @Tags({@Tag("artist")})
-    @Artist(count = 4, names = {"Picasso", "Van Gogh", "Monet", "Шишкин"})
+    @Artist(count = 4, names = {"Da Vinci", "Rembrandt", "Matisse", "Айвазовский"})
+    @ParameterizedTest
     @CsvSource({
-            "Picasso, Picasso",   // Полное совпадение
-            "PICASSO, Picasso",   // Поиск без учета регистра
-            "Pic, Picasso",       // Частичное совпадение LIKE 'Pic%' (начало строки)
-            "asso, Picasso",      // Частичное совпадение LIKE '%asso' (конец строки)
-            "cas, Picasso",       // Частичное совпадение LIKE '%cas%' (внутри строки)
-            "Шишкин, Шишкин"      // Поиск по кириллическим символам
+            "Da Vinci, Da Vinci",     // Полное совпадение
+            "DA VINCI, Da Vinci",     // Поиск без учета регистра
+            "Da, Da Vinci",           // Частичное совпадение LIKE 'Da%' (начало строки)
+            "inci, Da Vinci",         // Частичное совпадение LIKE '%inci' (конец строки)
+            "Vin, Da Vinci",          // Частичное совпадение LIKE '%Vin%' (внутри строки)
+            "Айвазовский, Айвазовский" // Поиск по кириллическим символам
     })
     @DisplayName("Фильтрация списка художников по существующему имени")
-    @Execution(ExecutionMode.SAME_THREAD)
     void shouldReturnArtistWhenSearchingForExistentName(String searchName, String expectedArtistName) {
         Response<RestResponsePage<ArtistJson>> response = gatewayApiClient.getAllArtists(0, 10, searchName);
 
@@ -91,12 +83,13 @@ public class GetAllArtistsApiTest {
         assertEquals(expectedArtistName, artistList.getFirst().name(), "Returned artist name does not match the search query");
     }
 
-    @Test
+
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка художников")
     @Tags({@Tag("artist")})
     @Artist(count = 3, names = {"Picasso", "Van Gogh", "Monet"})
+    @Test
     @DisplayName("Фильтрация списка художников по несуществующему имени")
     void shouldReturnEmptyListWhenSearchingForNonExistentName() {
         Response<RestResponsePage<ArtistJson>> response = gatewayApiClient.getAllArtists(0, 10, "NonExistentArtist");
@@ -106,15 +99,14 @@ public class GetAllArtistsApiTest {
         assertEquals(0, artistList.size(), "Expected empty list but got " + artistList.size());
     }
 
-    @ParameterizedTest
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка художников")
     @Tags({@Tag("artist")})
     @Artist(count = 10)
+    @ParameterizedTest
     @MethodSource("provideEmptyAndWhitespaceStrings")
     @DisplayName("Запрос всех художников при пустом или пробельном значении фильтра")
-    @Execution(ExecutionMode.SAME_THREAD)
     void shouldReturnUnfilteredListWhenSearchNameIsEmptyOrWhitespace(String searchName) {
         Response<RestResponsePage<ArtistJson>> response = gatewayApiClient.getAllArtists(0, 18, searchName);
 

@@ -25,4 +25,6 @@ public interface MuseumClient {
 
     @Nonnull
     Optional<MuseumJson> findMuseumByTitle(String title);
+
+    void deleteMuseumById(UUID id);
 }

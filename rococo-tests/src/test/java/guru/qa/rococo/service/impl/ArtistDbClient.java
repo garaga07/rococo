@@ -11,10 +11,10 @@ import io.qameta.allure.Step;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
@@ -40,23 +40,18 @@ public class ArtistDbClient implements ArtistClient {
         );
     }
 
-    @Step("Create artists using SQL")
+    @Step("Create multiple artists using SQL")
     @Nonnull
     @Override
     public List<ArtistJson> createArtists(List<ArtistJson> artists) {
         return requireNonNull(
-                xaTransactionTemplate.execute(() -> {
-                    List<ArtistJson> createdArtists = new ArrayList<>();
-                    for (ArtistJson artist : artists) {
-                        ArtistJson createdArtist = ArtistJson.fromEntity(
-                                artistRepository.create(
-                                        ArtistEntity.fromJson(artist)
-                                )
-                        );
-                        createdArtists.add(createdArtist);
-                    }
-                    return createdArtists;
-                })
+                xaTransactionTemplate.execute(() ->
+                        artists.stream()
+                                .map(artist -> ArtistJson.fromEntity(
+                                        artistRepository.create(ArtistEntity.fromJson(artist))
+                                ))
+                                .collect(Collectors.toList())
+                )
         );
     }
 
@@ -91,5 +86,15 @@ public class ArtistDbClient implements ArtistClient {
         return requireNonNull(xaTransactionTemplate.execute(() ->
                 artistRepository.findByName(name).map(ArtistJson::fromEntity)
         ));
+    }
+
+    @Step("Delete artist by id using SQL")
+    @Override
+    public void deleteArtistById(UUID id) {
+        requireNonNull(id, "Artist ID must not be null");
+        xaTransactionTemplate.execute(() -> {
+            artistRepository.deleteById(id);
+            return null;
+        });
     }
 }

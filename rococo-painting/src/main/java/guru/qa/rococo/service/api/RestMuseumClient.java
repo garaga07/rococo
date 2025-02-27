@@ -30,7 +30,7 @@ public class RestMuseumClient {
                     museumId
             ));
         } catch (HttpClientErrorException.NotFound e) {
-            throw new NotFoundException("Museum not found with ID: " + museumId);
+            throw new NotFoundException("Museum not found with id: " + museumId);
         }
     }
 }

@@ -1,5 +1,6 @@
 package guru.qa.rococo.data.entity.painting;
 
+import guru.qa.rococo.model.rest.PaintingJson;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,10 +31,22 @@ public class PaintingEntity implements Serializable {
     private byte[] content;
 
     @Column(name = "museum_id", nullable = false)
-    private UUID museum;
+    private UUID museumId;
 
     @Column(name = "artist_id", nullable = false)
-    private UUID artist;
+    private UUID artistId;
+
+    public static PaintingEntity fromJson(PaintingJson json) {
+        PaintingEntity entity = new PaintingEntity();
+        entity.setId(json.id());
+        entity.setTitle(json.title());
+        entity.setDescription(json.description());
+        entity.setContent(json.content().getBytes());
+        entity.setMuseumId(json.museumId());
+        entity.setArtistId(json.artistId());
+        return entity;
+    }
+
 
     @Override
     public final boolean equals(Object o) {

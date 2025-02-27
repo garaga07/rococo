@@ -15,4 +15,6 @@ public interface GeoRepository {
 
     @Nonnull
     Optional<GeoEntity> findByCityAndCountry(UUID countryId, String city);
+
+    void delete(@Nonnull GeoEntity geo);
 }

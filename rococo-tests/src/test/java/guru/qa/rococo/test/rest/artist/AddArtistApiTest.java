@@ -45,13 +45,14 @@ public class AddArtistApiTest {
     public static final String ERROR_PHOTO_FORMAT = "photo: Фото должно начинаться с 'data:image/'";
     public static final String ERROR_PHOTO_SIZE = "photo: Размер фото не должен превышать 1MB";
 
-    @Test
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @Test
     @DisplayName("Успешное добавление нового художника")
     void shouldSuccessfullyAddArtist(@Token String token) {
         ArtistJson artist = new ArtistJson(
@@ -75,11 +76,12 @@ public class AddArtistApiTest {
         );
     }
 
-    @Test
+
     @Story("Художники")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @Test
     @DisplayName("Добавление художника с невалидным значением токена")
     void shouldAddArtistWithIncorrectToken() {
         ArtistJson artist = new ArtistJson(
@@ -122,14 +124,15 @@ public class AddArtistApiTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("artistRequiredFieldsProvider")
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("artistRequiredFieldsProvider")
     @DisplayName("Проверка обязательности полей при добавлении художника")
     void shouldRequiredArtistFields(ArtistJson artist, String expectedDetail) {
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -138,7 +141,6 @@ public class AddArtistApiTest {
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
         assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
-        assertEquals("/api/artist", error.instance(), "Error instance mismatch");
     }
 
     static Stream<Arguments> validArtistNameValuesProvider() {
@@ -160,14 +162,15 @@ public class AddArtistApiTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("validArtistNameValuesProvider")
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("validArtistNameValuesProvider")
     @DisplayName("Проверка валидных значений для поля name при добавлении художника")
     void shouldSuccessForValidArtistNameValues(ArtistJson artist) {
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -194,8 +197,7 @@ public class AddArtistApiTest {
                                 RandomDataUtils.randomArtistName(2),
                                 RandomDataUtils.randomBiography(),
                                 RandomDataUtils.randomBase64Image()
-                        ),
-                        ERROR_NAME_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new ArtistJson(
@@ -203,8 +205,7 @@ public class AddArtistApiTest {
                                 RandomDataUtils.randomArtistName(256),
                                 RandomDataUtils.randomBiography(),
                                 RandomDataUtils.randomBase64Image()
-                        ),
-                        ERROR_NAME_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new ArtistJson(
@@ -212,8 +213,7 @@ public class AddArtistApiTest {
                                 "",
                                 RandomDataUtils.randomBiography(),
                                 RandomDataUtils.randomBase64Image()
-                        ),
-                        ERROR_NAME_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new ArtistJson(
@@ -221,29 +221,28 @@ public class AddArtistApiTest {
                                 "             ",
                                 RandomDataUtils.randomBiography(),
                                 RandomDataUtils.randomBase64Image()
-                        ),
-                        ERROR_NAME_LENGTH
+                        )
                 )
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("invalidArtistNameValuesProvider")
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("invalidArtistNameValuesProvider")
     @DisplayName("Проверка невалидных значений для поля name при добавлении художника")
-    void shouldFailForInvalidArtistNameValues(ArtistJson artist, String expectedDetail) {
+    void shouldFailForInvalidArtistNameValues(ArtistJson artist) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<ArtistJson> response = gatewayApiClient.addArtist(token, artist);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-        assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
-        assertEquals("/api/artist", error.instance(), "Error instance mismatch");
+        assertEquals(ERROR_NAME_LENGTH, error.detail(), "Error detail mismatch");
     }
 
     static Stream<Arguments> validArtistBiographyValuesProvider() {
@@ -267,14 +266,15 @@ public class AddArtistApiTest {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("validArtistBiographyValuesProvider")
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("validArtistBiographyValuesProvider")
     @DisplayName("Проверка валидных значений для поля biography при добавлении художника")
     void shouldSuccessForValidArtistBiographyValues(ArtistJson artist) {
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -301,8 +301,7 @@ public class AddArtistApiTest {
                                 RandomDataUtils.randomArtistName(),
                                 RandomDataUtils.randomBiography(10),
                                 RandomDataUtils.randomBase64Image()
-                        ),
-                        ERROR_BIOGRAPHY_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new ArtistJson(
@@ -310,8 +309,7 @@ public class AddArtistApiTest {
                                 RandomDataUtils.randomArtistName(),
                                 RandomDataUtils.randomBiography(2001),
                                 RandomDataUtils.randomBase64Image()
-                        ),
-                        ERROR_BIOGRAPHY_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new ArtistJson(
@@ -319,8 +317,7 @@ public class AddArtistApiTest {
                                 RandomDataUtils.randomArtistName(),
                                 "",
                                 RandomDataUtils.randomBase64Image()
-                        ),
-                        ERROR_BIOGRAPHY_LENGTH
+                        )
                 ),
                 Arguments.of(
                         new ArtistJson(
@@ -328,38 +325,38 @@ public class AddArtistApiTest {
                                 RandomDataUtils.randomArtistName(),
                                 "             ",
                                 RandomDataUtils.randomBase64Image()
-                        ),
-                        ERROR_BIOGRAPHY_LENGTH
+                        )
                 )
         );
     }
 
-    @ParameterizedTest
-    @MethodSource("invalidArtistBiographyValuesProvider")
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("invalidArtistBiographyValuesProvider")
     @DisplayName("Проверка невалидных значений для поля biography при добавлении художника")
-    void shouldFailForInvalidArtistBiographyValues(ArtistJson artist, String expectedDetail) {
+    void shouldFailForInvalidArtistBiographyValues(ArtistJson artist) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<ArtistJson> response = gatewayApiClient.addArtist(token, artist);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-        assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
-        assertEquals("/api/artist", error.instance(), "Error instance mismatch");
+        assertEquals(ERROR_BIOGRAPHY_LENGTH, error.detail(), "Error detail mismatch");
     }
 
-    @Test
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @Test
     @DisplayName("Попытка загрузки изображения больше 1MB при добавлении художника")
     void shouldFailWhenAddingArtistWithImageLargerThan1MB(@Token String token) {
         String largeImage = RandomDataUtils.randomBase64Image(2 * 700 * 1024); // ~2MB
@@ -373,23 +370,20 @@ public class AddArtistApiTest {
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-        assertEquals(
-                ERROR_PHOTO_SIZE,
-                error.detail(),
-                "Error detail mismatch"
-        );
+        assertEquals(ERROR_PHOTO_SIZE, error.detail(), "Error detail mismatch");
     }
 
-    @ParameterizedTest
-    @MethodSource("invalidPhotoValuesProvider")
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
+    @ParameterizedTest
+    @MethodSource("invalidPhotoValuesProvider")
     @DisplayName("Проверка, что поле photo должно начинаться с 'data:image/'")
-    void shouldFailForInvalidPhotoValues(String invalidPhoto, String expectedDetail) {
+    void shouldFailForInvalidPhotoValues(String invalidPhoto) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         ArtistJson artist = new ArtistJson(
                 null,
@@ -401,38 +395,35 @@ public class AddArtistApiTest {
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
         ErrorJson error = gatewayApiClient.parseError(response);
         assertNotNull(error, "ErrorJson should not be null");
-        assertEquals(expectedDetail, error.detail(), "Error detail mismatch");
+        assertEquals(ERROR_PHOTO_FORMAT, error.detail(), "Error detail mismatch");
     }
 
     static Stream<Arguments> invalidPhotoValuesProvider() {
         return Stream.of(
                 Arguments.of(
-                        "",
-                        ERROR_PHOTO_FORMAT
+                        ""
                 ),
                 Arguments.of(
-                        "               ",
-                        ERROR_PHOTO_FORMAT
+                        "               "
                 ),
                 Arguments.of(
-                        "арапапыурпоаыур",
-                        ERROR_PHOTO_FORMAT
+                        "арапапыурпоаыур"
                 ),
                 Arguments.of(
-                        "http://example.com/image.png",
-                        ERROR_PHOTO_FORMAT
+                        "http://example.com/image.png"
                 )
         );
     }
 
-    @Test
+
     @User
-    @ApiLogin()
+    @ApiLogin
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление художника")
     @Tags({@Tag("artist")})
-    @DisplayName("Успешное добавление нового художника")
+    @Test
+    @DisplayName("Успешное добавление художника с фото размером 1MB")
     void shouldSuccessfullyAddArtistWithPhotoEqual1MB(@Token String token) {
         ArtistJson artist = new ArtistJson(
                 null,

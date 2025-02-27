@@ -21,7 +21,6 @@ public class CountryRepositoryHibernate implements CountryRepository {
     @Nonnull
     @Override
     public Optional<CountryEntity> findById(UUID id) {
-        entityManager.joinTransaction();
         return Optional.ofNullable(entityManager.find(CountryEntity.class, id));
     }
 }
