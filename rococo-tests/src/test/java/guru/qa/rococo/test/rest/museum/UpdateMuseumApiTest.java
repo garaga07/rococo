@@ -68,9 +68,9 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное обновление данных музея")
+    @DisplayName("API: Успешное обновление данных музея")
     void shouldSuccessfullyUpdateMuseum(@Token String token, MuseumJson museum) {
         MuseumJson updatedMuseum = new MuseumJson(
                 museum.id(),
@@ -100,8 +100,8 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Обновление музея с невалидным значением токена")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 401 при обновлении музея с невалидным токеном")
     void shouldFailToUpdateMuseumWithInvalidToken(MuseumJson museum) {
         MuseumJson updatedMuseum = new MuseumJson(
                 museum.id(),
@@ -122,8 +122,8 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Попытка обновить данные несуществующего музея")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 404 при обновлении несуществующего музея")
     void shouldFailToUpdateNonExistentMuseum(@Token String token) {
         UUID nonExistentMuseumId = UUID.randomUUID();
         MuseumJson nonExistentMuseum = new MuseumJson(
@@ -169,10 +169,10 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("museumRequiredFieldsForUpdateProvider")
-    @DisplayName("Проверка обязательности полей при обновлении музея")
+    @DisplayName("API: Ошибка 400 при отсутствии обязательных полей в запросе на обновление музея")
     void shouldFailToUpdateMuseumWithNullFields(String fieldToNullify, String expectedDetail) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -214,10 +214,10 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validMuseumTitleValuesProvider")
-    @DisplayName("Проверка валидных значений для поля title при обновлении музея")
+    @DisplayName("API: Успешное обновление названия музея валидными значениями")
     void shouldSuccessForValidMuseumTitleValues(String validTitle) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -268,11 +268,11 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidMuseumTitleValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля title при обновлении музея")
-    void shouldFailForInvalidMuseumTitleValues(String invalidTitle) {
+    @DisplayName("API: Ошибка 400 при обновлении названия музея невалидными значениями")
+    void shouldFailToUpdateMuseumWithInvalidTitle(String invalidTitle) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -306,10 +306,10 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validMuseumDescriptionValuesProvider")
-    @DisplayName("Проверка валидных значений для поля description при обновлении музея")
+    @DisplayName("API: Успешное обновление описания музея валидными значениями")
     void shouldSuccessForValidMuseumDescriptionValues(String validDescription) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -369,11 +369,11 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidMuseumDescriptionValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля description при обновлении музея")
-    void shouldFailForInvalidMuseumDescriptionValues(String invalidDescription) {
+    @DisplayName("API: Ошибка 400 при обновлении описания музея невалидными значениями")
+    void shouldFailToUpdateMuseumWithInvalidDescription(String invalidDescription) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -407,10 +407,10 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validMuseumCityValuesProvider")
-    @DisplayName("Проверка валидных значений для поля city при обновлении музея")
+    @DisplayName("API: Успешное обновление города музея валидными значениями")
     void shouldSuccessForValidMuseumCityValues(String validCity) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -471,11 +471,11 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidMuseumCityValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля city при обновлении музея")
-    void shouldFailForInvalidMuseumCityValues(String invalidCity) {
+    @DisplayName("API: Ошибка 400 при обновлении города музея невалидными значениями")
+    void shouldFailToUpdateMuseumWithInvalidCity(String invalidCity) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -511,11 +511,11 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidMuseumPhotoValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля photo при обновлении музея")
-    void shouldFailForInvalidMuseumPhotoValues(String invalidPhoto) {
+    @DisplayName("API: Ошибка 400 при обновлении фото музея невалидными значениями")
+    void shouldFailToUpdateMuseumWithInvalidPhoto(String invalidPhoto) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -542,10 +542,10 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка загрузки изображения больше 1MB при обновлении музея")
-    void shouldFailWhenUpdatingMuseumWithImageLargerThan1MB(@Token String token) {
+    @DisplayName("API: Ошибка 400 при загрузке изображения больше 1MB при обновлении музея")
+    void shouldFailToUpdateMuseumWithPhotoLargerThan1MB(@Token String token) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String largeImage = RandomDataUtils.randomBase64Image(2 * 700 * 1024); // ~2MB
 
@@ -572,10 +572,10 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка обновить музей с несуществующим ID страны")
-    void shouldFailWhenUpdatingMuseumWithNonExistentCountryId(@Token String token) {
+    @DisplayName("API: Ошибка 404 при обновлении музея с несуществующим ID страны")
+    void shouldFailToUpdateMuseumWithNonExistentCountryId(@Token String token) {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         UUID nonExistentCountryId = UUID.randomUUID(); // Генерируем несуществующий ID страны
 
@@ -603,9 +603,9 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное обновление музея с фото размером 1MB")
+    @DisplayName("API: Успешное обновление музея с фото размером 1MB")
     void shouldSuccessfullyUpdateMuseumWithPhotoEqual1MB(@Token String token, MuseumJson museum) {
         MuseumJson updatedMuseum = new MuseumJson(
                 museum.id(),

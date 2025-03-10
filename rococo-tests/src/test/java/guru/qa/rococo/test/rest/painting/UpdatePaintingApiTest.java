@@ -66,9 +66,9 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное обновление данных картины")
+    @DisplayName("API: Успешное обновление данных картины")
     void shouldSuccessfullyUpdatePainting(@Token String token, PaintingJson painting) {
         PaintingRequestJson updatedPainting = new PaintingRequestJson(
                 painting.id(),
@@ -99,9 +99,9 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Обновление картины с невалидным значением токена")
+    @DisplayName("API: Ошибка 401 при обновлении картины с невалидным токеном")
     void shouldUpdatePaintingWithIncorrectToken(PaintingJson painting) {
         PaintingRequestJson updatedPainting = new PaintingRequestJson(
                 painting.id(),
@@ -121,9 +121,9 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка обновить данные несуществующей картины")
+    @DisplayName("API: Ошибка 404 при обновлении несуществующей картины")
     void shouldFailToUpdateNonExistentPainting(@Token String token) {
         UUID nonExistentPaintingId = UUID.randomUUID(); // Генерируем случайный ID, которого нет в базе
         PaintingRequestJson nonExistentPainting = new PaintingRequestJson(
@@ -150,10 +150,10 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка обновить картину с несуществующим id музея")
-    void shouldFailToUpdatePaintingWithNonExistentMuseum(@Token String token, PaintingJson painting) {
+    @DisplayName("API: Ошибка 404 при обновлении картины с несуществующим ID музея")
+    void shouldFailToUpdatePaintingWithNonExistentMuseumId(@Token String token, PaintingJson painting) {
         UUID nonExistentMuseumId = UUID.randomUUID(); // Генерируем ID музея, которого нет в базе
 
         PaintingRequestJson updatedPainting = new PaintingRequestJson(
@@ -180,10 +180,10 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка обновить картину с несуществующим id художника")
-    void shouldFailToUpdatePaintingWithNonExistentArtist(@Token String token, PaintingJson painting) {
+    @DisplayName("API: Ошибка 404 при обновлении картины с несуществующим ID художника")
+    void shouldFailToUpdatePaintingWithNonExistentArtistId(@Token String token, PaintingJson painting) {
         UUID nonExistentArtistId = UUID.randomUUID(); // Генерируем ID художника, которого нет в базе
 
         PaintingRequestJson updatedPainting = new PaintingRequestJson(
@@ -223,10 +223,10 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("requiredFieldProviderForPainting")
-    @DisplayName("Проверка обязательности полей при обновлении картины")
+    @DisplayName("API: Ошибка 400 при обновлении картины без передачи обязательных полей")
     void shouldFailToUpdatePaintingWithNullFields(String fieldToNullify, String expectedDetail) {
         PaintingJson painting = PaintingExtension.getPaintingForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -272,10 +272,10 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validPaintingTitleValuesProvider")
-    @DisplayName("Проверка валидных значений для поля title при обновлении картины")
+    @DisplayName("API: Успешное обновление картины с валидными значениями title")
     void shouldSuccessForValidPaintingTitleValues(String validTitle) {
         PaintingJson painting = PaintingExtension.getPaintingForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -327,11 +327,11 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidPaintingTitleValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля title при обновлении картины")
-    void shouldFailForInvalidPaintingTitleValues(String invalidTitle) {
+    @DisplayName("API: Ошибка 400 при обновлении картины с невалидными значениями title")
+    void shouldFailToUpdatePaintingWithInvalidTitle(String invalidTitle) {
         PaintingJson painting = PaintingExtension.getPaintingForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -365,10 +365,10 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validPaintingDescriptionValuesProvider")
-    @DisplayName("Проверка валидных значений для поля description при обновлении картины")
+    @DisplayName("API: Успешное обновление картины с валидными значениями description")
     void shouldSuccessForValidPaintingDescriptionValues(String validDescription) {
         PaintingJson painting = PaintingExtension.getPaintingForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -429,11 +429,11 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidPaintingDescriptionValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля description при обновлении картины")
-    void shouldFailForInvalidPaintingDescriptionValues(String invalidDescription) {
+    @DisplayName("API: Ошибка 400 при обновлении картины с невалидными значениями description")
+    void shouldFailToUpdatePaintingWithInvalidDescription(String invalidDescription) {
         PaintingJson painting = PaintingExtension.getPaintingForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -469,11 +469,11 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidPaintingPhotoValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля content при обновлении картины")
-    void shouldFailForInvalidPaintingPhotoValues(String invalidPhoto) {
+    @DisplayName("API: Ошибка 400 при обновлении картины с невалидными значениями content")
+    void shouldFailToUpdatePaintingWithInvalidContent(String invalidPhoto) {
         PaintingJson painting = PaintingExtension.getPaintingForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -500,10 +500,10 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка загрузки изображения больше 1MB при обновлении картины")
-    void shouldFailWhenUpdatingPaintingWithImageLargerThan1MB(@Token String token) {
+    @DisplayName("API: Ошибка 400 при загрузке изображения больше 1MB при обновлении картины")
+    void shouldFailToUpdatePaintingWithPhotoLargerThan1MB(@Token String token) {
         PaintingJson painting = PaintingExtension.getPaintingForTest();
         String largeImage = RandomDataUtils.randomBase64Image(2 * 700 * 1024); // ~2MB
 
@@ -530,9 +530,9 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное обновление картины с фото размером 1MB")
+    @DisplayName("API: Успешное обновление картины с фото размером 1MB")
     void shouldSuccessfullyUpdatePaintingWithPhotoEqual1MB(@Token String token, PaintingJson painting) {
         PaintingRequestJson updatedPainting = new PaintingRequestJson(
                 painting.id(),

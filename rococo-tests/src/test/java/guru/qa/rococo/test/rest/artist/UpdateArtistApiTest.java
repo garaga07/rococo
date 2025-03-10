@@ -58,9 +58,9 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное обновление данных художника")
+    @DisplayName("API: Успешное обновление информации о художнике")
     void shouldSuccessfullyUpdateArtist(@Token String token, ArtistJson artist) {
         ArtistJson updatedArtist = new ArtistJson(
                 artist.id(),
@@ -92,9 +92,9 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Обновление художника с невалидным значением токена")
+    @DisplayName("API: Ошибка 401 при обновлении художника с некорректным токеном")
     void shouldUpdateArtistWithIncorrectToken(ArtistJson artist) {
         ArtistJson updatedArtist = new ArtistJson(
                 artist.id(),
@@ -112,9 +112,9 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка обновить данные несуществующего художника")
+    @DisplayName("API: Ошибка 404 при обновлении несуществующего художника")
     void shouldFailToUpdateNonExistentArtist(@Token String token) {
         UUID nonExistentArtistId = UUID.randomUUID(); // Генерируем случайный ID, которого нет в базе
         ArtistJson nonExistentArtist = new ArtistJson(
@@ -149,10 +149,10 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("requiredFieldProvider")
-    @DisplayName("Проверка обязательности полей при обновлении художника")
+    @DisplayName("API: Ошибка 400 при отсутствии обязательных полей у художника при обновлении")
     void shouldFailToUpdateArtistWithNullFields(String fieldToNullify, String expectedDetail) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -185,10 +185,10 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validArtistNameValuesProvider")
-    @DisplayName("Проверка валидных значений для поля name при обновлении художника")
+    @DisplayName("API: Успешное обновление имени художника с допустимой длиной")
     void shouldSuccessForValidArtistNameValues(String validName) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -232,11 +232,11 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidArtistNameValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля name при обновлении художника")
-    void shouldFailForInvalidArtistNameValues(String invalidName) {
+    @DisplayName("API: Ошибка 400 при недопустимой длине имени художника при обновлении")
+    void shouldFailToUpdateArtistWithInvalidName(String invalidName) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -269,10 +269,10 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validArtistBiographyValuesProvider")
-    @DisplayName("Проверка валидных значений для поля biography при обновлении художника")
+    @DisplayName("API: Успешное обновление биографии художника с допустимой длиной")
     void shouldSuccessForValidArtistBiographyValues(String validBiography) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -316,11 +316,11 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidArtistBiographyValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля biography при обновлении художника")
-    void shouldFailForInvalidArtistBiographyValues(String invalidBiography) {
+    @DisplayName("API: Ошибка 400 при недопустимой длине биографии художника при обновлении")
+    void shouldFailToUpdateArtistWithInvalidBiography(String invalidBiography) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
 
@@ -346,9 +346,9 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка загрузки изображения больше 1MB при обновлении художника")
+    @DisplayName("API: Ошибка 400 при загрузке изображения более 1MB при обновлении художника")
     void shouldFailWhenUpdatingArtistWithImageLargerThan1MB(@Token String token) {
         String largeImage = RandomDataUtils.randomBase64Image(2 * 700 * 1024); // ~2MB
         ArtistJson artist = ArtistExtension.getArtistForTest();
@@ -377,18 +377,17 @@ public class UpdateArtistApiTest {
         );
     }
 
-
     @User
     @ApiLogin
     @Artist
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidPhotoValuesProvider")
-    @DisplayName("Проверка, что поле photo должно начинаться с 'data:image/' при обновлении художника")
-    void shouldFailForInvalidPhotoValuesWhenUpdating(String invalidPhoto) {
+    @DisplayName("API: Ошибка 400 при недопустимом формате фото художника при обновлении")
+    void shouldFailToUpdateArtistWithInvalidPhoto(String invalidPhoto) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         ArtistJson artist = ArtistExtension.getArtistForTest();
 
@@ -414,9 +413,9 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление художника")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное обновление художника с фото размером 1MB")
+    @DisplayName("API: Успешное обновление художника с изображением размером 1MB")
     void shouldSuccessfullyUpdateArtistWithPhotoEqual1MB(@Token String token) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
 

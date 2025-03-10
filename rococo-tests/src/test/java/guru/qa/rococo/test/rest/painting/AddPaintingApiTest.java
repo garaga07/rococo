@@ -63,8 +63,8 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
-    @DisplayName("Успешное добавление новой картины")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Успешное добавление новой картины")
     void shouldSuccessfullyAddPainting(@Token String token, ArtistJson artist, MuseumJson museum) {
         PaintingRequestJson painting = new PaintingRequestJson(
                 null,
@@ -107,8 +107,8 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
-    @DisplayName("Добавление картины с невалидным значением токена")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 401 при добавлении картины с невалидным токеном")
     void shouldFailToAddPaintingWithInvalidToken() {
         PaintingRequestJson painting = new PaintingRequestJson(
                 null,
@@ -143,10 +143,10 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("requiredFieldProviderForPainting")
-    @DisplayName("Проверка обязательности полей при добавлении картины")
+    @DisplayName("API: Ошибка 400 при отсутствии обязательных полей в запросе на добавление картины")
     void shouldFailToAddPaintingWithMissingFields(String fieldToNullify, String expectedDetail) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         MuseumJson museum = MuseumExtension.getMuseumForTest();
@@ -209,10 +209,10 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validPaintingTitleValuesProvider")
-    @DisplayName("Проверка валидных значений для поля title при добавлении картины")
+    @DisplayName("API: Успешное добавление картины с валидными значениями в поле title")
     void shouldSuccessForValidPaintingTitleValues(String validTitle) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         MuseumJson museum = MuseumExtension.getMuseumForTest();
@@ -264,11 +264,11 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidPaintingTitleValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля title при добавлении картины")
-    void shouldFailForInvalidPaintingTitleValues(String invalidTitle) {
+    @DisplayName("API: Ошибка 400 при добавлении картины с невалидными значениями в поле title")
+    void shouldFailToAddPaintingWithInvalidTitle(String invalidTitle) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -304,10 +304,10 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validPaintingDescriptionValuesProvider")
-    @DisplayName("Проверка валидных значений для поля description при добавлении картины")
+    @DisplayName("API: Успешное добавление картины с валидными значениями в поле description")
     void shouldSuccessForValidPaintingDescriptionValues(String validDescription) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         MuseumJson museum = MuseumExtension.getMuseumForTest();
@@ -364,11 +364,11 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidPaintingDescriptionValuesProvider")
-    @DisplayName("Проверка невалидных значений для поля description при добавлении картины")
-    void shouldFailForInvalidPaintingDescriptionValues(String invalidDescription) {
+    @DisplayName("API: Ошибка 400 при добавлении картины с невалидными значениями в поле description")
+    void shouldFailToAddPaintingWithInvalidDescription(String invalidDescription) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -406,11 +406,11 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidPaintingContentValuesProvider")
-    @DisplayName("Проверка, что поле content должно начинаться с 'data:image/' при добавлении картины")
-    void shouldFailForInvalidPaintingContentValues(String invalidContent) {
+    @DisplayName("API: Ошибка 400 при добавлении картины с невалидными значениями в поле content")
+    void shouldFailToAddPaintingWithInvalidContent(String invalidContent) {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -439,10 +439,10 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка загрузки изображения больше 1MB при добавлении картины")
-    void shouldFailWhenAddingPaintingWithImageLargerThan1MB() {
+    @DisplayName("API: Ошибка 400 при загрузке изображения больше 1MB при добавлении картины")
+    void shouldFailToAddPaintingWithPhotoLargerThan1MB() {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -473,9 +473,9 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное добавление новой картины с фото размером 1MB")
+    @DisplayName("API: Успешное добавление картины с фото размером 1MB")
     void shouldSuccessfullyAddPaintingWithPhotoEqual1MB() {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         MuseumJson museum = MuseumExtension.getMuseumForTest();
@@ -524,9 +524,9 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка добавить картину с несуществующим ID художника")
+    @DisplayName("API: Ошибка 404 при добавлении картины с несуществующим ID художника")
     void shouldFailToAddPaintingWithNonExistentArtistId() {
         MuseumJson museum = MuseumExtension.getMuseumForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();
@@ -557,9 +557,9 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка добавить картину с несуществующим ID музея")
+    @DisplayName("API: Ошибка 404 при добавлении картины с несуществующим ID музея")
     void shouldFailToAddPaintingWithNonExistentMuseumId() {
         ArtistJson artist = ArtistExtension.getArtistForTest();
         String token = "Bearer " + ApiLoginExtension.getToken();

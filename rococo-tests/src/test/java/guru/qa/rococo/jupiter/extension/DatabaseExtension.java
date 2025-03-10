@@ -19,7 +19,7 @@ public class DatabaseExtension implements BeforeAllCallback {
         clearDatabaseTables();
     }
 
-    private void clearDatabaseTables() {
+    public void clearDatabaseTables() {
         artistJdbcTemplate.execute("TRUNCATE TABLE artist CASCADE;");
         userdataJdbcTemplate.execute("TRUNCATE TABLE \"user\" CASCADE;");
         authJdbcTemplate.execute("TRUNCATE TABLE authority, \"user\" CASCADE;");

@@ -113,6 +113,23 @@ tasks.register('printVersion') {
     }
 }
 
+// Универсальная задача для запуска тестов с тегами
+def createTagTask(String name, String tag) {
+    tasks.register(name, Test) {
+        useJUnitPlatform {
+            includeTags(tag)
+        }
+        testLogging {
+            events "passed", "skipped", "failed", "standardOut", "standardError"
+            exceptionFormat "short"
+        }
+    }
+}
+
+// Задачи для запуска тестов по тегам
+createTagTask('testApi', 'api')
+createTagTask('testWeb', 'web')
+
 test {
     options {
         systemProperties(System.getProperties())

@@ -62,8 +62,8 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Успешное добавление нового музея")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Успешное создание нового музея")
     void shouldSuccessfullyAddMuseum(@Token String token) {
         MuseumJson museum = new MuseumJson(
                 null,
@@ -111,8 +111,8 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Добавление музея с невалидным значением токена")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 401 при добавлении музея с некорректным токеном")
     void shouldAddMuseumWithIncorrectToken() {
         MuseumJson museum = new MuseumJson(
                 null,
@@ -207,8 +207,8 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Проверка обязательности полей при добавлении музея")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 400 при отсутствии обязательных полей у музея")
     void shouldRequiredMuseumFields(MuseumJson museum, String expectedDetail) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
@@ -248,8 +248,8 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Проверка валидных значений для поля title при добавлении музея")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Успешное создание музея с допустимой длиной названия")
     void shouldSuccessForValidMuseumTitleValues(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
@@ -335,9 +335,9 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Проверка невалидных значений для поля title при добавлении музея")
-    void shouldFailForInvalidMuseumTitleValues(MuseumJson museum) {
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 400 при недопустимой длине названия музея")
+    void shouldFailToAddMuseumWithInvalidTitle(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
@@ -376,8 +376,8 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Проверка валидных значений для поля description при добавлении музея")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Успешное создание музея с допустимой длиной описания")
     void shouldSuccessForValidMuseumDescriptionValues(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
@@ -463,9 +463,9 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Проверка невалидных значений для поля description при добавлении музея")
-    void shouldFailForInvalidMuseumDescriptionValues(MuseumJson museum) {
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 400 при недопустимой длине описания музея")
+    void shouldFailToAddMuseumWithInvalidDescription(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
@@ -504,8 +504,8 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Проверка валидных значений для поля city при добавлении музея")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Успешное создание музея с допустимой длиной названия города")
     void shouldSuccessForValidMuseumCityValues(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
@@ -591,9 +591,9 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Проверка невалидных значений для поля city при добавлении музея")
-    void shouldFailForInvalidMuseumCityValues(MuseumJson museum) {
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 400 при недопустимой длине названия города")
+    void shouldFailToAddMuseumWithInvalidCity(MuseumJson museum) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         Response<MuseumJson> response = gatewayApiClient.addMuseum(token, museum);
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
@@ -608,9 +608,9 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Попытка загрузки изображения больше 1MB при добавлении музея")
-    void shouldFailWhenAddingMuseumWithImageLargerThan1MB(@Token String token) {
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 400 при загрузке изображения больше 1MB при добавлении музея")
+    void shouldFailToAddMuseumWithPhotoLargerThan1MB(@Token String token) {
         String largeImage = RandomDataUtils.randomBase64Image(2 * 700 * 1024); // ~2MB
         MuseumJson museum = new MuseumJson(
                 null,
@@ -654,9 +654,9 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Проверка, что поле photo должно начинаться с 'data:image/'")
-    void shouldFailForInvalidMuseumPhotoValues(String invalidPhoto) {
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 400 при недопустимом формате фото музея (photo должен начинаться с 'data:image/')")
+    void shouldFailToAddMuseumWithInvalidPhoto(String invalidPhoto) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         MuseumJson museum = new MuseumJson(
                 null,
@@ -678,8 +678,8 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Успешное добавление нового музея с фото размером 1MB")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Успешное создание музея с фото размером 1MB")
     void shouldSuccessfullyAddMuseumWithPhotoEqual1MB(@Token String token) {
         MuseumJson museum = new MuseumJson(
                 null,
@@ -729,9 +729,9 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("museum")})
-    @DisplayName("Попытка добавить музей с несуществующим ID страны")
-    void shouldFailWhenAddingMuseumWithNonExistentCountryId(@Token String token) {
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 404 при добавлении музея с несуществующим ID страны")
+    void shouldFailToAddMuseumWithNonExistentCountryId(@Token String token) {
         UUID nonExistentCountryId = UUID.randomUUID(); // Генерируем несуществующий ID страны
         MuseumJson museum = new MuseumJson(
                 null,

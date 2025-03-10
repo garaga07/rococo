@@ -3,6 +3,7 @@ package guru.qa.rococo.test.rest.userdata;
 import guru.qa.rococo.jupiter.annotation.ApiLogin;
 import guru.qa.rococo.jupiter.annotation.Token;
 import guru.qa.rococo.jupiter.annotation.User;
+import guru.qa.rococo.jupiter.annotation.meta.RestTest;
 import guru.qa.rococo.jupiter.extension.ApiLoginExtension;
 import guru.qa.rococo.jupiter.extension.UserExtension;
 import guru.qa.rococo.model.ErrorJson;
@@ -30,6 +31,8 @@ import java.util.stream.Stream;
 import static guru.qa.rococo.utils.RandomDataUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@RestTest
+@DisplayName("UpdateUserApi")
 public class UpdateUserApiTest {
     @RegisterExtension
     static final UserExtension userExtension = new UserExtension();
@@ -56,10 +59,10 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validUserNameValuesProvider")
-    @DisplayName("Успешное обновление информации текущего пользователя с валидным userName")
+    @DisplayName("API: Успешное обновление информации текущего пользователя с валидным userName")
     void shouldSuccessfullyUpdateUserInfoWithValidUserName(String validUserName) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         UserJson user = UserExtension.getUserJson();
@@ -102,10 +105,10 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidUserNameValuesProvider")
-    @DisplayName("Ошибка при обновлении информации текущего пользователя с невалидным userName")
+    @DisplayName("API: Ошибка 400 при обновлении информации текущего пользователя с невалидным userName")
     void shouldFailToUpdateUserInfoWithInvalidUserName(String invalidUserName) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         UserJson user = UserExtension.getUserJson();
@@ -138,10 +141,10 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validUserFirstNameValuesProvider")
-    @DisplayName("Успешное обновление информации текущего пользователя с валидным firstName")
+    @DisplayName("API: Успешное обновление информации текущего пользователя с валидным firstName")
     void shouldSuccessfullyUpdateUserInfoWithValidFirstName(String validFirstName) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         UserJson user = UserExtension.getUserJson();
@@ -177,9 +180,9 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Ошибка при обновлении информации текущего пользователя с невалидным firstName")
+    @DisplayName("API: Ошибка 400 при обновлении информации текущего пользователя с невалидным firstName")
     void shouldFailToUpdateUserInfoWithInvalidFirstName(@Token String token, UserJson user) {
         UserJson updatedUser = new UserJson(
                 user.id(),
@@ -209,10 +212,10 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("validUserLastNameValuesProvider")
-    @DisplayName("Успешное обновление информации текущего пользователя с валидным lastName")
+    @DisplayName("API: Успешное обновление информации текущего пользователя с валидным lastName")
     void shouldSuccessfullyUpdateUserInfoWithValidLastName(String validLastName) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         UserJson user = UserExtension.getUserJson();
@@ -248,9 +251,9 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Ошибка при обновлении информации текущего пользователя с невалидным lastName")
+    @DisplayName("API: Ошибка 400 при обновлении информации текущего пользователя с невалидным lastName")
     void shouldFailToUpdateUserInfoWithInvalidLastName(@Token String token, UserJson user) {
         UserJson updatedUser = new UserJson(
                 user.id(),
@@ -273,9 +276,9 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное обновлении информации о текущем пользователе с фото размером 1MB")
+    @DisplayName("API: Успешное обновление информации о текущем пользователе с фото размером 1MB")
     void shouldSuccessfullyUpdateUserInfoWithPhotoEqual1MB(@Token String token, UserJson user) {
         UserJson updatedUser = new UserJson(
                 user.id(),
@@ -309,9 +312,9 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Ошибка при обновлении информации текущего пользователя с фото размером больше 1MB")
+    @DisplayName("API: Ошибка 400 при обновлении информации текущего пользователя с фото размером больше 1MB")
     void shouldFailToUpdateUserInfoWithPhotoLargerThan1MB(@Token String token, UserJson user) {
         UserJson updatedUser = new UserJson(
                 user.id(),
@@ -351,10 +354,10 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @ParameterizedTest
     @MethodSource("invalidPhotoValuesProvider")
-    @DisplayName("Проверка, что поле photo должно начинаться с 'data:image/'")
+    @DisplayName("API: Ошибка 400 при обновлении информации текущего пользователя с некорректным значением photo")
     void shouldFailUpdateUserWithInvalidPhotoValues(String invalidPhoto) {
         String token = "Bearer " + ApiLoginExtension.getToken();
         UserJson user = UserExtension.getUserJson();
@@ -378,9 +381,9 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Обновление информации о текущем пользователе с невалидным значением токена")
+    @DisplayName("API: Ошибка 401 при обновлении информации текущего пользователя с невалидным значением токена")
     void shouldUpdateUserInfoWithIncorrectToken(UserJson user) {
         UserJson updatedUser = new UserJson(
                 user.id(),
@@ -399,9 +402,9 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка обновить данные несуществующего пользователя")
+    @DisplayName("API: Ошибка 404 при попытке обновить данные несуществующего пользователя")
     void shouldUpdateNonExistentUser(@Token String token) {
         UUID nonExistentUserId = UUID.randomUUID(); // Генерируем случайный ID, которого нет в базе
         UserJson nonExistentUser = new UserJson(
@@ -424,9 +427,9 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка обновить данные пользователя без указания username")
+    @DisplayName("API: Ошибка 400 при обновлении информации пользователя без указания username")
     void shouldUpdateUserInfoWithoutUserName(@Token String token, UserJson user) {
         UserJson nonExistentUser = new UserJson(
                 user.id(),
@@ -448,9 +451,9 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка обновить данные пользователя c указанием username, который уже занят")
+    @DisplayName("API: Ошибка 400 при обновлении информации пользователя с уже существующим username")
     void shouldUpdateUserInfoWithAlreadyExistUserName(@Token String token, UserJson user) {
         UsersClient usersClient = new UsersDbClient();
         UserJson existUser = usersClient.createUser(randomUsername(), randomPassword());

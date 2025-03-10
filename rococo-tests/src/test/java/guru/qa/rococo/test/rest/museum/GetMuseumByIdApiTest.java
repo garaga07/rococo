@@ -34,10 +34,10 @@ public class GetMuseumByIdApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение музея по ID")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Museum
     @Test
-    @DisplayName("Успешное получение данных о музее по ID")
+    @DisplayName("API: Успешное получение данных о музее по ID")
     void shouldReturnMuseumById(MuseumJson museum) {
         Response<MuseumJson> response = gatewayApiClient.getMuseumById(museum.id().toString());
 
@@ -79,8 +79,8 @@ public class GetMuseumByIdApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение музея по ID")
-    @Tags({@Tag("museum")})
-    @DisplayName("Попытка получить данные о несуществующем музее")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 404 при попытке получить данные о несуществующем музее")
     void shouldFailWhenMuseumDoesNotExist() {
         UUID nonExistentMuseumId = UUID.randomUUID();
         Response<MuseumJson> response = gatewayApiClient.getMuseumById(nonExistentMuseumId.toString());
@@ -92,8 +92,8 @@ public class GetMuseumByIdApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.MINOR)
     @Feature("Получение музея по ID")
-    @Tags({@Tag("museum")})
-    @DisplayName("Попытка получить данные о музее с некорректным UUID")
+    @Tags({@Tag("api")})
+    @DisplayName("API: Ошибка 400 при попытке получить данные о музее с некорректным UUID")
     void shouldFailWhenMuseumIdIsInvalid() {
         String invalidUuid = "3ed0e8878627-4074-b323573c3741499d";
         Response<MuseumJson> response = gatewayApiClient.getMuseumById(invalidUuid);

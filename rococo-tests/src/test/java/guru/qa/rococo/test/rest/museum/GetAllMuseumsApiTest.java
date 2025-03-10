@@ -37,7 +37,7 @@ public class GetAllMuseumsApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка музеев")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Museum(count = 5)
     @ParameterizedTest
     @CsvSource({
@@ -45,7 +45,7 @@ public class GetAllMuseumsApiTest {
             "1, 4, 1",  // Вторая страница, size=4 → должна быть 1 запись
             "2, 4, 0",  // Третья страница, size=4 → пустой список (нет данных)
     })
-    @DisplayName("Проверка пагинации списка музеев")
+    @DisplayName("API: Корректная пагинация списка музеев")
     void shouldReturnCorrectNumberOfMuseumsForPagination(int page, int size, int expectedCount) {
         Response<RestResponsePage<MuseumJson>> response = gatewayApiClient.getAllMuseums(page, size, null);
 
@@ -62,7 +62,7 @@ public class GetAllMuseumsApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка музеев")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Museum(count = 4, titles = {"Luvr", "Эрмитаж", "Метрополитен", "Третьяковка"})
     @ParameterizedTest
     @CsvSource({
@@ -73,7 +73,7 @@ public class GetAllMuseumsApiTest {
             "uv, Luvr",     // Частичное совпадение LIKE '%uv%' (внутри строки)
             "Третьяковка, Третьяковка"  // Поиск по кириллическим символам
     })
-    @DisplayName("Фильтрация списка музеев по существующему названию")
+    @DisplayName("API: Фильтрация списка музеев по существующему названию")
     void shouldReturnMuseumWhenSearchingForExistentTitle(String searchTitle, String expectedMuseumTitle) {
         Response<RestResponsePage<MuseumJson>> response = gatewayApiClient.getAllMuseums(0, 10, searchTitle);
 
@@ -89,10 +89,10 @@ public class GetAllMuseumsApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка музеев")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Museum(count = 3, titles = {"British Museum", "Guggenheim Museum", "Museo del Prado"})
     @Test
-    @DisplayName("Фильтрация списка музеев по несуществующему названию")
+    @DisplayName("API: Поиск музея по несуществующему названию возвращает пустой список")
     void shouldReturnEmptyListWhenSearchingForNonExistentTitle() {
         Response<RestResponsePage<MuseumJson>> response = gatewayApiClient.getAllMuseums(0, 10, "NonExistentMuseum");
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
@@ -105,11 +105,11 @@ public class GetAllMuseumsApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка музеев")
-    @Tags({@Tag("museum")})
+    @Tags({@Tag("api")})
     @Museum(count = 4)
     @ParameterizedTest
     @MethodSource("provideEmptyAndWhitespaceStrings")
-    @DisplayName("Запрос всех музеев при пустом или пробельном значении фильтра")
+    @DisplayName("API: Получение полного списка музеев при пустом или пробельном фильтре")
     void shouldReturnUnfilteredListWhenSearchTitleIsEmptyOrWhitespace(String searchTitle) {
         Response<RestResponsePage<MuseumJson>> response = gatewayApiClient.getAllMuseums(0, 4, searchTitle);
 

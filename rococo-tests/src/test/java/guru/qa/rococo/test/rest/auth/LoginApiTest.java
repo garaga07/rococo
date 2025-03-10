@@ -1,6 +1,7 @@
 package guru.qa.rococo.test.rest.auth;
 
 import guru.qa.rococo.jupiter.annotation.User;
+import guru.qa.rococo.jupiter.annotation.meta.RestTest;
 import guru.qa.rococo.jupiter.extension.UserExtension;
 import guru.qa.rococo.model.rest.UserJson;
 import guru.qa.rococo.service.impl.AuthApiClient;
@@ -16,6 +17,8 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@RestTest
+@DisplayName("LoginApi")
 public class LoginApiTest {
     @RegisterExtension
     static final UserExtension userExtension = new UserExtension();
@@ -25,9 +28,9 @@ public class LoginApiTest {
     @Story("Авторизация")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Авторизация пользователя")
-    @Tags({@Tag("auth")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешная авторизация зарегистрированного пользователя")
+    @DisplayName("API: Успешная авторизация существующего пользователя")
     void shouldSuccessfullyAuthenticateRegisteredUser(UserJson user) {
         String token = authApiClient.doLogin(user.username(), user.testData().password());
 

@@ -36,7 +36,7 @@ public class GetAllArtistsApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка художников")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Artist(count = 19)
     @ParameterizedTest
     @CsvSource({
@@ -44,7 +44,7 @@ public class GetAllArtistsApiTest {
             "1, 18, 1",  // Вторая страница, size=18 → должна быть 1 запись
             "2, 18, 0",  // Третья страница, size=18 → пустой список (нет данных)
     })
-    @DisplayName("Проверка пагинации списка художников")
+    @DisplayName("API: Корректность пагинации при получении списка художников")
     void shouldReturnCorrectNumberOfArtistsForPagination(int page, int size, int expectedCount) {
         Response<RestResponsePage<ArtistJson>> response = gatewayApiClient.getAllArtists(page, size, null);
 
@@ -60,7 +60,7 @@ public class GetAllArtistsApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка художников")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Artist(count = 4, names = {"Da Vinci", "Rembrandt", "Matisse", "Айвазовский"})
     @ParameterizedTest
     @CsvSource({
@@ -71,7 +71,7 @@ public class GetAllArtistsApiTest {
             "Vin, Da Vinci",          // Частичное совпадение LIKE '%Vin%' (внутри строки)
             "Айвазовский, Айвазовский" // Поиск по кириллическим символам
     })
-    @DisplayName("Фильтрация списка художников по существующему имени")
+    @DisplayName("API: Поиск художника по существующему имени")
     void shouldReturnArtistWhenSearchingForExistentName(String searchName, String expectedArtistName) {
         Response<RestResponsePage<ArtistJson>> response = gatewayApiClient.getAllArtists(0, 10, searchName);
 
@@ -87,10 +87,10 @@ public class GetAllArtistsApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка художников")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Artist(count = 3, names = {"Picasso", "Van Gogh", "Monet"})
     @Test
-    @DisplayName("Фильтрация списка художников по несуществующему имени")
+    @DisplayName("API: Поиск художника по несуществующему имени возвращает пустой список")
     void shouldReturnEmptyListWhenSearchingForNonExistentName() {
         Response<RestResponsePage<ArtistJson>> response = gatewayApiClient.getAllArtists(0, 10, "NonExistentArtist");
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
@@ -102,11 +102,11 @@ public class GetAllArtistsApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка художников")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Artist(count = 10)
     @ParameterizedTest
     @MethodSource("provideEmptyAndWhitespaceStrings")
-    @DisplayName("Запрос всех художников при пустом или пробельном значении фильтра")
+    @DisplayName("API: Получение полного списка художников при пустом или пробельном фильтре")
     void shouldReturnUnfilteredListWhenSearchNameIsEmptyOrWhitespace(String searchName) {
         Response<RestResponsePage<ArtistJson>> response = gatewayApiClient.getAllArtists(0, 18, searchName);
 

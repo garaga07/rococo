@@ -32,10 +32,10 @@ public class GetArtistByIdApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение художника по ID")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Artist
     @Test
-    @DisplayName("Успешное получение данных о художнике по ID")
+    @DisplayName("API: Успешное получение информации о художнике по ID")
     void shouldReturnArtistById(ArtistJson artist) {
         Response<ArtistJson> response = gatewayApiClient.getArtistById(artist.id().toString());
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
@@ -56,9 +56,9 @@ public class GetArtistByIdApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение художника по ID")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка получить данные о несуществующем художнике")
+    @DisplayName("API: Ошибка 404 при запросе данных несуществующего художника")
     void shouldFailWhenArtistDoesNotExist() {
         UUID nonExistentArtistId = UUID.randomUUID();
         Response<ArtistJson> response = gatewayApiClient.getArtistById(nonExistentArtistId.toString());
@@ -69,9 +69,9 @@ public class GetArtistByIdApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.MINOR)
     @Feature("Получение художника по ID")
-    @Tags({@Tag("artist")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка получить данные о художнике с некорректным UUID")
+    @DisplayName("API: Ошибка 400 при запросе художника с некорректным ID")
     void shouldFailWhenArtistIdIsInvalid() {
         String invalidUuid = "3ed0e8878627-4074-b323573c3741499d";
         Response<ArtistJson> response = gatewayApiClient.getArtistById(invalidUuid);

@@ -1,6 +1,7 @@
 package guru.qa.rococo.test.rest.auth;
 
 import guru.qa.rococo.jupiter.annotation.User;
+import guru.qa.rococo.jupiter.annotation.meta.RestTest;
 import guru.qa.rococo.jupiter.extension.UserExtension;
 import guru.qa.rococo.model.rest.UserJson;
 import guru.qa.rococo.service.impl.AuthApiClient;
@@ -19,6 +20,8 @@ import static guru.qa.rococo.utils.RandomDataUtils.randomPassword;
 import static guru.qa.rococo.utils.RandomDataUtils.randomUsername;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RestTest
+@DisplayName("RegisterApi")
 public class RegisterApiTest {
 
     @RegisterExtension
@@ -28,9 +31,9 @@ public class RegisterApiTest {
     @Story("Регистрация")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Регистрация пользователя")
-    @Tags({@Tag("register")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешная регистрация нового пользователя")
+    @DisplayName("API: Успешная регистрация нового пользователя")
     void shouldSuccessfullyRegisterNewUser() {
         String password = randomPassword();
         Response<Void> response = authApiClient.register(randomUsername(), password, password);
@@ -40,9 +43,9 @@ public class RegisterApiTest {
     @Story("Регистрация")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Регистрация пользователя")
-    @Tags({@Tag("register")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Регистрация нового пользователя с несовпадающими паролями")
+    @DisplayName("API: Ошибка 400 при несовпадающих паролях при регистрации")
     void shouldFailToRegisterUserWhenPasswordsDoNotMatch() {
         Response<Void> response = authApiClient.register(randomUsername(), randomPassword(), randomPassword());
         assertEquals(400, response.code(), "Expected HTTP status 400 but got " + response.code());
@@ -52,9 +55,9 @@ public class RegisterApiTest {
     @Story("Регистрация")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Регистрация пользователя")
-    @Tags({@Tag("register")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Регистрация нового пользователя с именем ранее зарегистрированного")
+    @DisplayName("API: Ошибка 400 при регистрации пользователя с уже существующим именем")
     void shouldFailToRegisterUserWithExistingUsername(UserJson user) {
         String password = randomPassword();
         Response<Void> response = authApiClient.register(user.username(), password, password);

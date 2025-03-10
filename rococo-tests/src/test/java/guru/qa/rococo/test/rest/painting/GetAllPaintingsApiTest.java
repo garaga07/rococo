@@ -39,7 +39,7 @@ public class GetAllPaintingsApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка картин")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Painting(count = 10)
     @ParameterizedTest
     @CsvSource({
@@ -47,7 +47,7 @@ public class GetAllPaintingsApiTest {
             "1, 9, 1",  // Вторая страница, size=9 → должна быть 1 запись
             "2, 9, 0",  // Третья страница, size=9 → пустой список (нет данных)
     })
-    @DisplayName("Проверка пагинации списка картин")
+    @DisplayName("API: Корректная пагинация списка картин")
     void shouldReturnCorrectNumberOfPaintingsForPagination(int page, int size, int expectedCount) {
         Response<RestResponsePage<PaintingResponseJson>> response = gatewayApiClient.getAllPaintings(page, size, null);
 
@@ -63,7 +63,7 @@ public class GetAllPaintingsApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка картин")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Painting(count = 4, titles = {"Mona Lisa", "The Starry Night", "The Scream", "Девушка с жемчужной сережкой"})
     @ParameterizedTest
     @CsvSource({
@@ -74,7 +74,7 @@ public class GetAllPaintingsApiTest {
             "Starry, The Starry Night", // Частичное совпадение LIKE '%Starry%'
             "Девушка с жемчужной сережкой, Девушка с жемчужной сережкой"  // Кириллические символы
     })
-    @DisplayName("Фильтрация списка картин по существующему названию")
+    @DisplayName("API: Фильтрация списка картин по существующему названию")
     void shouldReturnPaintingWhenSearchingForExistentTitle(String searchTitle, String expectedPaintingTitle) {
         Response<RestResponsePage<PaintingResponseJson>> response = gatewayApiClient.getAllPaintings(0, 10, searchTitle);
 
@@ -89,10 +89,10 @@ public class GetAllPaintingsApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка картин")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Painting(count = 3, titles = {"The Birth of Venus", "Guernica", "The Last Supper"})
     @Test
-    @DisplayName("Фильтрация списка картин по несуществующему названию")
+    @DisplayName("API: Поиск картины по несуществующему названию возвращает пустой список")
     void shouldReturnEmptyListWhenSearchingForNonExistentTitle() {
         Response<RestResponsePage<PaintingResponseJson>> response = gatewayApiClient.getAllPaintings(0, 10, "NonExistentPainting");
 
@@ -106,11 +106,11 @@ public class GetAllPaintingsApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка картин")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Painting(count = 2)
     @ParameterizedTest
     @MethodSource("provideEmptyAndWhitespaceStrings")
-    @DisplayName("Запрос всех картин при пустом или пробельном значении фильтра")
+    @DisplayName("API: Получение полного списка картин при пустом или пробельном фильтре")
     void shouldReturnUnfilteredListWhenSearchTitleIsEmptyOrWhitespace(String searchTitle) {
         Response<RestResponsePage<PaintingResponseJson>> response = gatewayApiClient.getAllPaintings(0, 9, searchTitle);
 

@@ -3,6 +3,7 @@ package guru.qa.rococo.test.rest.userdata;
 import guru.qa.rococo.jupiter.annotation.ApiLogin;
 import guru.qa.rococo.jupiter.annotation.Token;
 import guru.qa.rococo.jupiter.annotation.User;
+import guru.qa.rococo.jupiter.annotation.meta.RestTest;
 import guru.qa.rococo.jupiter.extension.ApiLoginExtension;
 import guru.qa.rococo.jupiter.extension.UserExtension;
 import guru.qa.rococo.model.rest.UserJson;
@@ -20,6 +21,8 @@ import retrofit2.Response;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@RestTest
+@DisplayName("GetUserApi")
 public class GetUserApiTest {
     @RegisterExtension
     static final UserExtension userExtension = new UserExtension();
@@ -32,9 +35,9 @@ public class GetUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Успешное получение информации о текущем пользователе")
+    @DisplayName("API: Успешное получение информации о текущем пользователе")
     void shouldSuccessfullyGetCurrentUserInfo(@Token String token, UserJson user) {
         Response<UserJson> response = gatewayApiClient.getUser(token);
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
@@ -57,9 +60,9 @@ public class GetUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Получение информации о текущем пользователе")
-    @Tags({@Tag("user")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка получения информации о пользователе без авторизации")
+    @DisplayName("API: Ошибка 401 при попытке получить информацию о пользователе без авторизации")
     void shouldFailToGetUserInfoWithoutAuthorization() {
         Response<UserJson> response = gatewayApiClient.getUser("invalid_token");
         assertEquals(401, response.code(), "Expected HTTP status 401 but got " + response.code());

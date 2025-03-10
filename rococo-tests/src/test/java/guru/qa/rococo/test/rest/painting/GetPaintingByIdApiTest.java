@@ -23,7 +23,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @RestTest
-@DisplayName("GetArtistById")
+@DisplayName("GetPaintingById")
 public class GetPaintingByIdApiTest {
     @RegisterExtension
     static final PaintingExtension paintingExtension = new PaintingExtension();
@@ -32,10 +32,10 @@ public class GetPaintingByIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение картины по ID")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Painting
     @Test
-    @DisplayName("Успешное получение данных о картине по ID")
+    @DisplayName("API: Успешное получение данных о картине по ID")
     void shouldReturnPaintingById(PaintingJson painting) {
         Response<PaintingResponseJson> response = gatewayApiClient.getPaintingById(painting.id().toString());
         assertEquals(200, response.code(), "Expected HTTP status 200 but got " + response.code());
@@ -82,9 +82,9 @@ public class GetPaintingByIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение картины по ID")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка получить данные о несуществующей картине")
+    @DisplayName("API: Ошибка 404 при попытке получить данные о несуществующей картине")
     void shouldFailWhenPaintingDoesNotExist() {
         UUID nonExistentPaintingId = UUID.randomUUID();
         Response<PaintingResponseJson> response = gatewayApiClient.getPaintingById(nonExistentPaintingId.toString());
@@ -94,9 +94,9 @@ public class GetPaintingByIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.MINOR)
     @Feature("Получение картины по ID")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка получить данные о картине с некорректным UUID")
+    @DisplayName("API: Ошибка 400 при запросе картины с некорректным UUID")
     void shouldFailWhenPaintingIdIsInvalid() {
         String invalidUuid = "3ed0e8878627-4074-b323573c3741499d";
         Response<PaintingResponseJson> response = gatewayApiClient.getPaintingById(invalidUuid);

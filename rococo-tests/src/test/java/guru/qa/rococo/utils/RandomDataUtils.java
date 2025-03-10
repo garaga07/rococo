@@ -47,6 +47,11 @@ public class RandomDataUtils {
     }
 
     @Nonnull
+    public static String randomPassword(int min, int max) {
+        return faker.internet().password(min, max);
+    }
+
+    @Nonnull
     public static String randomArtistName() {
         return faker.artist().name();
     }

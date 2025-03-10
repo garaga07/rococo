@@ -1,11 +1,14 @@
 package guru.qa.rococo.jupiter.extension;
 
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import guru.qa.rococo.api.core.ThreadSafeCookieStore;
 import guru.qa.rococo.config.Config;
 import guru.qa.rococo.jupiter.annotation.ApiLogin;
 import guru.qa.rococo.jupiter.annotation.Token;
 import guru.qa.rococo.model.rest.TestData;
 import guru.qa.rococo.model.rest.UserJson;
+import guru.qa.rococo.page.MainPage;
 import guru.qa.rococo.service.impl.AuthApiClient;
 import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.support.AnnotationSupport;
@@ -61,14 +64,14 @@ public class ApiLoginExtension implements BeforeTestExecutionCallback, Parameter
                     setToken(token);
 
                     // Настройка браузера
-//                    if (setupBrowser) {
-//                        Selenide.open(CFG.frontUrl());
-//                        Selenide.localStorage().setItem("id_token", getToken());
-//                        WebDriverRunner.getWebDriver().manage().addCookie(
-//                                getJsessionIdCookie()
-//                        );
-//                        Selenide.open(MainPage.URL, MainPage.class).checkThatPageLoaded();
-//                    }
+                    if (setupBrowser) {
+                        Selenide.open(CFG.frontUrl());
+                        Selenide.localStorage().setItem("id_token", getToken());
+                        WebDriverRunner.getWebDriver().manage().addCookie(
+                                getJsessionIdCookie()
+                        );
+                        Selenide.open(MainPage.URL, MainPage.class).checkThatPageLoaded();
+                    }
                 });
     }
 

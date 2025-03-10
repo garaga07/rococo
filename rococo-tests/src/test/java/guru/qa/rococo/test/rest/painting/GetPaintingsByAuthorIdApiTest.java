@@ -44,10 +44,10 @@ public class GetPaintingsByAuthorIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка картин по ID художника")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Painting(count = 2)
     @Test
-    @DisplayName("Получение списка картин по id существующего художника")
+    @DisplayName("API: Успешное получение списка картин по ID существующего художника")
     void shouldReturnPaintingsByExistsAuthorId() {
         String authorId = PaintingExtension.getPaintingForTest().artistId().toString();
         Response<RestResponsePage<PaintingResponseJson>> response = gatewayApiClient.getPaintingsByAuthorId(authorId, 0, 9);
@@ -92,7 +92,7 @@ public class GetPaintingsByAuthorIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка картин по ID художника")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Painting(count = 10)
     @ParameterizedTest
     @CsvSource({
@@ -100,7 +100,7 @@ public class GetPaintingsByAuthorIdApiTest {
             "1, 9, 1",  // Вторая страница, size=9 → должна быть 1 запись
             "2, 9, 0",  // Третья страница, size=9 → пустой список (нет данных)
     })
-    @DisplayName("Проверка пагинации списка картин по ID художника")
+    @DisplayName("API: Корректная пагинация списка картин по ID художника")
     void shouldReturnCorrectPaintingsByAuthorIdWithPagination(int page, int size, int expectedCount) {
         String authorId = PaintingExtension.getPaintingForTest().artistId().toString();
         Response<RestResponsePage<PaintingResponseJson>> response = gatewayApiClient.getPaintingsByAuthorId(authorId, page, size);
@@ -117,9 +117,9 @@ public class GetPaintingsByAuthorIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка картин по ID художника")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Test
-    @DisplayName("Попытка получить список картин для несуществующего художника")
+    @DisplayName("API: Ошибка 404 при запросе списка картин для несуществующего художника")
     void shouldFailWhenAuthorDoesNotExist() {
         String nonExistentAuthorId = UUID.randomUUID().toString();
         Response<RestResponsePage<PaintingResponseJson>> response = gatewayApiClient.getPaintingsByAuthorId(nonExistentAuthorId, 0, 9);
@@ -133,10 +133,10 @@ public class GetPaintingsByAuthorIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка картин по ID художника")
-    @Tags({@Tag("painting")})
+    @Tags({@Tag("api")})
     @Artist
     @Test
-    @DisplayName("Проверка получения пустого списка картин для вновь созданного художника")
+    @DisplayName("API: Получение пустого списка картин для нового художника")
     void shouldReturnEmptyListForNewAuthor(ArtistJson artist) {
         String authorId = artist.id().toString();
         Response<RestResponsePage<PaintingResponseJson>> response = gatewayApiClient.getPaintingsByAuthorId(authorId, 0, 9);
