@@ -77,14 +77,11 @@ public class ProfileModal extends BaseModal<ProfileModal> {
         return this;
     }
 
-    @Step("Check first name error is: {error}")
-    public ProfileModal checkFirstnameError(String error) {
-        firstNameInput.sibling(0).shouldBe(visible).shouldHave(text(error));
-        return this;
-    }
-
-    @Step("Check surname error is: {error}")
-    public void checkSurnameError(String error) {
-        surnameInput.sibling(0).shouldBe(visible).shouldHave(text(error));
+    @Step("Check all profile validation errors")
+    public void checkAllProfileErrors(String expectedFirstnameError, String expectedSurnameError) {
+        checkValidationErrors(new Object[][]{
+                {firstNameInput, expectedFirstnameError},
+                {surnameInput, expectedSurnameError}
+        });
     }
 }

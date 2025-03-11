@@ -107,9 +107,11 @@ public class MuseumTest {
                 .setMuseumPhoto("img/museum.png")
                 .setMuseumDescription(tooShortDescription)
                 .errorSubmit()
-                .checkMuseumTitleError("Название не может быть короче 3 символов")
-                .checkMuseumDescriptionError("Описание не может быть короче 11 символов")
-                .checkMuseumCityError("Город не может быть короче 3 символов");
+                .checkAllMuseumErrors(
+                        "Название не может быть короче 3 символов",
+                        "Описание не может быть короче 11 символов",
+                        "Город не может быть короче 3 символов"
+                );
     }
 
     @User
@@ -135,9 +137,11 @@ public class MuseumTest {
                 .setMuseumPhoto("img/museum.png")
                 .setMuseumDescription(exceedingMaxDescription)
                 .errorSubmit()
-                .checkMuseumTitleError("Название не может быть длиннее 255 символов")
-                .checkMuseumDescriptionError("Описание не может быть длиннее 2000 символов")
-                .checkMuseumCityError("Город не может быть длиннее 255 символов");
+                .checkAllMuseumErrors(
+                        "Название не может быть длиннее 255 символов",
+                        "Описание не может быть длиннее 2000 символов",
+                        "Город не может быть длиннее 255 символов"
+                );
     }
 
 
@@ -219,9 +223,11 @@ public class MuseumTest {
                 .setMuseumCity(tooShortCity)
                 .setMuseumPhoto("img/museum.png")
                 .errorSubmit()
-                .checkMuseumTitleError("Название не может быть короче 3 символов")
-                .checkMuseumDescriptionError("Описание не может быть короче 11 символов")
-                .checkMuseumCityError("Город не может быть короче 3 символов");
+                .checkAllMuseumErrors(
+                        "Название не может быть короче 3 символов",
+                        "Описание не может быть короче 11 символов",
+                        "Город не может быть короче 3 символов"
+                );
     }
 
 
@@ -248,9 +254,11 @@ public class MuseumTest {
                 .setMuseumCity(exceedingMaxCity)
                 .setMuseumPhoto("img/museum.png")
                 .errorSubmit()
-                .checkMuseumTitleError("Название не может быть длиннее 255 символов")
-                .checkMuseumDescriptionError("Описание не может быть длиннее 2000 символов")
-                .checkMuseumCityError("Город не может быть длиннее 255 символов");
+                .checkAllMuseumErrors(
+                        "Название не может быть длиннее 255 символов",
+                        "Описание не может быть длиннее 2000 символов",
+                        "Город не может быть длиннее 255 символов"
+                );
     }
 
     @User

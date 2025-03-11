@@ -132,7 +132,9 @@ public class ProfileTest {
                 .setFirstName(exceedingMaxLengthValue)
                 .setSurname(exceedingMaxLengthValue)
                 .errorSubmit()
-                .checkFirstnameError("Имя не может быть длиннее 255 символов")
-                .checkSurnameError("Фамилия не может быть длиннее 255 символов");
+                .checkAllProfileErrors(
+                        "Имя не может быть длиннее 255 символов",
+                        "Фамилия не может быть длиннее 255 символов"
+                );
     }
 }

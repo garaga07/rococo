@@ -31,14 +31,11 @@ public class ArtistModal extends BaseModal<ArtistModal> {
         return this;
     }
 
-    @Step("Check name error message: {error}")
-    public ArtistModal checkArtistNameError(String error) {
-        artistNameField.sibling(0).shouldBe(visible).shouldHave(text(error));
-        return this;
-    }
-
-    @Step("Check biography error message: {error}")
-    public void checkArtistBiographyError(String error) {
-        biographyField.sibling(0).shouldBe(visible).shouldHave(text(error));
+    @Step("Check all artist validation errors")
+    public void checkAllArtistErrors(String expectedNameError, String expectedBiographyError) {
+        checkValidationErrors(new Object[][]{
+                {artistNameField, expectedNameError},
+                {biographyField, expectedBiographyError}
+        });
     }
 }

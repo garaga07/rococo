@@ -98,8 +98,10 @@ public class ArtistTest {
                 .setArtistPhoto("img/artist.png")
                 .setArtistBiography(tooShortBiography)
                 .errorSubmit()
-                .checkArtistNameError("Имя не может быть короче 3 символов")
-                .checkArtistBiographyError("Биография не может быть короче 11 символов");
+                .checkAllArtistErrors(
+                        "Имя не может быть короче 3 символов",
+                        "Биография не может быть короче 11 символов"
+                );
     }
 
     @User
@@ -121,8 +123,10 @@ public class ArtistTest {
                 .setArtistPhoto("img/artist.png")
                 .setArtistBiography(exceedingMaxBiography)
                 .errorSubmit()
-                .checkArtistNameError("Имя не может быть длиннее 255 символов")
-                .checkArtistBiographyError("Биография не может быть длиннее 2000 символов");
+                .checkAllArtistErrors(
+                        "Имя не может быть длиннее 255 символов",
+                        "Биография не может быть длиннее 2000 символов"
+                );
     }
 
     @User
@@ -196,8 +200,10 @@ public class ArtistTest {
                 .setArtistBiography(tooShortBiography)
                 .setArtistPhoto("img/artist.png")
                 .errorSubmit()
-                .checkArtistNameError("Имя не может быть короче 3 символов")
-                .checkArtistBiographyError("Биография не может быть короче 11 символов");
+                .checkAllArtistErrors(
+                        "Имя не может быть короче 3 символов",
+                        "Биография не может быть короче 11 символов"
+                );
     }
 
     @User
@@ -221,8 +227,10 @@ public class ArtistTest {
                 .setArtistBiography(exceedingMaxBiography)
                 .setArtistPhoto("img/artist.png")
                 .errorSubmit()
-                .checkArtistNameError("Имя не может быть длиннее 255 символов")
-                .checkArtistBiographyError("Биография не может быть длиннее 2000 символов");
+                .checkAllArtistErrors(
+                        "Имя не может быть длиннее 255 символов",
+                        "Биография не может быть длиннее 2000 символов"
+                );
     }
 
     @User

@@ -53,21 +53,12 @@ public class MuseumModal extends BaseModal<MuseumModal> {
         return this;
     }
 
-    @Step("Check city error message: {error}")
-    public MuseumModal checkMuseumCityError(String error) {
-        cityField.sibling(0).shouldBe(visible).shouldHave(text(error));
-        return this;
-    }
-
-    @Step("Check description error message: {error}")
-    public MuseumModal checkMuseumDescriptionError(String error) {
-        descriptionField.sibling(0).shouldBe(visible).shouldHave(text(error));
-        return this;
-    }
-
-    @Step("Check title error message: {error}")
-    public MuseumModal checkMuseumTitleError(String error) {
-        titleField.sibling(0).shouldBe(visible).shouldHave(text(error));
-        return this;
+    @Step("Check all museum validation errors")
+    public void checkAllMuseumErrors(String expectedTitleError, String expectedDescriptionError, String expectedCityError) {
+        checkValidationErrors(new Object[][]{
+                {titleField, expectedTitleError},
+                {descriptionField, expectedDescriptionError},
+                {cityField, expectedCityError}
+        });
     }
 }

@@ -58,16 +58,12 @@ public class PaintingModal extends BaseModal<PaintingModal> {
         return this;
     }
 
-    @Step("Check description error message: {error}")
-    public PaintingModal checkPaintingDescriptionError(String error) {
-        descriptionField.sibling(0).shouldBe(visible).shouldHave(text(error));
-        return this;
-    }
-
-    @Step("Check title error message: {error}")
-    public PaintingModal checkPaintingTitleError(String error) {
-        titleField.sibling(0).shouldBe(visible).shouldHave(text(error));
-        return this;
+    @Step("Check all painting validation errors")
+    public void checkAllPaintingErrors(String expectedTitleError, String expectedDescriptionError) {
+        checkValidationErrors(new Object[][]{
+                {titleField, expectedTitleError},
+                {descriptionField, expectedDescriptionError}
+        });
     }
 
     @Step("Verify that the artist selection field is absent in the modal")

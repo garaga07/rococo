@@ -101,6 +101,8 @@ dependencies {
     // Lombok
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    // AssertJ
+    testImplementation 'org.assertj:assertj-core:3.27.3'
 }
 
 tasks.withType(JavaCompile).configureEach {

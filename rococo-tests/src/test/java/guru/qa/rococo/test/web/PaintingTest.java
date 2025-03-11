@@ -89,8 +89,10 @@ public class PaintingTest {
                 .setPaintingDescription(tooShortDescription)
                 .selectRandomMuseum()
                 .errorSubmit()
-                .checkPaintingTitleError("Название не может быть короче 3 символов")
-                .checkPaintingDescriptionError("Описание не может быть короче 11 символов");
+                .checkAllPaintingErrors(
+                        "Название не может быть короче 3 символов",
+                        "Описание не может быть короче 11 символов"
+                );
     }
 
     @User
@@ -117,8 +119,11 @@ public class PaintingTest {
                 .setPaintingDescription(exceedingMaxDescription)
                 .selectRandomMuseum()
                 .errorSubmit()
-                .checkPaintingTitleError("Название не может быть длиннее 255 символов")
-                .checkPaintingDescriptionError("Описание не может быть длиннее 2000 символов");
+                .checkAllPaintingErrors(
+                        "Название не может быть длиннее 255 символов",
+                        "Описание не может быть длиннее 2000 символов"
+                );
+
     }
 
     @User
@@ -192,8 +197,10 @@ public class PaintingTest {
                 .setPaintingDescription(tooShortDescription)
                 .setPaintingPhoto("img/painting.png")
                 .errorSubmit()
-                .checkPaintingTitleError("Название не может быть короче 3 символов")
-                .checkPaintingDescriptionError("Описание не может быть короче 11 символов");
+                .checkAllPaintingErrors(
+                        "Название не может быть короче 3 символов",
+                        "Описание не может быть короче 11 символов"
+                );
     }
 
     @User
@@ -217,8 +224,10 @@ public class PaintingTest {
                 .setPaintingDescription(exceedingMaxDescription)
                 .setPaintingPhoto("img/painting.png")
                 .errorSubmit()
-                .checkPaintingTitleError("Название не может быть длиннее 255 символов")
-                .checkPaintingDescriptionError("Описание не может быть длиннее 2000 символов");
+                .checkAllPaintingErrors(
+                        "Название не может быть длиннее 255 символов",
+                        "Описание не может быть длиннее 2000 символов"
+                );
     }
 
     @User
