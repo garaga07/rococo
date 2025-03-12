@@ -26,6 +26,7 @@ buildscript {
 
 plugins {
     id 'io.qameta.allure' version '2.12.0'
+    id 'io.qameta.allure-adapter' version '2.12.0'
 }
 
 group = 'guru.qa'
@@ -35,6 +36,7 @@ allure {
     version.set("${allureVersion}")
     adapter {
         aspectjVersion.set("1.9.22")
+        autoconfigure.set(true)
         aspectjWeaver.set(true)
     }
 }
@@ -74,6 +76,8 @@ dependencies {
     // Allure
     testImplementation "io.qameta.allure:allure-attachments:${allureVersion}"
     testImplementation("io.qameta.allure:allure-junit5:${allureVersion}") {
+        exclude group: "org.junit.jupiter-api"
+        exclude group: "org.junit.platform"
         exclude group: "org.junit.jupiter"
     }
     testImplementation("io.qameta.allure:allure-selenide:${allureVersion}") {

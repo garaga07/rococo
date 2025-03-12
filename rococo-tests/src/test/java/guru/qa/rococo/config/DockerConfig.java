@@ -78,4 +78,10 @@ enum DockerConfig implements Config {
     public String paintingJdbcUrl() {
         return "jdbc:postgresql://rococo-all-db:5432/rococo-painting";
     }
+
+    @NotNull
+    @Override
+    public String kafkaAddress() {
+        return "kafka:9092";
+    }
 }

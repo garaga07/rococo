@@ -79,4 +79,10 @@ enum LocalConfig implements Config {
     public String paintingJdbcUrl() {
         return "jdbc:postgresql://127.0.0.1:5432/rococo-painting";
     }
+
+    @NotNull
+    @Override
+    public String kafkaAddress() {
+        return "127.0.0.1:9092";
+    }
 }
