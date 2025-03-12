@@ -4,6 +4,7 @@ import guru.qa.rococo.data.entity.auth.AuthUserEntity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

@@ -1,798 +1,336 @@
-2025-03-11 15:02:28 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 15:02:28 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 8008 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 15:02:28 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 15:02:29 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 15:02:29 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 102 ms. Found 1 JPA repository interface.
-2025-03-11 15:02:29 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 15:02:29 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 15:02:29 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 15:02:30 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 15:02:30 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 15:02:30 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 15:02:30 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 15:02:30 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 15:02:30 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1903 ms
-2025-03-11 15:02:30 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 15:02:30 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 15:02:30 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 15:02:30 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 15:02:30 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 15:02:30 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 15:02:31 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 15:02:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 15:02:31 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 15:02:31 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 15:02:31 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 15:02:32 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 15:02:33 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 15:02:33 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 15:02:33 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 15:02:33 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 25 ms
-2025-03-11 15:02:33 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 15:02:33 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 58083 (http) with context path '/'
-2025-03-11 15:02:33 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.969 seconds (process running for 6.981)
-2025-03-11 15:02:34 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2025-03-12 07:35:04 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-03-12 07:35:04 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 21120 (started by user in D:\IdeaProjects\rococo\rococo-artist)
+2025-03-12 07:35:04 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
+2025-03-12 07:35:05 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-12 07:35:05 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 120 ms. Found 1 JPA repository interface.
+2025-03-12 07:35:05 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
+2025-03-12 07:35:06 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-12 07:35:06 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-03-12 07:35:06 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2025-03-12 07:35:06 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 07:35:06 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-12 07:35:06 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-03-12 07:35:06 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-12 07:35:06 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2034 ms
+2025-03-12 07:35:07 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-12 07:35:07 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-03-12 07:35:07 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-12 07:35:07 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-12 07:35:07 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
+2025-03-12 07:35:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-12 07:35:07 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
+2025-03-12 07:35:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-12 07:35:07 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-12 07:35:08 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-12 07:35:08 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 07:35:08 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-12 07:35:10 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+2025-03-12 07:35:10 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-03-12 07:35:10 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-03-12 07:35:10 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 19 ms
+2025-03-12 07:35:10 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 07:35:10 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 49884 (http) with context path '/'
+2025-03-12 07:35:10 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 6.358 seconds (process running for 7.448)
+2025-03-12 07:35:11 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2025-03-11 15:02:34 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: b92eefed-74a9-474b-861f-9a64c9c3b755
-2025-03-11 15:02:34 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 15:02:35 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 15:02:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 15:02:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 15:07:06 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 15:07:06 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 32756 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 15:07:06 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 15:07:07 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 15:07:07 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 154 ms. Found 1 JPA repository interface.
-2025-03-11 15:07:08 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 15:07:08 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 15:07:08 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 15:07:08 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 15:07:08 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 15:07:08 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 15:07:08 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 15:07:08 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 15:07:08 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1909 ms
-2025-03-11 15:07:08 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 15:07:09 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 15:07:09 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 15:07:09 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 15:07:09 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 15:07:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 15:07:09 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 15:07:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 15:07:09 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 15:07:10 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 15:07:10 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 15:07:10 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 15:07:11 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 15:07:11 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 15:07:11 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 15:07:11 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 21 ms
-2025-03-11 15:07:12 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 15:07:12 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 58238 (http) with context path '/'
-2025-03-11 15:07:12 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.887 seconds (process running for 6.885)
-2025-03-11 15:07:12 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2025-03-12 07:35:11 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 52ef454a-b4ce-4434-aa9e-bc971723eda3
+2025-03-12 07:35:11 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
+2025-03-12 07:35:11 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 07:35:11 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-12 07:35:11 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-12 07:57:00 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-03-12 07:57:00 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 20188 (started by user in D:\IdeaProjects\rococo\rococo-artist)
+2025-03-12 07:57:00 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
+2025-03-12 07:57:01 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-12 07:57:01 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 107 ms. Found 1 JPA repository interface.
+2025-03-12 07:57:01 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
+2025-03-12 07:57:01 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-12 07:57:02 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-03-12 07:57:02 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2025-03-12 07:57:02 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 07:57:02 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-12 07:57:02 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-03-12 07:57:02 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-12 07:57:02 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1856 ms
+2025-03-12 07:57:02 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-12 07:57:02 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-03-12 07:57:02 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-12 07:57:03 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-12 07:57:03 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
+2025-03-12 07:57:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-12 07:57:03 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
+2025-03-12 07:57:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-12 07:57:03 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-12 07:57:04 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-12 07:57:04 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 07:57:04 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-12 07:57:06 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+2025-03-12 07:57:06 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-03-12 07:57:06 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-03-12 07:57:06 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 30 ms
+2025-03-12 07:57:06 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 07:57:06 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 52007 (http) with context path '/'
+2025-03-12 07:57:06 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 6.063 seconds (process running for 7.088)
+2025-03-12 07:57:06 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2025-03-11 15:07:12 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: d1c16e4a-57fb-45ec-ae5e-e13584e2a77d
-2025-03-11 15:07:12 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 15:07:13 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 15:07:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 15:07:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 15:12:15 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 15:12:15 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 15880 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 15:12:15 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 15:12:16 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 15:12:16 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 102 ms. Found 1 JPA repository interface.
-2025-03-11 15:12:16 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 15:12:16 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 15:12:16 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 15:12:16 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 15:12:16 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 15:12:16 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 15:12:16 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 15:12:17 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 15:12:17 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1833 ms
-2025-03-11 15:12:17 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 15:12:17 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 15:12:17 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 15:12:17 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 15:12:17 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 15:12:17 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 15:12:17 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 15:12:17 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 15:12:17 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 15:12:18 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 15:12:18 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 15:12:18 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 15:12:20 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 15:12:20 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 15:12:20 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 15:12:20 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 29 ms
-2025-03-11 15:12:20 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 15:12:20 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 58620 (http) with context path '/'
-2025-03-11 15:12:20 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.762 seconds (process running for 6.736)
-2025-03-11 15:12:21 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2025-03-12 07:57:06 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 44919c0b-4552-4ff2-86d0-8f4b869ab614
+2025-03-12 07:57:07 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
+2025-03-12 07:57:07 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 07:57:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-12 07:57:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-12 08:14:41 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-03-12 08:14:41 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 3812 (started by user in D:\IdeaProjects\rococo\rococo-artist)
+2025-03-12 08:14:41 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
+2025-03-12 08:14:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-12 08:14:42 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 119 ms. Found 1 JPA repository interface.
+2025-03-12 08:14:43 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
+2025-03-12 08:14:43 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-12 08:14:43 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-03-12 08:14:43 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2025-03-12 08:14:43 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 08:14:43 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-12 08:14:43 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-03-12 08:14:43 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-12 08:14:43 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1907 ms
+2025-03-12 08:14:44 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-12 08:14:44 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-03-12 08:14:44 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-12 08:14:44 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-12 08:14:44 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
+2025-03-12 08:14:44 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-12 08:14:44 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
+2025-03-12 08:14:44 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-12 08:14:44 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-12 08:14:45 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-12 08:14:45 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 08:14:45 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-12 08:14:47 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+2025-03-12 08:14:47 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-03-12 08:14:47 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-03-12 08:14:47 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 29 ms
+2025-03-12 08:14:47 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 08:14:47 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 54328 (http) with context path '/'
+2025-03-12 08:14:47 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 6.058 seconds (process running for 7.092)
+2025-03-12 08:14:48 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2025-03-11 15:12:21 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 10f7f26b-7519-4137-972c-95b84c208695
-2025-03-11 15:12:21 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 15:12:21 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 15:12:21 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 15:12:21 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 15:30:16 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 15:30:16 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 2348 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 15:30:16 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 15:30:17 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 15:30:17 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 102 ms. Found 1 JPA repository interface.
-2025-03-11 15:30:17 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 15:30:17 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 15:30:17 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 15:30:18 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 15:30:18 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 15:30:18 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 15:30:18 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 15:30:18 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 15:30:18 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1799 ms
-2025-03-11 15:30:18 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 15:30:18 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 15:30:18 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 15:30:19 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 15:30:19 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 15:30:19 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 15:30:19 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 15:30:19 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 15:30:19 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 15:30:19 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 15:30:19 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 15:30:20 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 15:30:21 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 15:30:21 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 15:30:21 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 15:30:21 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 24 ms
-2025-03-11 15:30:22 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 15:30:22 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 59279 (http) with context path '/'
-2025-03-11 15:30:22 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.917 seconds (process running for 6.885)
-2025-03-11 15:30:22 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2025-03-12 08:14:48 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 8b9156fa-abfc-4e90-9c2d-79de361bd555
+2025-03-12 08:14:48 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
+2025-03-12 08:14:48 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 08:14:48 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-12 08:14:48 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-12 08:25:32 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-03-12 08:25:32 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 5592 (started by user in D:\IdeaProjects\rococo\rococo-artist)
+2025-03-12 08:25:32 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
+2025-03-12 08:25:33 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-12 08:25:33 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 130 ms. Found 1 JPA repository interface.
+2025-03-12 08:25:33 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
+2025-03-12 08:25:33 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-12 08:25:33 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-03-12 08:25:34 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2025-03-12 08:25:34 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 08:25:34 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-12 08:25:34 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-03-12 08:25:34 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-12 08:25:34 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1893 ms
+2025-03-12 08:25:34 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-12 08:25:34 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-03-12 08:25:34 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-12 08:25:35 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-12 08:25:35 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
+2025-03-12 08:25:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-12 08:25:35 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
+2025-03-12 08:25:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-12 08:25:35 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-12 08:25:36 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-12 08:25:36 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 08:25:36 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-12 08:25:37 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+2025-03-12 08:25:37 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-03-12 08:25:37 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-03-12 08:25:37 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 22 ms
+2025-03-12 08:25:38 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 08:25:38 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 55939 (http) with context path '/'
+2025-03-12 08:25:38 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 6.12 seconds (process running for 7.171)
+2025-03-12 08:25:38 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2025-03-11 15:30:22 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: f739fd14-c810-457d-850d-9c13ca750113
-2025-03-11 15:30:22 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 15:30:23 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 15:30:23 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 15:30:23 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 16:21:44 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 16:21:44 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 23768 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 16:21:44 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 16:21:45 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 16:21:45 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 111 ms. Found 1 JPA repository interface.
-2025-03-11 16:21:45 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 16:21:45 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 16:21:46 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 16:21:46 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 16:21:46 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:21:46 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 16:21:46 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 16:21:46 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 16:21:46 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1828 ms
-2025-03-11 16:21:46 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 16:21:46 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 16:21:46 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 16:21:47 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 16:21:47 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 16:21:47 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 16:21:47 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 16:21:47 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 16:21:47 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 16:21:47 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 16:21:48 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:21:48 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 16:21:49 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 16:21:49 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 16:21:49 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 16:21:49 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 21 ms
-2025-03-11 16:21:50 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:21:50 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 60259 (http) with context path '/'
-2025-03-11 16:21:50 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.739 seconds (process running for 6.719)
-2025-03-11 16:21:50 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2025-03-12 08:25:39 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: a8774e08-401f-4553-aa9a-34e59efe6718
+2025-03-12 08:25:39 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
+2025-03-12 08:25:39 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 08:25:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-12 08:25:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-12 08:34:13 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-03-12 08:34:13 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 22096 (started by user in D:\IdeaProjects\rococo\rococo-artist)
+2025-03-12 08:34:13 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
+2025-03-12 08:34:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-12 08:34:14 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 111 ms. Found 1 JPA repository interface.
+2025-03-12 08:34:14 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
+2025-03-12 08:34:14 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-12 08:34:14 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-03-12 08:34:15 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2025-03-12 08:34:15 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 08:34:15 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-12 08:34:15 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-03-12 08:34:15 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-12 08:34:15 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1866 ms
+2025-03-12 08:34:15 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-12 08:34:15 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-03-12 08:34:15 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-12 08:34:16 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-12 08:34:16 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
+2025-03-12 08:34:16 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-12 08:34:16 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
+2025-03-12 08:34:16 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-12 08:34:16 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-12 08:34:16 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-12 08:34:16 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 08:34:17 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-12 08:34:18 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+2025-03-12 08:34:18 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-03-12 08:34:18 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-03-12 08:34:18 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 20 ms
+2025-03-12 08:34:18 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 08:34:18 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 57019 (http) with context path '/'
+2025-03-12 08:34:18 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.753 seconds (process running for 6.812)
+2025-03-12 08:34:19 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2025-03-11 16:21:50 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: aeea9bd2-a91b-418f-80e7-9bfb531d00cf
-2025-03-11 16:21:50 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 16:21:51 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:21:51 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 16:21:51 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 16:35:12 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 16:35:12 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 13024 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 16:35:12 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 16:35:13 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 16:35:13 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 108 ms. Found 1 JPA repository interface.
-2025-03-11 16:35:13 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 16:35:13 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 16:35:13 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 16:35:14 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 16:35:14 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:35:14 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 16:35:14 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 16:35:14 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 16:35:14 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1862 ms
-2025-03-11 16:35:14 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 16:35:14 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 16:35:14 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 16:35:14 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 16:35:14 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 16:35:14 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 16:35:15 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 16:35:15 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 16:35:15 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 16:35:15 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 16:35:15 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:35:16 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 16:35:17 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 16:35:17 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 16:35:17 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 16:35:17 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 25 ms
-2025-03-11 16:35:17 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:35:17 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 60459 (http) with context path '/'
-2025-03-11 16:35:17 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.83 seconds (process running for 6.808)
-2025-03-11 16:35:18 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2025-03-12 08:34:19 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: f9ce4349-969c-48ef-a8c3-0cd1b30dae66
+2025-03-12 08:34:19 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
+2025-03-12 08:34:19 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 08:34:19 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-12 08:34:19 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-12 08:48:29 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-03-12 08:48:29 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 20316 (started by user in D:\IdeaProjects\rococo\rococo-artist)
+2025-03-12 08:48:29 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
+2025-03-12 08:48:30 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-12 08:48:30 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 112 ms. Found 1 JPA repository interface.
+2025-03-12 08:48:30 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
+2025-03-12 08:48:30 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-12 08:48:30 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-03-12 08:48:31 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2025-03-12 08:48:31 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 08:48:31 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-12 08:48:31 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-03-12 08:48:31 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-12 08:48:31 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1850 ms
+2025-03-12 08:48:31 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-12 08:48:31 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-03-12 08:48:31 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-12 08:48:31 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-12 08:48:31 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
+2025-03-12 08:48:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-12 08:48:32 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
+2025-03-12 08:48:32 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-12 08:48:32 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-12 08:48:32 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-12 08:48:32 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 08:48:32 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-12 08:48:34 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+2025-03-12 08:48:34 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-03-12 08:48:34 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-03-12 08:48:34 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 21 ms
+2025-03-12 08:48:34 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 08:48:34 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 58416 (http) with context path '/'
+2025-03-12 08:48:34 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.798 seconds (process running for 6.827)
+2025-03-12 08:48:35 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2025-03-11 16:35:18 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: b81e5d58-203f-4a8f-9e44-4e5d5d129ee9
-2025-03-11 16:35:18 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 16:35:18 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:35:18 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 16:35:18 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 16:40:50 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 16:40:50 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 26940 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 16:40:50 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 16:40:51 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 16:40:51 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 112 ms. Found 1 JPA repository interface.
-2025-03-11 16:40:51 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 16:40:51 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 16:40:51 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 16:40:52 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 16:40:52 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:40:52 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 16:40:52 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 16:40:52 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 16:40:52 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1851 ms
-2025-03-11 16:40:52 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 16:40:52 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 16:40:52 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 16:40:53 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 16:40:53 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 16:40:53 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 16:40:53 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 16:40:53 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 16:40:53 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 16:40:53 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 16:40:53 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:40:54 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 16:40:55 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 16:40:55 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 16:40:55 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 16:40:55 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 19 ms
-2025-03-11 16:40:55 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:40:55 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 60639 (http) with context path '/'
-2025-03-11 16:40:55 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.788 seconds (process running for 6.807)
-2025-03-11 16:40:56 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2025-03-12 08:48:35 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: bd4d9d89-86c1-4f14-931d-177eaf7f485a
+2025-03-12 08:48:35 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
+2025-03-12 08:48:35 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 08:48:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-12 08:48:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-12 09:00:46 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-03-12 09:00:46 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 3192 (started by user in D:\IdeaProjects\rococo\rococo-artist)
+2025-03-12 09:00:46 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
+2025-03-12 09:00:47 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-12 09:00:47 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 109 ms. Found 1 JPA repository interface.
+2025-03-12 09:00:47 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
+2025-03-12 09:00:47 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-12 09:00:47 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-03-12 09:00:47 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2025-03-12 09:00:47 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 09:00:47 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-12 09:00:47 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-03-12 09:00:48 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-12 09:00:48 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1895 ms
+2025-03-12 09:00:48 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-12 09:00:48 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-03-12 09:00:48 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-12 09:00:48 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-12 09:00:48 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
+2025-03-12 09:00:48 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-12 09:00:48 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
+2025-03-12 09:00:48 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-12 09:00:48 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-12 09:00:49 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-12 09:00:49 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 09:00:49 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-12 09:00:51 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+2025-03-12 09:00:51 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-03-12 09:00:51 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-03-12 09:00:51 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 21 ms
+2025-03-12 09:00:51 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 09:00:51 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 59914 (http) with context path '/'
+2025-03-12 09:00:51 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.901 seconds (process running for 6.946)
+2025-03-12 09:00:52 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2025-03-11 16:40:56 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 87869073-c55d-4775-b6d9-ed31be330de5
-2025-03-11 16:40:56 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 16:40:56 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:40:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 16:40:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 16:54:36 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 16:54:36 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 14876 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 16:54:36 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 16:54:37 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 16:54:37 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 117 ms. Found 1 JPA repository interface.
-2025-03-11 16:54:37 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 16:54:38 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 16:54:38 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 16:54:38 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 16:54:38 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:54:38 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 16:54:38 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 16:54:38 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 16:54:38 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1870 ms
-2025-03-11 16:54:38 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 16:54:38 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 16:54:38 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 16:54:39 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 16:54:39 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 16:54:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 16:54:39 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 16:54:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 16:54:39 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 16:54:40 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 16:54:40 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:54:40 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 16:54:41 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 16:54:41 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 16:54:41 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 16:54:41 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 25 ms
-2025-03-11 16:54:42 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:54:42 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 61213 (http) with context path '/'
-2025-03-11 16:54:42 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.855 seconds (process running for 6.847)
-2025-03-11 16:54:42 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2025-03-12 09:00:52 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: fb355e19-3486-4fb9-b7be-01b3b78bf9df
+2025-03-12 09:00:52 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
+2025-03-12 09:00:52 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 09:00:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-12 09:00:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-12 09:19:52 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-03-12 09:19:52 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 21888 (started by user in D:\IdeaProjects\rococo\rococo-artist)
+2025-03-12 09:19:52 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
+2025-03-12 09:19:53 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-12 09:19:53 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 103 ms. Found 1 JPA repository interface.
+2025-03-12 09:19:53 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
+2025-03-12 09:19:53 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2025-03-12 09:19:53 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2025-03-12 09:19:54 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+2025-03-12 09:19:54 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 09:19:54 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-12 09:19:54 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2025-03-12 09:19:54 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-12 09:19:54 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1887 ms
+2025-03-12 09:19:54 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-12 09:19:54 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-03-12 09:19:54 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-12 09:19:55 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-12 09:19:55 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
+2025-03-12 09:19:55 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-12 09:19:55 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
+2025-03-12 09:19:55 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-12 09:19:55 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-12 09:19:56 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-12 09:19:56 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 09:19:56 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-12 09:19:57 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
+2025-03-12 09:19:57 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-03-12 09:19:57 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2025-03-12 09:19:57 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 22 ms
+2025-03-12 09:19:58 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+2025-03-12 09:19:58 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 63518 (http) with context path '/'
+2025-03-12 09:19:58 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.993 seconds (process running for 7.165)
+2025-03-12 09:19:58 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2025-03-11 16:54:42 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 257949ca-d37f-409e-8431-b8ee4352b0c5
-2025-03-11 16:54:42 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 16:54:43 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:54:43 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 16:54:43 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 16:55:38 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 16:55:38 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 15640 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 16:55:38 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 16:55:39 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 16:55:39 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 109 ms. Found 1 JPA repository interface.
-2025-03-11 16:55:40 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 16:55:40 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 16:55:40 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 16:55:40 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 16:55:40 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:55:40 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 16:55:40 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 16:55:40 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 16:55:40 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1897 ms
-2025-03-11 16:55:41 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 16:55:41 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 16:55:41 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 16:55:41 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 16:55:41 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 16:55:41 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 16:55:41 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 16:55:41 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 16:55:41 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 16:55:42 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 16:55:42 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:55:42 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 16:55:44 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 16:55:44 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 16:55:44 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 16:55:44 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 21 ms
-2025-03-11 16:55:44 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 16:55:44 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 61345 (http) with context path '/'
-2025-03-11 16:55:44 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.791 seconds (process running for 6.764)
-2025-03-11 16:55:44 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 16:55:45 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 92c6a07f-e28c-4a3d-838e-6746a2bb40ee
-2025-03-11 16:55:45 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 16:55:45 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 16:55:45 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 16:55:45 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 17:02:17 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 17:02:17 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 18864 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 17:02:17 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 17:02:18 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 17:02:18 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 116 ms. Found 1 JPA repository interface.
-2025-03-11 17:02:18 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 17:02:18 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 17:02:18 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 17:02:19 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 17:02:19 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 17:02:19 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 17:02:19 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 17:02:19 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 17:02:19 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1842 ms
-2025-03-11 17:02:19 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 17:02:19 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 17:02:19 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 17:02:20 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 17:02:20 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 17:02:20 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 17:02:20 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 17:02:20 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 17:02:20 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 17:02:20 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 17:02:20 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 17:02:21 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 17:02:22 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 17:02:22 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 17:02:22 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 17:02:22 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 21 ms
-2025-03-11 17:02:22 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 17:02:22 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 61541 (http) with context path '/'
-2025-03-11 17:02:22 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.753 seconds (process running for 6.719)
-2025-03-11 17:02:23 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 17:02:23 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 00abdac7-984c-408e-b626-1caf0c0e9f02
-2025-03-11 17:02:23 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 17:02:23 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 17:02:23 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 17:02:23 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 17:04:29 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 17:04:30 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 24192 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 17:04:30 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 17:04:30 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 17:04:30 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 104 ms. Found 1 JPA repository interface.
-2025-03-11 17:04:31 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 17:04:31 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 17:04:31 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 17:04:31 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 17:04:31 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 17:04:31 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 17:04:31 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 17:04:31 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 17:04:31 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1802 ms
-2025-03-11 17:04:32 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 17:04:32 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 17:04:32 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 17:04:32 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 17:04:32 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 17:04:32 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 17:04:32 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 17:04:32 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 17:04:32 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 17:04:33 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 17:04:33 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 17:04:33 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 17:04:34 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 17:04:34 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 17:04:34 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 17:04:34 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 19 ms
-2025-03-11 17:04:35 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 17:04:35 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 61660 (http) with context path '/'
-2025-03-11 17:04:35 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.567 seconds (process running for 6.538)
-2025-03-11 17:04:35 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 17:04:35 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 6e9d8417-5085-433f-a2a7-62d506b73bf9
-2025-03-11 17:04:35 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 17:04:36 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 17:04:36 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 17:04:36 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 17:18:07 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 17:18:07 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 18276 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 17:18:07 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 17:18:08 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 17:18:08 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 109 ms. Found 1 JPA repository interface.
-2025-03-11 17:18:08 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 17:18:08 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 17:18:08 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 17:18:09 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 17:18:09 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 17:18:09 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 17:18:09 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 17:18:09 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 17:18:09 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1816 ms
-2025-03-11 17:18:09 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 17:18:09 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 17:18:09 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 17:18:09 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 17:18:09 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 17:18:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 17:18:10 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 17:18:10 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 17:18:10 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 17:18:10 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 17:18:10 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 17:18:11 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 17:18:12 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 17:18:12 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 17:18:12 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 17:18:12 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 22 ms
-2025-03-11 17:18:12 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 17:18:12 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 62136 (http) with context path '/'
-2025-03-11 17:18:12 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.814 seconds (process running for 6.779)
-2025-03-11 17:18:13 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 17:18:13 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 9f701a56-dfc6-45d3-80e6-610398eda7a4
-2025-03-11 17:18:13 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 17:18:13 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 17:18:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 17:18:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 17:58:05 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 17:58:05 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 24120 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 17:58:05 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 17:58:06 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 17:58:06 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 109 ms. Found 1 JPA repository interface.
-2025-03-11 17:58:07 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 17:58:07 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 17:58:07 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 17:58:07 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 17:58:07 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 17:58:07 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 17:58:07 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 17:58:07 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 17:58:07 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1870 ms
-2025-03-11 17:58:08 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 17:58:08 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 17:58:08 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 17:58:08 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 17:58:08 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 17:58:08 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 17:58:08 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 17:58:08 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 17:58:08 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 17:58:09 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 17:58:09 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 17:58:09 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 17:58:10 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 17:58:10 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 17:58:10 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 17:58:10 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 17 ms
-2025-03-11 17:58:11 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 17:58:11 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 62931 (http) with context path '/'
-2025-03-11 17:58:11 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.676 seconds (process running for 6.664)
-2025-03-11 17:58:11 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 17:58:11 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 0039b54d-874f-4ebd-a8f0-60bb65605b3e
-2025-03-11 17:58:11 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 17:58:12 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 17:58:12 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 17:58:12 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 18:04:03 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 18:04:03 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 2340 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 18:04:03 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 18:04:04 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 18:04:04 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 111 ms. Found 1 JPA repository interface.
-2025-03-11 18:04:04 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 18:04:04 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 18:04:04 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 18:04:04 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 18:04:04 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 18:04:04 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 18:04:04 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 18:04:05 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 18:04:05 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1842 ms
-2025-03-11 18:04:05 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 18:04:05 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 18:04:05 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 18:04:05 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 18:04:05 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 18:04:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 18:04:05 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 18:04:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 18:04:05 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 18:04:06 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 18:04:06 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 18:04:06 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 18:04:08 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 18:04:08 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 18:04:08 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 18:04:08 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 22 ms
-2025-03-11 18:04:08 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 18:04:08 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 63393 (http) with context path '/'
-2025-03-11 18:04:08 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.92 seconds (process running for 6.904)
-2025-03-11 18:04:09 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 18:04:09 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 90d3c459-3881-4aa5-b7e1-ee4ab0b695c8
-2025-03-11 18:04:09 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 18:04:09 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 18:04:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 18:04:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 18:20:56 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 18:20:56 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 7592 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 18:20:56 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 18:20:57 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 18:20:57 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 111 ms. Found 1 JPA repository interface.
-2025-03-11 18:20:57 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 18:20:57 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 18:20:58 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 18:20:58 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 18:20:58 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 18:20:58 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 18:20:58 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 18:20:58 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 18:20:58 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1800 ms
-2025-03-11 18:20:58 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 18:20:58 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 18:20:58 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 18:20:59 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 18:20:59 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 18:20:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 18:20:59 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 18:20:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 18:20:59 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 18:21:00 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 18:21:00 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 18:21:00 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 18:21:01 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 18:21:01 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 18:21:01 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 18:21:01 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 22 ms
-2025-03-11 18:21:02 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 18:21:02 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 63709 (http) with context path '/'
-2025-03-11 18:21:02 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.826 seconds (process running for 6.837)
-2025-03-11 18:21:02 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 18:21:02 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: fd0f12dc-e2ff-4b0e-a1cd-1b7107fd6929
-2025-03-11 18:21:02 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 18:21:03 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 18:21:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 18:21:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 18:27:09 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 18:27:09 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 18292 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 18:27:09 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 18:27:09 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 18:27:10 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 113 ms. Found 1 JPA repository interface.
-2025-03-11 18:27:10 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 18:27:10 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 18:27:10 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 18:27:10 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 18:27:10 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 18:27:10 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 18:27:10 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 18:27:10 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 18:27:10 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1841 ms
-2025-03-11 18:27:11 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 18:27:11 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 18:27:11 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 18:27:11 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 18:27:11 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 18:27:11 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 18:27:11 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 18:27:11 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 18:27:11 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 18:27:12 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 18:27:12 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 18:27:12 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 18:27:14 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 18:27:14 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 18:27:14 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 18:27:14 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 20 ms
-2025-03-11 18:27:14 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 18:27:14 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 64152 (http) with context path '/'
-2025-03-11 18:27:14 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.832 seconds (process running for 6.802)
-2025-03-11 18:27:15 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 18:27:15 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 376c9380-ea75-424c-854e-02e7b6996dd9
-2025-03-11 18:27:15 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 18:27:15 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 18:27:15 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 18:27:15 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 19:17:01 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 19:17:01 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 4184 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 19:17:01 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 19:17:02 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 19:17:02 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 116 ms. Found 1 JPA repository interface.
-2025-03-11 19:17:02 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 19:17:02 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 19:17:02 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 19:17:03 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 19:17:03 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 19:17:03 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 19:17:03 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 19:17:03 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 19:17:03 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1819 ms
-2025-03-11 19:17:03 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 19:17:03 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 19:17:03 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 19:17:03 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 19:17:03 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 19:17:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 19:17:04 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 19:17:04 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 19:17:04 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 19:17:04 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 19:17:04 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 19:17:04 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 19:17:06 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 19:17:06 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 19:17:06 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 19:17:06 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 22 ms
-2025-03-11 19:17:06 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 19:17:06 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 64621 (http) with context path '/'
-2025-03-11 19:17:06 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.709 seconds (process running for 6.715)
-2025-03-11 19:17:07 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 19:17:07 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 3b0b8450-07b5-4b01-9093-e9a0869af9c7
-2025-03-11 19:17:07 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 19:17:07 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 19:17:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 19:17:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 19:25:32 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 19:25:32 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 7932 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 19:25:32 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 19:25:33 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 19:25:33 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 112 ms. Found 1 JPA repository interface.
-2025-03-11 19:25:34 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 19:25:34 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 19:25:34 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 19:25:34 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 19:25:34 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 19:25:34 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 19:25:34 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 19:25:34 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 19:25:34 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1840 ms
-2025-03-11 19:25:35 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 19:25:35 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 19:25:35 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 19:25:35 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 19:25:35 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 19:25:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 19:25:35 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 19:25:35 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 19:25:35 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 19:25:36 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 19:25:36 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 19:25:36 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 19:25:37 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 19:25:37 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 19:25:37 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 19:25:38 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 21 ms
-2025-03-11 19:25:38 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 19:25:38 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 64807 (http) with context path '/'
-2025-03-11 19:25:38 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.679 seconds (process running for 6.643)
-2025-03-11 19:25:38 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 19:25:38 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 6ab1abd1-dfd1-4767-88fa-37c047718ba6
-2025-03-11 19:25:38 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 19:25:39 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 19:25:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 19:25:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2025-03-11 19:29:11 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-2025-03-11 19:29:11 INFO  g.q.r.c.ArtistControllerTest - Starting ArtistControllerTest using Java 21.0.4 with PID 31088 (started by user in D:\IdeaProjects\rococo\rococo-artist)
-2025-03-11 19:29:11 INFO  g.q.r.c.ArtistControllerTest - The following 1 profile is active: "test"
-2025-03-11 19:29:11 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-11 19:29:12 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 110 ms. Found 1 JPA repository interface.
-2025-03-11 19:29:12 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=895fce87-c301-39c8-b222-bb9a711875e2
-2025-03-11 19:29:12 WARN  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
-2025-03-11 19:29:12 INFO  o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-2025-03-11 19:29:12 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-2025-03-11 19:29:12 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 19:29:12 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-03-11 19:29:12 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.26]
-2025-03-11 19:29:12 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2025-03-11 19:29:12 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1847 ms
-2025-03-11 19:29:13 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-11 19:29:13 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-03-11 19:29:13 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-03-11 19:29:13 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-11 19:29:13 WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - maxLifetime is less than 30000ms, setting to default 1800000ms.
-2025-03-11 19:29:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-03-11 19:29:13 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:rococo-artist user=SA
-2025-03-11 19:29:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-03-11 19:29:13 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-03-11 19:29:14 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-11 19:29:14 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 19:29:14 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-03-11 19:29:16 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring TestDispatcherServlet ''
-2025-03-11 19:29:16 INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-03-11 19:29:16 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-2025-03-11 19:29:16 INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 20 ms
-2025-03-11 19:29:16 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-2025-03-11 19:29:16 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 64938 (http) with context path '/'
-2025-03-11 19:29:16 INFO  g.q.r.c.ArtistControllerTest - Started ArtistControllerTest in 5.725 seconds (process running for 6.696)
-2025-03-11 19:29:16 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$PlainPageSerializationWarning - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
-	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
-	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
-
-2025-03-11 19:29:17 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 5521a022-f311-4865-aa8b-f0a49980252b
-2025-03-11 19:29:17 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
-2025-03-11 19:29:17 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-03-11 19:29:17 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2025-03-11 19:29:17 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-03-12 09:19:58 WARN  g.q.r.service.GlobalExceptionHandler - Resource not found: id: Художник не найден с id: 39df2371-8a8c-410a-b36f-e247a8c5e431
+2025-03-12 09:19:58 WARN  g.q.r.service.GlobalExceptionHandler - Bad request: id: ID художника обязателен для заполнения
+2025-03-12 09:19:59 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-12 09:19:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-12 09:19:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -31,6 +31,25 @@ echo "### Skip build: $SKIP_BUILD ###"
 echo '### Java version ###'
 java --version
 
+echo "### Checking and downloading required Selenoid browser images from browsers.json ###"
+
+BROWSERS_FILE="./selenoid/browsers.json"
+
+if [ -f "$BROWSERS_FILE" ]; then
+  BROWSERS=$(grep -o '"image": "[^"]*' "$BROWSERS_FILE" | awk -F': "' '{print $2}')
+
+  for IMAGE in $BROWSERS; do
+    if [[ "$(docker images -q $IMAGE 2> /dev/null)" == "" ]]; then
+      echo "Downloading $IMAGE..."
+      docker pull $IMAGE
+    else
+      echo "$IMAGE already exists."
+    fi
+  done
+else
+  echo "browsers.json not found! Skipping browser download."
+fi
+
 if [ "$SKIP_BUILD" = false ]; then
   echo "### Stopping and removing old containers ###"
   docker compose down

@@ -4,7 +4,7 @@
              version="2.1">
 
     <!-- AUTH DATABASE -->
-    <persistence-unit name="jdbc:postgresql://127.0.0.1:5432/rococo-auth" transaction-type="JTA">
+    <persistence-unit name="rococo-auth" transaction-type="JTA">
         <jta-data-source>java:comp/env/jdbc/rococo-auth</jta-data-source>
         <class>guru.qa.rococo.data.entity.auth.AuthUserEntity</class>
         <class>guru.qa.rococo.data.entity.auth.AuthorityEntity</class>
@@ -19,7 +19,7 @@
     </persistence-unit>
 
     <!-- USERDATA DATABASE -->
-    <persistence-unit name="jdbc:postgresql://127.0.0.1:5432/rococo-userdata" transaction-type="JTA">
+    <persistence-unit name="rococo-userdata" transaction-type="JTA">
         <jta-data-source>java:comp/env/jdbc/rococo-userdata</jta-data-source>
         <class>guru.qa.rococo.data.entity.userdata.UserdataEntity</class>
 
@@ -33,7 +33,7 @@
     </persistence-unit>
 
     <!-- MUSEUM DATABASE -->
-    <persistence-unit name="jdbc:postgresql://127.0.0.1:5432/rococo-museum" transaction-type="JTA">
+    <persistence-unit name="rococo-museum" transaction-type="JTA">
         <jta-data-source>java:comp/env/jdbc/rococo-museum</jta-data-source>
         <class>guru.qa.rococo.data.entity.museum.CountryEntity</class>
         <class>guru.qa.rococo.data.entity.museum.GeoEntity</class>
@@ -49,7 +49,7 @@
     </persistence-unit>
 
     <!-- ARTIST DATABASE -->
-    <persistence-unit name="jdbc:postgresql://127.0.0.1:5432/rococo-artist" transaction-type="JTA">
+    <persistence-unit name="rococo-artist" transaction-type="JTA">
         <jta-data-source>java:comp/env/jdbc/rococo-artist</jta-data-source>
         <class>guru.qa.rococo.data.entity.artist.ArtistEntity</class>
 
@@ -63,7 +63,7 @@
     </persistence-unit>
 
     <!-- PAINTING DATABASE -->
-    <persistence-unit name="jdbc:postgresql://127.0.0.1:5432/rococo-painting" transaction-type="JTA">
+    <persistence-unit name="rococo-painting" transaction-type="JTA">
         <jta-data-source>java:comp/env/jdbc/rococo-painting</jta-data-source>
         <class>guru.qa.rococo.data.entity.painting.PaintingEntity</class>
 
