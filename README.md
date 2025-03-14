@@ -385,7 +385,7 @@ bash docker-compose-test.sh firefox --skip-build
 
 4. После того, как все контейнеры успешно соберутся и запустятся - переключиться на логи контейнера rococo-tests командой:
 ```posh
-$ docker logs -f rococo
+$ docker logs -f rococo-tests
 ```
 5. После прогона тестов в логах отобразится ссылка на аллюр отчёт
 

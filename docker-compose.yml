@@ -184,7 +184,7 @@ services:
 
   rococo:
     profiles: [ test ]
-    container_name: rococo
+    container_name: rococo-tests
     image: ${PREFIX}/rococo-tests:latest
     build:
       context: ./
