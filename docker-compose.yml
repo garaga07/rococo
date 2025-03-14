@@ -189,6 +189,8 @@ services:
     build:
       context: ./
       dockerfile: ./rococo-tests/Dockerfile
+    volumes:
+      - ./rococo-tests/build/allure-results:/allure-results
     environment:
       - ALLURE_DOCKER_API=${ALLURE_DOCKER_API}
       - GITHUB_TOKEN=${GITHUB_TOKEN}
