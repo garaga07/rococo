@@ -207,7 +207,7 @@ services:
     container_name: allure
     image: frankescobar/allure-docker-service:2.27.0
     depends_on:
-      - rococo
+      - rococo-tests
     environment:
       - CHECK_RESULTS_EVERY_SECONDS=NONE
       - KEEP_HISTORY=1
