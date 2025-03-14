@@ -35,7 +35,7 @@ public class ArtistTest {
     @Story("Художники")
     @Feature("Добавление художника")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("artistWeb")})
     @Test
     @DisplayName("WEB: Успешное добавление нового художника с минимальным значением длины для имени и биографии")
     void shouldSuccessfullyAddArtistWithMinAllowedNameAndBiographyLength() {

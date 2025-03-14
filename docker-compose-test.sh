@@ -3,7 +3,7 @@ source ./docker.properties
 export COMPOSE_PROFILES=test
 export PROFILE=docker
 export PREFIX="${IMAGE_PREFIX}"
-export ALLURE_DOCKER_API=http://allure:5050/
+export ALLURE_DOCKER_API=${ALLURE_DOCKER_API:-http://allure:5050/}
 export HEAD_COMMIT_MESSAGE="local build"
 export ARCH=$(uname -m)
 
