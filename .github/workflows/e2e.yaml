@@ -42,11 +42,11 @@ jobs:
         run: |
           docker compose up -d
           docker ps -a
-          docker wait rococo
-          exit_code=$(docker inspect -f '{{.State.ExitCode}}' rococo)
+          docker wait rococo-tests
+          exit_code=$(docker inspect -f '{{.State.ExitCode}}' rococo-tests)
           echo "E2E_EXIT_CODE=$exit_code" >> $GITHUB_OUTPUT
           echo "### Test logs ###"
-          docker logs rococo
+          docker logs rococo-tests
           if [ "$exit_code" -eq "0" ]; then
             echo "Tests passed successfully!"
             exit 0
