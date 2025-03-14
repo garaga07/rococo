@@ -182,9 +182,9 @@ services:
     networks:
       - rococo-network
 
-  rococo:
+  rococo-tests:
     profiles: [ test ]
-    container_name: rococo
+    container_name: rococo-tests
     image: ${PREFIX}/rococo-tests:latest
     build:
       context: ./
@@ -209,7 +209,7 @@ services:
     container_name: allure
     image: frankescobar/allure-docker-service:2.27.0
     depends_on:
-      - rococo
+      - rococo-tests
     environment:
       - CHECK_RESULTS_EVERY_SECONDS=5
       - KEEP_HISTORY=1
