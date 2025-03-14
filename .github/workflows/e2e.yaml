@@ -6,7 +6,7 @@ on:
 
 jobs:
   e2e:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       PROFILE: docker
       COMPOSE_PROFILES: test
@@ -39,7 +39,6 @@ jobs:
           echo "HEAD_COMMIT_MESSAGE=$(git show -s --format=%s)" >> $GITHUB_ENV
       - name: Run e2e tests
         id: e2e
-        shell: bash
         run: |
           docker compose up -d
           docker ps -a
