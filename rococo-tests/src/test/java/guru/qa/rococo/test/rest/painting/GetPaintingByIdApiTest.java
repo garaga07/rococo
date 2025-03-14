@@ -32,7 +32,7 @@ public class GetPaintingByIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение картины по ID")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Painting
     @Test
     @DisplayName("API: Успешное получение данных о картине по ID")
@@ -82,7 +82,7 @@ public class GetPaintingByIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение картины по ID")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при попытке получить данные о несуществующей картине")
     void shouldFailWhenPaintingDoesNotExist() {

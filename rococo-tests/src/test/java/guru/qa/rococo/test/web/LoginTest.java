@@ -25,7 +25,7 @@ public class LoginTest {
     @Story("Авторизация")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Авторизация пользователя")
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешная авторизация пользователя")
     void shouldDisplayProfileAvatarAfterSuccessfulLogin(UserJson user) {
@@ -40,9 +40,9 @@ public class LoginTest {
     }
 
     @Story("Авторизация")
-    @Severity(SeverityLevel.CRITICAL )
+    @Severity(SeverityLevel.BLOCKER )
     @Feature("Авторизация пользователя")
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Авторизация пользователя с неверными учетными данными")
     void userShouldStayOnLoginPageAfterLoginWithBadCredentials() {

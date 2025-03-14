@@ -58,7 +58,7 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Успешное обновление информации о художнике")
     void shouldSuccessfullyUpdateArtist(@Token String token, ArtistJson artist) {
@@ -90,9 +90,9 @@ public class UpdateArtistApiTest {
 
     @Artist
     @Story("Художники")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 401 при обновлении художника с некорректным токеном")
     void shouldUpdateArtistWithIncorrectToken(ArtistJson artist) {
@@ -112,7 +112,7 @@ public class UpdateArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при обновлении несуществующего художника")
     void shouldFailToUpdateNonExistentArtist(@Token String token) {
@@ -411,7 +411,7 @@ public class UpdateArtistApiTest {
     @ApiLogin
     @Artist
     @Story("Художники")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление художника")
     @Tags({@Tag("api")})
     @Test

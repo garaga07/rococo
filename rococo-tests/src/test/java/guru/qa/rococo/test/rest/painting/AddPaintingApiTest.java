@@ -63,7 +63,7 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @DisplayName("API: Успешное добавление новой картины")
     void shouldSuccessfullyAddPainting(@Token String token, ArtistJson artist, MuseumJson museum) {
         PaintingRequestJson painting = new PaintingRequestJson(
@@ -105,9 +105,9 @@ public class AddPaintingApiTest {
 
     @Test
     @Story("Картины")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @DisplayName("API: Ошибка 401 при добавлении картины с невалидным токеном")
     void shouldFailToAddPaintingWithInvalidToken() {
         PaintingRequestJson painting = new PaintingRequestJson(
@@ -524,7 +524,7 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при добавлении картины с несуществующим ID художника")
     void shouldFailToAddPaintingWithNonExistentArtistId() {
@@ -557,7 +557,7 @@ public class AddPaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при добавлении картины с несуществующим ID музея")
     void shouldFailToAddPaintingWithNonExistentMuseumId() {

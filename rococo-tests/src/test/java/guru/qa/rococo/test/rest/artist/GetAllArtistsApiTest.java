@@ -36,7 +36,7 @@ public class GetAllArtistsApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка художников")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Artist(count = 19)
     @ParameterizedTest
     @CsvSource({
@@ -60,7 +60,7 @@ public class GetAllArtistsApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка художников")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Artist(count = 4, names = {"Da Vinci", "Rembrandt", "Matisse", "Айвазовский"})
     @ParameterizedTest
     @CsvSource({
@@ -100,7 +100,7 @@ public class GetAllArtistsApiTest {
     }
 
     @Story("Художники")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.MINOR)
     @Feature("Получение списка художников")
     @Tags({@Tag("api")})
     @Artist(count = 10)

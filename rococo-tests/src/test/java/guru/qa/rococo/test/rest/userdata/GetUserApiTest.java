@@ -35,7 +35,7 @@ public class GetUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение информации о текущем пользователе")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Успешное получение информации о текущем пользователе")
     void shouldSuccessfullyGetCurrentUserInfo(@Token String token, UserJson user) {

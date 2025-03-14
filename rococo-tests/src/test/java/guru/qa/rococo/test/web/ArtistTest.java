@@ -35,7 +35,7 @@ public class ArtistTest {
     @Story("Художники")
     @Feature("Добавление художника")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное добавление нового художника с минимальным значением длины для имени и биографии")
     void shouldSuccessfullyAddArtistWithMinAllowedNameAndBiographyLength() {
@@ -59,7 +59,7 @@ public class ArtistTest {
     @Story("Художники")
     @Feature("Добавление художника")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное добавление нового художника с максимальным значением длины для имени и биографии")
     void shouldSuccessfullyAddArtistWithMaxAllowedNameAndBiographyLength() {
@@ -135,7 +135,7 @@ public class ArtistTest {
     @Story("Художники")
     @Feature("Обновление данных художника")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное обновление данных художника с минимально допустимыми значениями для имени и биографии")
     void shouldSuccessfullyUpdateArtistWithMinAllowedNameAndBiographyLength(ArtistJson artist) {
@@ -160,7 +160,7 @@ public class ArtistTest {
     @Story("Художники")
     @Feature("Обновление данных художника")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное обновление данных художника с максимально допустимыми значениями для имени и биографии")
     void shouldSuccessfullyUpdateArtistWithMaxAllowedNameAndBiographyLength(ArtistJson artist) {

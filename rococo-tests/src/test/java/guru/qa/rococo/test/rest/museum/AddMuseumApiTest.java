@@ -62,7 +62,7 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление музея")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @DisplayName("API: Успешное создание нового музея")
     void shouldSuccessfullyAddMuseum(@Token String token) {
         MuseumJson museum = new MuseumJson(
@@ -109,9 +109,9 @@ public class AddMuseumApiTest {
 
     @Test
     @Story("Музеи")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление музея")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @DisplayName("API: Ошибка 401 при добавлении музея с некорректным токеном")
     void shouldAddMuseumWithIncorrectToken() {
         MuseumJson museum = new MuseumJson(
@@ -676,7 +676,7 @@ public class AddMuseumApiTest {
     @User
     @ApiLogin
     @Story("Музеи")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Добавление музея")
     @Tags({@Tag("api")})
     @DisplayName("API: Успешное создание музея с фото размером 1MB")
@@ -729,7 +729,7 @@ public class AddMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление музея")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @DisplayName("API: Ошибка 404 при добавлении музея с несуществующим ID страны")
     void shouldFailToAddMuseumWithNonExistentCountryId(@Token String token) {
         UUID nonExistentCountryId = UUID.randomUUID(); // Генерируем несуществующий ID страны

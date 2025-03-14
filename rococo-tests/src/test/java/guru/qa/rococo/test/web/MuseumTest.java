@@ -34,7 +34,7 @@ public class MuseumTest {
     @Story("Музеи")
     @Feature("Добавление музея")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное добавление нового музея с минимально допустимой длиной названия, описания и города")
     void shouldSuccessfullyAddMuseumWithMinAllowedTitleDescriptionAndCityLength() {
@@ -61,7 +61,7 @@ public class MuseumTest {
     @Story("Музеи")
     @Feature("Добавление музея")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное добавление нового музея с максимально допустимой длиной названия, описания и города")
     void shouldSuccessfullyAddMuseumWithMaxAllowedTitleDescriptionAndCityLength() {
@@ -151,7 +151,7 @@ public class MuseumTest {
     @Story("Музеи")
     @Feature("Обновление данных музея")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное обновление данных музея с минимально допустимыми значениями для названия, описания и города")
     void shouldSuccessfullyUpdateMuseumWithMinAllowedTitleDescriptionAndCityLength(MuseumJson museum) {
@@ -178,7 +178,7 @@ public class MuseumTest {
     @Story("Музеи")
     @Feature("Обновление данных музея")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное обновление данных музея с максимально допустимыми значениями для названия, описания и города")
     void shouldSuccessfullyUpdateMuseumWithMaxAllowedTitleDescriptionAndCityLength(MuseumJson museum) {

@@ -51,7 +51,7 @@ public class AddArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Успешное создание нового художника")
     void shouldSuccessfullyAddArtist(@Token String token) {
@@ -78,9 +78,9 @@ public class AddArtistApiTest {
 
 
     @Story("Художники")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 401 при попытке добавить художника с некорректным токеном")
     void shouldAddArtistWithIncorrectToken() {
@@ -128,9 +128,9 @@ public class AddArtistApiTest {
     @User
     @ApiLogin
     @Story("Художники")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @Feature("Добавление художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @ParameterizedTest
     @MethodSource("artistRequiredFieldsProvider")
     @DisplayName("API: Ошибка 400 при отсутствии обязательных полей у художника")

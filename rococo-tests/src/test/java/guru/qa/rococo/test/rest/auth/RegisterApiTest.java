@@ -31,7 +31,7 @@ public class RegisterApiTest {
     @Story("Регистрация")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Регистрация пользователя")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Успешная регистрация нового пользователя")
     void shouldSuccessfullyRegisterNewUser() {
@@ -41,7 +41,7 @@ public class RegisterApiTest {
     }
 
     @Story("Регистрация")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Регистрация пользователя")
     @Tags({@Tag("api")})
     @Test
@@ -55,7 +55,7 @@ public class RegisterApiTest {
     @Story("Регистрация")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Регистрация пользователя")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 400 при регистрации пользователя с уже существующим именем")
     void shouldFailToRegisterUserWithExistingUsername(UserJson user) {

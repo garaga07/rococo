@@ -66,7 +66,7 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Успешное обновление данных картины")
     void shouldSuccessfullyUpdatePainting(@Token String token, PaintingJson painting) {
@@ -97,9 +97,9 @@ public class UpdatePaintingApiTest {
 
     @Painting
     @Story("Картины")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 401 при обновлении картины с невалидным токеном")
     void shouldUpdatePaintingWithIncorrectToken(PaintingJson painting) {
@@ -121,7 +121,7 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при обновлении несуществующей картины")
     void shouldFailToUpdateNonExistentPainting(@Token String token) {
@@ -150,7 +150,7 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при обновлении картины с несуществующим ID музея")
     void shouldFailToUpdatePaintingWithNonExistentMuseumId(@Token String token, PaintingJson painting) {
@@ -180,7 +180,7 @@ public class UpdatePaintingApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при обновлении картины с несуществующим ID художника")
     void shouldFailToUpdatePaintingWithNonExistentArtistId(@Token String token, PaintingJson painting) {
@@ -528,7 +528,7 @@ public class UpdatePaintingApiTest {
     @ApiLogin
     @Painting
     @Story("Картины")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление картины")
     @Tags({@Tag("api")})
     @Test

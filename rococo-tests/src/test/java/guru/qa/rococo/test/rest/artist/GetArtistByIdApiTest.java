@@ -32,7 +32,7 @@ public class GetArtistByIdApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение художника по ID")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Artist
     @Test
     @DisplayName("API: Успешное получение информации о художнике по ID")
@@ -56,7 +56,7 @@ public class GetArtistByIdApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение художника по ID")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при запросе данных несуществующего художника")
     void shouldFailWhenArtistDoesNotExist() {

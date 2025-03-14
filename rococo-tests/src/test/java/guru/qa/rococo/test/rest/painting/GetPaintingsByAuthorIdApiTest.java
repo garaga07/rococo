@@ -42,9 +42,9 @@ public class GetPaintingsByAuthorIdApiTest {
     private final GatewayApiClient gatewayApiClient = new GatewayApiClient();
 
     @Story("Картины")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка картин по ID художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Painting(count = 2)
     @Test
     @DisplayName("API: Успешное получение списка картин по ID существующего художника")
@@ -92,7 +92,7 @@ public class GetPaintingsByAuthorIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка картин по ID художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Painting(count = 10)
     @ParameterizedTest
     @CsvSource({
@@ -117,7 +117,7 @@ public class GetPaintingsByAuthorIdApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка картин по ID художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при запросе списка картин для несуществующего художника")
     void shouldFailWhenAuthorDoesNotExist() {
@@ -131,7 +131,7 @@ public class GetPaintingsByAuthorIdApiTest {
     }
 
     @Story("Картины")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Получение списка картин по ID художника")
     @Tags({@Tag("api")})
     @Artist

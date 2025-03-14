@@ -28,7 +28,7 @@ public class LoginApiTest {
     @Story("Авторизация")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Авторизация пользователя")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Успешная авторизация существующего пользователя")
     void shouldSuccessfullyAuthenticateRegisteredUser(UserJson user) {

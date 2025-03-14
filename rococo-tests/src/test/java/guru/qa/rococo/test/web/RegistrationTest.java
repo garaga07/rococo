@@ -32,7 +32,7 @@ public class RegistrationTest {
     @Story("Регистрация")
     @Feature("Регистрация нового пользователя")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешная регистрация нового пользователя")
     void shouldRegisterNewUser() {
@@ -53,7 +53,7 @@ public class RegistrationTest {
     @Story("Регистрация")
     @Feature("Регистрация нового пользователя")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Ошибка при регистрации пользователя с уже существующим именем")
     void shouldNotRegisterUserWithExistingUsername(UserJson user) {
@@ -68,8 +68,8 @@ public class RegistrationTest {
 
     @Story("Регистрация")
     @Feature("Регистрация нового пользователя")
-    @Severity(SeverityLevel.NORMAL)
-    @Tags({@Tag("web")})
+    @Severity(SeverityLevel.CRITICAL)
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Ошибка при регистрации пользователя с несовпадающими паролями")
     void shouldShowErrorIfPasswordAndConfirmPasswordAreNotEqual() {

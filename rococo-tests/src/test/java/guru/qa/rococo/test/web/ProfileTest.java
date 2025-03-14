@@ -50,8 +50,8 @@ public class ProfileTest {
     @Test
     @Story("Профиль пользователя")
     @Feature("Редактирование профиля")
-    @Severity(SeverityLevel.CRITICAL)
-    @Tags({@Tag("web")})
+    @Severity(SeverityLevel.BLOCKER)
+    @Tags({@Tag("web"), @Tag("smoke")})
     @DisplayName("WEB: Проверка обновления всех полей профиля")
     void shouldUpdateProfileWithAllFieldsSet() {
         String firstName = randomFirstname();

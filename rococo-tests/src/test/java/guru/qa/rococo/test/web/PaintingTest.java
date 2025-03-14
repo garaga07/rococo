@@ -44,7 +44,7 @@ public class PaintingTest {
     @Story("Картины")
     @Feature("Добавление картины")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное добавление новой картины с минимально допустимой длиной названия и описания")
     void shouldSuccessfullyAddPaintingWithMinAllowedTitleAndDescriptionLength() {
@@ -132,7 +132,7 @@ public class PaintingTest {
     @Story("Картины")
     @Feature("Обновление данных картины")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное обновление данных картины с минимально допустимыми значениями для названия и описания")
     void shouldSuccessfullyUpdatePaintingWithMinAllowedTitleAndDescriptionLength(PaintingJson painting) {
@@ -157,7 +157,7 @@ public class PaintingTest {
     @Story("Картины")
     @Feature("Обновление данных картины")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное обновление данных картины с максимально допустимыми значениями для названия и описания")
     void shouldSuccessfullyUpdatePaintingWithMaxAllowedTitleAndDescriptionLength(PaintingJson painting) {
@@ -275,7 +275,7 @@ public class PaintingTest {
     @Story("Картины")
     @Feature("Добавление картины")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешное добавление новой картины со страницы художника без выбора автора")
     void shouldAddPaintingFromArtistPageWithoutAuthorSelection(ArtistJson artist) {
@@ -302,7 +302,7 @@ public class PaintingTest {
     @Story("Отображение картин")
     @Feature("Отображение картины в списке работ художника")
     @Severity(SeverityLevel.BLOCKER)
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Отображение картины в списке работ на странице художника")
     void shouldDisplayPaintingInArtistWorksList(PaintingJson painting) {

@@ -37,7 +37,7 @@ public class GetAllMuseumsApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка музеев")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Museum(count = 5)
     @ParameterizedTest
     @CsvSource({
@@ -60,9 +60,9 @@ public class GetAllMuseumsApiTest {
 
 
     @Story("Музеи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.CRITICAL)
     @Feature("Получение списка музеев")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Museum(count = 4, titles = {"Luvr", "Эрмитаж", "Метрополитен", "Третьяковка"})
     @ParameterizedTest
     @CsvSource({
@@ -103,7 +103,7 @@ public class GetAllMuseumsApiTest {
 
 
     @Story("Музеи")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.MINOR)
     @Feature("Получение списка музеев")
     @Tags({@Tag("api")})
     @Museum(count = 4)

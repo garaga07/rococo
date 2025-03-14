@@ -34,7 +34,7 @@ public class GetMuseumByIdApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение музея по ID")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Museum
     @Test
     @DisplayName("API: Успешное получение данных о музее по ID")
@@ -79,7 +79,7 @@ public class GetMuseumByIdApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Получение музея по ID")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @DisplayName("API: Ошибка 404 при попытке получить данные о несуществующем музее")
     void shouldFailWhenMuseumDoesNotExist() {
         UUID nonExistentMuseumId = UUID.randomUUID();

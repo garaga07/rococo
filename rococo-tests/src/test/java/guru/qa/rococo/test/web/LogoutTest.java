@@ -23,7 +23,7 @@ public class LogoutTest {
     @Story("Завершение сессии")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Выход пользователя")
-    @Tags({@Tag("web")})
+    @Tags({@Tag("web"), @Tag("smoke")})
     @Test
     @DisplayName("WEB: Успешный выход из системы и завершение сессии")
     void shouldSuccessfullyLogoutAndCompleteSession() {

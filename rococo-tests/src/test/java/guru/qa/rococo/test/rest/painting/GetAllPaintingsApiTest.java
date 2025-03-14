@@ -39,7 +39,7 @@ public class GetAllPaintingsApiTest {
     @Story("Картины")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Получение списка картин")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Painting(count = 10)
     @ParameterizedTest
     @CsvSource({
@@ -61,9 +61,9 @@ public class GetAllPaintingsApiTest {
     }
 
     @Story("Картины")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.CRITICAL)
     @Feature("Получение списка картин")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Painting(count = 4, titles = {"Mona Lisa", "The Starry Night", "The Scream", "Девушка с жемчужной сережкой"})
     @ParameterizedTest
     @CsvSource({
@@ -104,7 +104,7 @@ public class GetAllPaintingsApiTest {
     }
 
     @Story("Картины")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.MINOR)
     @Feature("Получение списка картин")
     @Tags({@Tag("api")})
     @Painting(count = 2)

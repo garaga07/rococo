@@ -59,7 +59,7 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @ParameterizedTest
     @MethodSource("validUserNameValuesProvider")
     @DisplayName("API: Успешное обновление информации текущего пользователя с валидным userName")
@@ -103,7 +103,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @ParameterizedTest
@@ -139,7 +139,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @ParameterizedTest
@@ -178,7 +178,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @Test
@@ -210,7 +210,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @ParameterizedTest
@@ -249,7 +249,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @Test
@@ -274,7 +274,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @Test
@@ -310,7 +310,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @Test
@@ -352,7 +352,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @ParameterizedTest
@@ -381,7 +381,7 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 401 при обновлении информации текущего пользователя с невалидным значением токена")
     void shouldUpdateUserInfoWithIncorrectToken(UserJson user) {
@@ -400,9 +400,9 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при попытке обновить данные несуществующего пользователя")
     void shouldUpdateNonExistentUser(@Token String token) {
@@ -425,7 +425,7 @@ public class UpdateUserApiTest {
     @User
     @ApiLogin
     @Story("Пользователи")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление информации о текущем пользователе")
     @Tags({@Tag("api")})
     @Test
@@ -451,7 +451,7 @@ public class UpdateUserApiTest {
     @Story("Пользователи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление информации о текущем пользователе")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 400 при обновлении информации пользователя с уже существующим username")
     void shouldUpdateUserInfoWithAlreadyExistUserName(@Token String token, UserJson user) {

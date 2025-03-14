@@ -68,7 +68,7 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление музея")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Успешное обновление данных музея")
     void shouldSuccessfullyUpdateMuseum(@Token String token, MuseumJson museum) {
@@ -98,9 +98,9 @@ public class UpdateMuseumApiTest {
     @Test
     @Museum
     @Story("Музеи")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     @Feature("Обновление музея")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @DisplayName("API: Ошибка 401 при обновлении музея с невалидным токеном")
     void shouldFailToUpdateMuseumWithInvalidToken(MuseumJson museum) {
         MuseumJson updatedMuseum = new MuseumJson(
@@ -122,7 +122,7 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @DisplayName("API: Ошибка 404 при обновлении несуществующего музея")
     void shouldFailToUpdateNonExistentMuseum(@Token String token) {
         UUID nonExistentMuseumId = UUID.randomUUID();
@@ -572,7 +572,7 @@ public class UpdateMuseumApiTest {
     @Story("Музеи")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Обновление музея")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("smoke")})
     @Test
     @DisplayName("API: Ошибка 404 при обновлении музея с несуществующим ID страны")
     void shouldFailToUpdateMuseumWithNonExistentCountryId(@Token String token) {
@@ -601,7 +601,7 @@ public class UpdateMuseumApiTest {
     @ApiLogin
     @Museum
     @Story("Музеи")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Feature("Обновление музея")
     @Tags({@Tag("api")})
     @Test
