@@ -135,7 +135,6 @@ def createTagTask(String name, String tag) {
 // Задачи для запуска тестов по тегам
 createTagTask('testApi', 'api')
 createTagTask('testWeb', 'web')
-createTagTask('artist', 'artist')
 
 test {
     options {
