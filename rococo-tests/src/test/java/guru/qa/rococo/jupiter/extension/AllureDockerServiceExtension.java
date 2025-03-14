@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Stream;
@@ -37,23 +36,18 @@ public class AllureDockerServiceExtension implements SuiteExtension {
     public void afterSuite() {
         if (inDocker) {
             try (Stream<Path> allureResults = Files.walk(pathToResults).filter(Files::isRegularFile)) {
-                List<EncodedAllureResult> encodedAllureResults = new ArrayList<>();
                 for (Path path : allureResults.toList()) {
                     try (InputStream is = Files.newInputStream(path)) {
-                        encodedAllureResults.add(
-                                new EncodedAllureResult(
-                                        encoder.encodeToString(is.readAllBytes()),
-                                        path.getFileName().toString()
-                                )
+                        EncodedAllureResult encodedResult = new EncodedAllureResult(
+                                encoder.encodeToString(is.readAllBytes()),
+                                path.getFileName().toString()
+                        );
+                        allureApiClient.uploadResults(
+                                CFG.projectId(),
+                                new AllureResults(List.of(encodedResult)) // <-- ОТПРАВЛЯЕМ ПО ОДНОМУ ФАЙЛУ
                         );
                     }
                 }
-                allureApiClient.uploadResults(
-                        CFG.projectId(),
-                        new AllureResults(
-                                encodedAllureResults
-                        )
-                );
                 allureApiClient.generateReport(CFG.projectId());
             } catch (IOException e) {
                 throw new RuntimeException(e);
