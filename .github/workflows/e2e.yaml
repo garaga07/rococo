@@ -6,7 +6,7 @@ on:
 
 jobs:
   e2e:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       PROFILE: docker
       COMPOSE_PROFILES: test
