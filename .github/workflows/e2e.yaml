@@ -5,7 +5,7 @@ on:
     types: [opened, reopened, synchronize]
 
 jobs:
-  api-tests:
+  artist_api_tests:
     runs-on: ubuntu-latest
     env:
       PROFILE: docker
@@ -21,51 +21,33 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ env.GITHUB_SHA }}
-
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
       - name: Build backends
         run: |
           ./gradlew jibDockerBuild -x :rococo-tests:test
-
-      - name: Start required services
-        run: docker compose up -d rococo-all-db kafka zookeeper auth.rococo.dc gateway.rococo.dc artist.rococo.dc
-
-      - name: Run API Tests (Artist)
-        id: api-tests
-        continue-on-error: true  # Тесты не будут блокировать другие задачи
+      - name: Pull Chrome 127
         run: |
-          docker run --rm ${PREFIX}/rococo-tests ./gradlew testArtistApi -Dtest.env=docker
+          docker pull selenoid/vnc_chrome:127.0
+      - name: Get the last commit message
+        run: |
+          echo "HEAD_COMMIT_MESSAGE=$(git show -s --format=%s)" >> $GITHUB_ENV
+      - name: Run API tests for artist
+        id: artist_api
+        run: |
+          docker compose up -d
+          docker ps -a
+          docker exec rococo-tests ./gradlew testArtistApi -Dtest.env=docker
           exit_code=$?
-          echo "API_EXIT_CODE=$exit_code" >> $GITHUB_ENV
+          echo "ARTIST_API_EXIT_CODE=$exit_code" >> $GITHUB_ENV
           exit $exit_code
 
-      - name: Add comment to PR with link to allure
-        if: always()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const exitCode = ${{ env.API_EXIT_CODE }}
-            const reportUrl = 'https://allure.niffler-stage.qa.guru/api/allure-docker-service/projects/rococo-garaga/reports/latest/index.html'
-            const historyUrl = 'https://allure.niffler-stage.qa.guru/allure-docker-service-ui/projects/rococo-garaga'
-            const message = exitCode == '0' ?
-              `✅ API TESTS PASSED ✅ There is the [report](${reportUrl})\n🕓 All reports [history](${historyUrl})` :
-              `🔴 API TESTS FAILED 🔴 There is the [report](${reportUrl})\n🕓 All reports [history](${historyUrl})`
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: message
-            })
-
-  web-tests:
+  artist_web_tests:
     runs-on: ubuntu-latest
     env:
       PROFILE: docker
@@ -81,46 +63,48 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ env.GITHUB_SHA }}
-
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
       - name: Build backends
         run: |
           ./gradlew jibDockerBuild -x :rococo-tests:test
-
-      - name: Start required services
-        run: docker compose up -d frontend.rococo.dc selenoid selenoid-ui
-
-      - name: Run Web Tests (Artist)
-        id: web-tests
-        continue-on-error: true  # Тесты не блокируют API тесты
+      - name: Pull Chrome 127
         run: |
-          docker run --rm ${PREFIX}/rococo-tests ./gradlew testArtistWeb -Dtest.env=docker
+          docker pull selenoid/vnc_chrome:127.0
+      - name: Get the last commit message
+        run: |
+          echo "HEAD_COMMIT_MESSAGE=$(git show -s --format=%s)" >> $GITHUB_ENV
+      - name: Run WEB tests for artist
+        id: artist_web
+        run: |
+          docker compose up -d
+          docker ps -a
+          docker exec rococo-tests ./gradlew testArtistWeb -Dtest.env=docker
           exit_code=$?
-          echo "WEB_EXIT_CODE=$exit_code" >> $GITHUB_ENV
+          echo "ARTIST_WEB_EXIT_CODE=$exit_code" >> $GITHUB_ENV
           exit $exit_code
 
-      - name: Add comment to PR with link to allure
-        if: always()
+  add_comment_to_pr:
+    runs-on: ubuntu-latest
+    needs: [artist_api_tests, artist_web_tests]
+    if: always()
+    steps:
+      - name: Add comment to PR with link to Allure
         uses: actions/github-script@v7
         with:
           script: |
-            const exitCode = ${{ env.WEB_EXIT_CODE }}
-            const reportUrl = 'https://allure.niffler-stage.qa.guru/api/allure-docker-service/projects/rococo-garaga/reports/latest/index.html'
-            const historyUrl = 'https://allure.niffler-stage.qa.guru/allure-docker-service-ui/projects/rococo-garaga'
-            const message = exitCode == '0' ?
-              `✅ WEB TESTS PASSED ✅ There is the [report](${reportUrl})\n🕓 All reports [history](${historyUrl})` :
-              `🔴 WEB TESTS FAILED 🔴 There is the [report](${reportUrl})\n🕓 All reports [history](${historyUrl})`
+            const reportUrl = 'https://allure.niffler-stage.qa.guru/api/allure-docker-service/projects/rococo-garaga/reports/latest/index.html';
+            const historyUrl = 'https://allure.niffler-stage.qa.guru/allure-docker-service-ui/projects/rococo-garaga';
+            const message = `📊 Allure Report is ready!\n🔗 [Latest Report](${reportUrl})\n🕓 [All Reports History](${historyUrl})`;
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: message
-            })
+            });
