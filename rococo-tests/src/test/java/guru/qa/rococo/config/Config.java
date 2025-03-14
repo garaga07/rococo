@@ -12,6 +12,11 @@ public interface Config {
     }
 
     @Nonnull
+    default String projectId() {
+        return "rococo";
+    }
+
+    @Nonnull
     String frontUrl();
 
     @Nonnull
@@ -53,4 +58,6 @@ public interface Config {
     default List<String> kafkaTopics() {
         return List.of("users");
     }
+
+    String allureDockerServiceUrl();
 }
