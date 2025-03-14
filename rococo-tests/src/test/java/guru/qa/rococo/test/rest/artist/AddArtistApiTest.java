@@ -51,7 +51,7 @@ public class AddArtistApiTest {
     @Story("Художники")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("Добавление художника")
-    @Tags({@Tag("api")})
+    @Tags({@Tag("api"), @Tag("artist")})
     @Test
     @DisplayName("API: Успешное создание нового художника")
     void shouldSuccessfullyAddArtist(@Token String token) {
