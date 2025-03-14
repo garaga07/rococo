@@ -182,7 +182,7 @@ services:
     networks:
       - rococo-network
 
-  rococo:
+  rococo-tests:
     profiles: [ test ]
     container_name: rococo-tests
     image: ${PREFIX}/rococo-tests:latest
